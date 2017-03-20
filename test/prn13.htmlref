@@ -76,13 +76,13 @@ Two variants on the information flow measure IF4 are also presented, one (IF4v) 
 <TR>
 <TD WIDTH=700%>Lines of Code</TD><TD WIDTH=120%>LOC</TD><TD ALIGN=RIGHT>   346</TD><TD ALIGN=RIGHT>17.300</TD></TR>
 <TR>
-<TD>McCabe's Cyclomatic Number</TD><TD>MVG</TD><TD ALIGN=RIGHT>    61</TD><TD ALIGN=RIGHT> 3.050</TD></TR>
+<TD>McCabe's Cyclomatic Number</TD><TD>MVG</TD><TD ALIGN=RIGHT>    83</TD><TD ALIGN=RIGHT> 4.150</TD></TR>
 <TR>
 <TD>Lines of Comment</TD><TD>COM</TD><TD ALIGN=RIGHT>    37</TD><TD ALIGN=RIGHT> 1.850</TD></TR>
 <TR>
 <TD>LOC/COM</TD><TD>L_C</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 9.351</EM></TD><TD>&nbsp;</TD></TR>
 <TR>
-<TD>MVG/COM</TD><TD>M_C</TD><TD ALIGN=RIGHT> 1.649</TD><TD>&nbsp;</TD></TR>
+<TD>MVG/COM</TD><TD>M_C</TD><TD ALIGN=RIGHT> 2.243</TD><TD>&nbsp;</TD></TR>
 <TR>
 <TD>Information Flow measure ( &nbsp;inclusive&nbsp;)</TD><TD>IF4</TD><TD ALIGN=RIGHT>    64</TD><TD ALIGN=RIGHT>   3.200</TD></TR>
 <TR>
@@ -130,7 +130,7 @@ CustomControls</A>
 <TR>
 <TD><A HREF="DemoControls.html#procdet">
 DemoControls</A>
-</TD><TD ALIGN=RIGHT>    74</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>74.000</STRONG></TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>    74</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>74.000</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 9.000</EM></TD></TR>
 <TR>
 <TD><A HREF="Dimension.html#procdet">
 Dimension</A>
@@ -138,7 +138,7 @@ Dimension</A>
 <TR>
 <TD><A HREF="FadeAnim.html#procdet">
 FadeAnim</A>
-</TD><TD ALIGN=RIGHT>   165</TD><TD ALIGN=RIGHT>    36</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>41.250</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 9.000</EM></TD></TR>
+</TD><TD ALIGN=RIGHT>   165</TD><TD ALIGN=RIGHT>    45</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>41.250</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>11.250</STRONG></TD></TR>
 <TR>
 <TD><A HREF="Font.html#procdet">
 Font</A>
@@ -158,7 +158,7 @@ Object</A>
 <TR>
 <TD><A HREF="ObjectData.html#procdet">
 ObjectData</A>
-</TD><TD ALIGN=RIGHT>    84</TD><TD ALIGN=RIGHT>    21</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+</TD><TD ALIGN=RIGHT>    84</TD><TD ALIGN=RIGHT>    26</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
 <TR>
 <TD><A HREF="Paint.html#procdet">
 Paint</A>
@@ -170,7 +170,7 @@ String</A>
 <TR>
 <TD><A HREF="TextData.html#procdet">
 TextData</A>
-</TD><TD ALIGN=RIGHT>    12</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>    12</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD><A HREF="TexturePaint.html#procdet">
 TexturePaint</A>
@@ -259,25 +259,25 @@ definition &nbsp;
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       356">prn13.java:356</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    39</EM></TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    39</EM></TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>getPreferredSize( &nbsp;&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       422">prn13.java:422</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>run( &nbsp;&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       427">prn13.java:427</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>stateChanged( &nbsp;ChangeEvent&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       401">prn13.java:401</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    19</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>    19</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>******</TD></TR>
 <TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
 <TR>
 <TD WIDTH=50%><A NAME="procdet"></A>
@@ -302,49 +302,49 @@ definition &nbsp;
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:        92">prn13.java:92</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>main( &nbsp;String[]&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       236">prn13.java:236</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>render( &nbsp;int, &nbsp;int, &nbsp;Graphics2D&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       209">prn13.java:209</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    24</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+</TD><TD ALIGN=RIGHT>    24</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
 <TR>
 <TD>reset( &nbsp;int, &nbsp;int&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       195">prn13.java:195</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>setImages( &nbsp;int&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       102">prn13.java:102</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    29</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT>******</TD></TR>
+</TD><TD ALIGN=RIGHT>    29</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
 <TR>
 <TD>setShapes( &nbsp;int&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       161">prn13.java:161</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    31</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    19</EM></TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    31</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    20</EM></TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
 <TR>
 <TD>setStrings( &nbsp;int&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       134">prn13.java:134</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    24</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>    24</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT>******</TD></TR>
 <TR>
 <TD>step( &nbsp;int, &nbsp;int&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       202">prn13.java:202</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
 <TR>
 <TD WIDTH=50%><A NAME="procdet"></A>
@@ -396,25 +396,25 @@ definition &nbsp;
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       268">prn13.java:268</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>getRandomXY( &nbsp;int, &nbsp;int&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       281">prn13.java:281</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    14</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>    14</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>******</TD></TR>
 <TR>
 <TD>reset( &nbsp;int, &nbsp;int&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       297">prn13.java:297</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    28</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+</TD><TD ALIGN=RIGHT>    28</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
 <TR>
 <TD>step( &nbsp;int, &nbsp;int&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       327">prn13.java:327</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    20</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>******</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+</TD><TD ALIGN=RIGHT>    20</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>******</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
 <TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
 <TR>
 <TD WIDTH=50%><A NAME="procdet"></A>
@@ -448,7 +448,7 @@ definition &nbsp;
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn13.java:       247">prn13.java:247</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
 <TR>
 <TD WIDTH=50%><A NAME="procdet"></A>
@@ -1151,7 +1151,7 @@ member variable &nbsp;
 <TH BGCOLOR="AQUA" WIDTH=25%>Location</TH><TH BGCOLOR="AQUA" WIDTH=45%>Text</TH><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH></TR>
 <TR><TD><CODE><A HREF="cccc_src.html#prn13.java:         1">prn13.java:1</A></CODE><BR>
 </TD>
-<TD>&lt;file scope items&gt;</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>    32</TD><TD ALIGN=RIGHT>     0</TD></TR>
+<TD>&lt;file scope items&gt;</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>    32</TD><TD ALIGN=RIGHT>     1</TD></TR>
 </TABLE>
 <H1><A NAME="infocccc">About CCCC</A></H1>
 <P>This report was generated by the program CCCC, which is FREELY REDISTRIBUTABLE but carries NO WARRANTY.

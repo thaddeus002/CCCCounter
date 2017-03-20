@@ -76,13 +76,13 @@ Two variants on the information flow measure IF4 are also presented, one (IF4v) 
 <TR>
 <TD WIDTH=700%>Lines of Code</TD><TD WIDTH=120%>LOC</TD><TD ALIGN=RIGHT>   188</TD><TD ALIGN=RIGHT>11.750</TD></TR>
 <TR>
-<TD>McCabe's Cyclomatic Number</TD><TD>MVG</TD><TD ALIGN=RIGHT>    21</TD><TD ALIGN=RIGHT> 1.312</TD></TR>
+<TD>McCabe's Cyclomatic Number</TD><TD>MVG</TD><TD ALIGN=RIGHT>    33</TD><TD ALIGN=RIGHT> 2.062</TD></TR>
 <TR>
 <TD>Lines of Comment</TD><TD>COM</TD><TD ALIGN=RIGHT>    44</TD><TD ALIGN=RIGHT> 2.750</TD></TR>
 <TR>
 <TD>LOC/COM</TD><TD>L_C</TD><TD ALIGN=RIGHT> 4.273</TD><TD>&nbsp;</TD></TR>
 <TR>
-<TD>MVG/COM</TD><TD>M_C</TD><TD ALIGN=RIGHT> 0.477</TD><TD>&nbsp;</TD></TR>
+<TD>MVG/COM</TD><TD>M_C</TD><TD ALIGN=RIGHT> 0.750</TD><TD>&nbsp;</TD></TR>
 <TR>
 <TD>Information Flow measure ( &nbsp;inclusive&nbsp;)</TD><TD>IF4</TD><TD ALIGN=RIGHT>    64</TD><TD ALIGN=RIGHT>   4.000</TD></TR>
 <TR>
@@ -134,7 +134,7 @@ CustomControls</A>
 <TR>
 <TD><A HREF="DemoControls.html#procdet">
 DemoControls</A>
-</TD><TD ALIGN=RIGHT>    71</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>71.000</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>11.000</STRONG></TD></TR>
+</TD><TD ALIGN=RIGHT>    71</TD><TD ALIGN=RIGHT>    16</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>71.000</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>16.000</STRONG></TD></TR>
 <TR>
 <TD><A HREF="Dimension.html#procdet">
 Dimension</A>
@@ -150,7 +150,7 @@ Graphics2D</A>
 <TR>
 <TD><A HREF="ImageOps.html#procdet">
 ImageOps</A>
-</TD><TD ALIGN=RIGHT>   108</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 9.818</EM></TD><TD ALIGN=RIGHT> 0.909</TD></TR>
+</TD><TD ALIGN=RIGHT>   108</TD><TD ALIGN=RIGHT>    16</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 9.818</EM></TD><TD ALIGN=RIGHT> 1.455</TD></TR>
 <TR>
 <TD><A HREF="JComboBox.html#procdet">
 JComboBox</A>
@@ -252,25 +252,25 @@ definition &nbsp;
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn14.java:       182">prn14.java:182</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    17</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>    17</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>actionPerformed( &nbsp;ActionEvent&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn14.java:       201">prn14.java:201</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    22</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>    22</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT>******</TD></TR>
 <TR>
 <TD>getPreferredSize( &nbsp;&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn14.java:       225">prn14.java:225</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>run( &nbsp;&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn14.java:       230">prn14.java:230</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    24</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT>******</TD></TR>
+</TD><TD ALIGN=RIGHT>    24</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
 <TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
 <TR>
 <TD WIDTH=50%><A NAME="procdet"></A>
@@ -313,31 +313,31 @@ definition &nbsp;
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn14.java:       100">prn14.java:100</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    19</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>    19</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>main( &nbsp;String[]&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn14.java:       171">prn14.java:171</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>render( &nbsp;int, &nbsp;int, &nbsp;Graphics2D&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn14.java:       136">prn14.java:136</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
 <TD>stateChanged( &nbsp;ChangeEvent&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn14.java:       145">prn14.java:145</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    21</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>10.500</EM></TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>    21</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>10.500</EM></TD><TD ALIGN=RIGHT> 2.500</TD></TR>
 <TR>
 <TD>thresholdOp( &nbsp;int, &nbsp;int&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#prn14.java:       121">prn14.java:121</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
 <TR>
 <TD WIDTH=50%><A NAME="procdet"></A>
@@ -883,7 +883,7 @@ normal parameter &nbsp;
 <TH BGCOLOR="AQUA" WIDTH=25%>Location</TH><TH BGCOLOR="AQUA" WIDTH=45%>Text</TH><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH></TR>
 <TR><TD><CODE><A HREF="cccc_src.html#prn14.java:         1">prn14.java:1</A></CODE><BR>
 </TD>
-<TD>&lt;file scope items&gt;</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>    32</TD><TD ALIGN=RIGHT>     0</TD></TR>
+<TD>&lt;file scope items&gt;</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>    32</TD><TD ALIGN=RIGHT>     1</TD></TR>
 </TABLE>
 <H1><A NAME="infocccc">About CCCC</A></H1>
 <P>This report was generated by the program CCCC, which is FREELY REDISTRIBUTABLE but carries NO WARRANTY.
