@@ -8,7 +8,7 @@
 
 .PHONY : pccts cccc test install
 
-all : pccts cccc test install
+all : pccts cccc test
 
 pccts :
 	cd pccts ; make
@@ -20,5 +20,9 @@ test :
 	cd test ; make -f posix.mak
 
 install : 
-	cd install ; su root -c "make -f install.mak" 
+	cp cccc/cccc /usr/local/bin/
+	@echo ===========================
+	@echo Installation succeeded!
+	@echo ===========================
+
 
