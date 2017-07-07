@@ -4,18 +4,10 @@
 # This file builds and tests CCCC on a POSIX platform using the
 # GNU C++ compiler.
 
-cd pccts
-make clean
-make antlr dlg
-cd ..
 
-cd cccc
-make -f posixgcc.mak clean
-make -f posixgcc.mak
-cd ..
+make -C src -f posixgcc.mak clean
+make -C src -f posixgcc.mak
 
-cd test
-make -f posix.mak
-cd ..
-
+# also make de tests
+make -C test -f posix.mak
 

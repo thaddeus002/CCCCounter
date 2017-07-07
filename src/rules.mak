@@ -29,13 +29,6 @@
 ## OBJEXT=<the extension of an object file>
 ## CCCC_EXE=<the name of the final executable>
 
-# PCCTS is now packaged as part of the CCCC distribution.
-PCCTS=..$(PATHSEP)pccts
-PCCTS_H=$(PCCTS)$(PATHSEP)h
-PCCTS_BIN=$(PCCTS)$(PATHSEP)bin
-# PCCTS_OBJDIR needs to be defined in the platform-specific makefile
-# as some compilers put the obj file in $(PCCTS_H), others put it
-# in the current directory.
 
 # locations and flags for antlr and dlg (don't change the flags unless you 
 # understand PCCTS)

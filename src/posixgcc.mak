@@ -26,8 +26,13 @@ endif
 
 PATHSEP=/
 
+PREFIX=/usr/local
+PCCTS=$(PREFIX)
+PCCTS_H=$(PCCTS)/include/pccts
+PCCTS_BIN=$(PCCTS)/bin
+
 CCC ?= g++
-INCLUDES = -I../pccts/h
+INCLUDES = -I$(PCCTS_H)
 CCC_OPTS = -c $(CFLAGS) $(DEBUG_FLAGS) $(INCLUDES) -std=c++98 -x c++
 C_OFLAG = -o 
 LD_OPTS = $(LDFLAGS) $(DEBUG_LFLAGS)
