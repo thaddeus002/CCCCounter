@@ -92,7 +92,7 @@ void CCCC_Html_Stream::GenerateReports(CCCC_Project* prj,
     {
       main_html_stream.Procedural_Detail();
     }
-  
+
   if(report_mask & rtOODESIGN)
     {
       main_html_stream.OO_Design();
@@ -102,7 +102,7 @@ void CCCC_Html_Stream::GenerateReports(CCCC_Project* prj,
     {
       main_html_stream.Structural_Summary();
     }
-    
+
   if(report_mask & rtSTRUCT2)
     {
       main_html_stream.Structural_Detail();
@@ -139,8 +139,8 @@ void CCCC_Html_Stream::GenerateReports(CCCC_Project* prj,
         << "<P>User support for CCCC can be obtained by "
         << "<A HREF=mailto:cccc-users@lists.sourceforge.net>"
         << "mailing the list cccc-users@lists.sourceforge.net</A>."
-	<< "<P>Please also visit the CCCC development website at "
-	<< "<A HREF=http://cccc.sourceforge.net>http://cccc.sourceforge.net</A>."
+	<< "<P>Please also visit the new CCCC development website at "
+	<< "<A HREF=http://sarnold.github.io/cccc/>http://sarnold.github.io/cccc/</A>."
 	<< endl;
     }
 }
@@ -1221,7 +1221,6 @@ void CCCC_Html_Stream::Module_Summary(CCCC_Module *module_ptr)
 {
   // calculate the counts on which all displayed data will be based
   // int nof=module_ptr->member_table.records(); // Number of functions
-  int nof=0;
   int loc=module_ptr->get_count("LOC");  // lines of code
   int mvg=module_ptr->get_count("MVG");  // McCabes cyclomatic complexity
   int com=module_ptr->get_count("COM");  // lines of comment
@@ -1236,6 +1235,10 @@ void CCCC_Html_Stream::Module_Summary(CCCC_Module *module_ptr)
   int dit=module_ptr->get_count("DIT");   // depth of inheritance tree
   int noc=module_ptr->get_count("NOC");   // number of children
   int cbo=module_ptr->get_count("CBO");   // coupling between objects
+
+  // To calculate the per function metrics in the detailed report the
+  // number of functions is set to the weighted methods 
+  int nof=wmc1;
 
   fstr << "<TABLE BORDER WIDTH=100%>" << endl
        << "<TR>" << endl;

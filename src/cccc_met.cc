@@ -26,6 +26,8 @@ using std::ostringstream;
 
 #include "cccc_opt.h"
 
+extern const char *internal_treatments[];
+
 Metric_Treatment::Metric_Treatment(CCCC_Item& treatment_line)
 {
   lower_threshold=0;

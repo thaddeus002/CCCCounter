@@ -18,23 +18,25 @@
 
 # support for debugging 
 ifeq "$(DEBUG)" "true"
-CFLAGS_DEBUG=-g
-LDFLAGS_DEBUG=-g
+DEBUG_FLAGS = -g
+DEBUG_LFLAGS = -Wl,$(DEBUG_FLAGS)
+else
+DEBUG_LFLAGS =
 endif
 
 PATHSEP=/
 
-CCC=g++
-LD=g++
-CFLAGS=-c -I../pccts/h $(CFLAGS_DEBUG) -x c++ 
-C_OFLAG=-o
-LDFLAGS=$(LDFLAGS_DEBUG)
-LD_OFLAG=-o
-OBJEXT=o
-CCCC_EXE=cccc
+CCC ?= g++
+INCLUDES = -I../pccts/h
+CCC_OPTS = -c $(CFLAGS) $(DEBUG_FLAGS) $(INCLUDES) -std=c++98 -x c++
+C_OFLAG = -o 
+LD_OPTS = $(LDFLAGS) $(DEBUG_LFLAGS)
+LD_OFLAG = -o 
+OBJEXT = o
+CCCC_EXE = cccc
 
-COPY=cp
-RM=rm
+COPY = cp
+RM = rm
 
 
 include rules.mak
