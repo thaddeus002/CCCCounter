@@ -6,7 +6,7 @@ CPP ?= cpp -E
 CC ?= gcc
 CCC ?= g++
 LD ?= g++
-DOX	= doxygen
+DOX = doxygen
 
 # Options
 CCCOPTS	= --lang=c++
@@ -36,11 +36,11 @@ all : cccc test
 
 
 cccc :
-	$(MAKE) DEBUG=$(DEBUG) -C src -f posixgcc.mak $@ || exit $$?
+	$(MAKE) DEBUG=$(DEBUG) -C src $@ || exit $$?
 
 .NOTPARALLEL: cccc test
 test :
-	$(MAKE) -C test -f posix.mak || exit $$?
+	$(MAKE) -C test || exit $$?
 
 DOCS	= doxygen
 METRICS	= ccccout
@@ -69,7 +69,7 @@ clean :
 	rm -rf src/*.o src/cccc $(GENSRC)
 
 
-install : 
+install :
 	install src/cccc /usr/local/bin/
 	@echo ===========================
 	@echo Installation succeeded!

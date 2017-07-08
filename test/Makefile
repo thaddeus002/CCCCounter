@@ -1,18 +1,25 @@
+# Makefile to control testing of CCCC
 
-# rules.mak
-# This file contains cross-platform rules to support testing of CCCC
-# it is intended to be included by a platform specific makefile.
+# Define the variables
 
-# Before this file is included the following variables need to be
-# defined:
 # CP=<command to copy a file>
+CP=cp
 # RM=<program to remove a file>
 # RMDIR=<program to remove a directory>
+RMDIR=rm -rf
 # MV=<program to move a file>
+MV=mv
 # ECHO=<echo program>
+ECHO=echo
 # DIFF=<differencing program>
+DIFF=diff
 # PATHSEP=<path separator - \ for win32, / for Unix>
+PATHSEP=/
 # CCCC=<path to CCCC program>
+CCCC=../src/cccc
+
+
+
 
 # We may also want to define CCCC_DEBUG_FLAGS on the command line
 # if we would like to see some or all of the debug output available
@@ -33,7 +40,7 @@ all : unit_tests regression_tests
 # generated.  We choose to generate all information in the main file,
 # but not the separate HTML reports on each module or the source listing.
 # We also supress the generation date, so that reports generated at different
-# times can be compared. 
+# times can be compared.
 # At this stage we are happy if the numbers in the generated report look OK:
 # some day soon we need to tidy up the code so that when a selective report
 # like this is generated it does not contain loose HTML HREF tags.
@@ -82,7 +89,7 @@ unit_tests : test1.do_the_test test2.do_the_test test3.do_the_test \
 # is used)
 # PRN5 prepared by TL to check for problem due to relationships being
 # created involving built-in types
-# PRN6 based on a test case reported by ??? 
+# PRN6 based on a test case reported by ???
 # PRN7 based on a test case reported by Larry Peters of ATI
 # PRN8 based on a test case reported by Eric Pischel
 # PRN9-PRN12 based on test cases reported by Victor B Putz
