@@ -1,20 +1,18 @@
 # Top level makefile for CCCC
 
+# Programms
 AR ?= ar
 CPP ?= cpp -E
 CC ?= gcc
 CCC ?= g++
 LD ?= g++
-
-# This distribution is a compilation of code, some of which comes from
-# different sources, some of which builds different (e.g. Win32 DLL) kinds
-# of targets.
-# I would like to make it less inconsistent, but the first stage is to make 
-# it work...
-
 DOX	= doxygen
-CCCC	= src/cccc
+
+# Options
 CCCOPTS	= --lang=c++
+
+# Files
+CCCC	= src/cccc
 CCCCSRC = src/*.cc src/*.h
 GENSRC	= src/CLexer.cpp \
           src/CLexer.h \
@@ -30,18 +28,19 @@ GENSRC	= src/CLexer.cpp \
           src/java.cpp \
           src/parser.dlg
 
+# Targets
+
 .PHONY : all cccc test
 
 all : cccc test
 
 
-
 cccc :
-	$(MAKE) DEBUG=$(DEBUG) -C cccc -f posixgcc.mak $@ || exit $$?
+	$(MAKE) DEBUG=$(DEBUG) -C src -f posixgcc.mak $@ || exit $$?
 
 .NOTPARALLEL: cccc test
 test :
-	cd test && $(MAKE) -f posix.mak || exit $$?
+	$(MAKE) -C test -f posix.mak || exit $$?
 
 DOCS	= doxygen
 METRICS	= ccccout
@@ -66,12 +65,12 @@ docs :	Doxyfile.html_cfg $(CCCCSRC) $(DOCS)/.keep_dir
 	$(DOX) Doxyfile.html_cfg
 	@echo "API docs now in $(DOCS)/html"
 
-clean	:
+clean :
 	rm -rf src/*.o src/cccc $(GENSRC)
 
 
 install : 
-	cp src/cccc /usr/local/bin/
+	install src/cccc /usr/local/bin/
 	@echo ===========================
 	@echo Installation succeeded!
 	@echo ===========================
