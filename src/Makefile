@@ -130,7 +130,22 @@ USR_OBJ = \
 
 ALL_OBJ = $(SPAWN_OBJ) $(USR_OBJ) $(PCCTS_OBJ)
 
-
+# Files
+CCCC	= cccc
+CCCCSRC = *.cc *.h
+GENSRC	= CLexer.cpp \
+          CLexer.h \
+          CParser.cpp \
+          CParser.h \
+          Ctokens.h \
+          JLexer.cpp \
+          JLexer.h \
+          JParser.cpp \
+          Parser.h \
+          Jtokens.h \
+          cccc.cpp \
+          java.cpp \
+          parser.dlg
 
 all: $(CCCC_EXE)
 
@@ -160,6 +175,7 @@ ccccmain.$(OBJEXT) : ccccmain.cc
 
 .cxx.$(OBJEXT):
 	$(CCC) -c $(CCC_OPTS) $< $(C_OFLAG)$*.$(OBJEXT)
+
 
 # Different compilers handle the source file being in a
 # different directory in different ways.  The easiest way
@@ -195,9 +211,9 @@ $(ADA_SPAWN) : ada.g
 	$(DLG) $(DFLAGS) -ci -cl ALexer parser.dlg
 
 clean:
-	-$(RM) *.cpp
-	-$(RM) *.$(OBJEXT)
+	$(RM) -f $(GENSRC)
+	$(RM) -f *.$(OBJEXT)
 
 mrproper: clean
-	-$(RM) $(CCCC_EXE)
+	$(RM) -f $(CCCC_EXE)
 

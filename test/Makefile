@@ -105,3 +105,8 @@ regression_tests : \
 	prn13.do_the_test prn14.do_the_test prn15.do_the_test \
 	prn16.do_the_test
 
+
+# clean directory
+mrproper:
+	rm -f *.html *.xml *.db
+	rm -rf .cccc

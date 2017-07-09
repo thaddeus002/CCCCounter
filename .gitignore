@@ -22,7 +22,7 @@ src/Jtokens.h
 
 src/cccc.cpp
 src/java.cpp
-srcc/parser.dlg
+src/parser.dlg
 
 # generated test output
 test/.cccc/*

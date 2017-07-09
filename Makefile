@@ -11,22 +11,7 @@ DOX = doxygen
 # Options
 CCCOPTS	= --lang=c++
 
-# Files
-CCCC	= src/cccc
-CCCCSRC = src/*.cc src/*.h
-GENSRC	= src/CLexer.cpp \
-          src/CLexer.h \
-          src/CParser.cpp \
-          src/CParser.h \
-          src/Ctokens.h \
-          src/JLexer.cpp \
-          src/JLexer.h \
-          src/JParser.cpp \
-          src/JParser.h \
-          src/Jtokens.h \
-          src/cccc.cpp \
-          src/java.cpp \
-          src/parser.dlg
+
 
 # Targets
 
@@ -66,8 +51,11 @@ docs :	Doxyfile.html_cfg $(CCCCSRC) $(DOCS)/.keep_dir
 	@echo "API docs now in $(DOCS)/html"
 
 clean :
-	rm -rf src/*.o src/cccc $(GENSRC)
+	$(MAKE) -C src clean
 
+mrproper:
+	$(MAKE) -C src mrproper
+	$(MAKE) -C test mrproper
 
 install :
 	install src/cccc /usr/local/bin/
