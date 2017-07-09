@@ -160,9 +160,9 @@ void ANTLRToken::CountToken()
 
 const char *ANTLRToken::getTokenTypeName() { return ""; }
 
-/*
-** structured output method for token objects
-*/
+/**
+ * structured output method for token objects
+ */
 ostream& operator << (ostream& out, ANTLRToken& t) {
   int i;
 
@@ -174,10 +174,4 @@ ostream& operator << (ostream& out, ANTLRToken& t) {
   out << endl;
   return out;
 }
-
-
-
-
-
-
 

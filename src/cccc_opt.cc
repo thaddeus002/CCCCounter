@@ -278,48 +278,48 @@ const char *default_fileext_options[]=
 {
 	// file extensions
 	".c@c.ansi@",
-		
-		".h@c++.ansi@",
-		".cc@c++.ansi@",
-		".cpp@c++.ansi@",
-		".cxx@c++.ansi@",
-		".c++@c++.ansi@",
-		".C@c++.ansi@",
-		".CC@c++.ansi@",
-		".CPP@c++.ansi@",
-		".CXX@c++.ansi@",
-		".hh@c++.ansi@",
-		".hpp@c++.ansi@",
-		".hxx@c++.ansi@",
-		".h++@c++.ansi@",
-		".H@c++.ansi@",
-		".HH@c++.ansi@",
-		".HPP@c++.ansi@",
-		".HXX@c++.ansi@",
-		".H++@c++.ansi@",
-		
-		".j@java@",
-		".jav@java@",
-		".java@java@",
-		".J@java@",
-		".JAV@java@",
-		".JAVA@java@",
-		
-		".ada@ada.95@",
-		".ads@ada.95@",
-		".adb@ada.95@",
-		
-		".ADA@ada.95@",
-		".ADS@ada.95@",
-		".ADB@ada.95@",
-		
-		// The language associated with the empty file extension would be used as a default
-		// if defined.
-		// This is presently disabled so that we don't process files in 
-		// MSVC projects like .rc, .odl which are not in C++.
-		// "@c++.ansi@",
-		
-		NULL
+
+	".h@c++.ansi@",
+	".cc@c++.ansi@",
+	".cpp@c++.ansi@",
+	".cxx@c++.ansi@",
+	".c++@c++.ansi@",
+	".C@c++.ansi@",
+	".CC@c++.ansi@",
+	".CPP@c++.ansi@",
+	".CXX@c++.ansi@",
+	".hh@c++.ansi@",
+	".hpp@c++.ansi@",
+	".hxx@c++.ansi@",
+	".h++@c++.ansi@",
+	".H@c++.ansi@",
+	".HH@c++.ansi@",
+	".HPP@c++.ansi@",
+	".HXX@c++.ansi@",
+	".H++@c++.ansi@",
+
+	".j@java@",
+	".jav@java@",
+	".java@java@",
+	".J@java@",
+	".JAV@java@",
+	".JAVA@java@",
+
+	".ada@ada.95@",
+	".ads@ada.95@",
+	".adb@ada.95@",
+
+	".ADA@ada.95@",
+	".ADS@ada.95@",
+	".ADB@ada.95@",
+
+	// The language associated with the empty file extension would be used as a default
+	// if defined.
+	// This is presently disabled so that we don't process files in 
+	// MSVC projects like .rc, .odl which are not in C++.
+	// "@c++.ansi@",
+
+	NULL
 };
 
 const char *default_treatment_options[] = 
@@ -406,19 +406,9 @@ const char *default_dialect_options[] =
 	// the parser can think of an intelligent way to 
 	// proceed.
 	"c++.mfc@BEGIN_MESSAGE_MAP@start_skipping@",
-		"c++.mfc@END_MESSAGE_MAP@stop_skipping@",
-		"c++.stl@__STL_BEGIN_NAMESPACE@ignore@",
-		"c++.stl@__STL_END_NAMESPACE@ignore@",
-		NULL
+	"c++.mfc@END_MESSAGE_MAP@stop_skipping@",
+	"c++.stl@__STL_BEGIN_NAMESPACE@ignore@",
+	"c++.stl@__STL_END_NAMESPACE@ignore@",
+	NULL
 };
-
-
-
-
-
-
-
-
-
-
 

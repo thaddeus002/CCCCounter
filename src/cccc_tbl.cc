@@ -140,12 +140,3 @@ template <class T> int CCCC_Table<T>::records()
 #endif // _CCCC_TBL_BODY
 
 
-
-
-
-
-
-
-
-
-
