@@ -48,15 +48,14 @@
 
 CCCC_Project *prj=NULL;
 int DebugMask=0;
-int dont_free=0;
 
 char *skip_identifiers[SKIP_IDENTIFIERS_ARRAY_SIZE];
 
-#if defined(_WIN32) && defined(__GNUG__) 
+#if defined(_WIN32) && defined(__GNUG__)
 // Cygnus gcc for Win32 B19 will try to expand wildcards that are given at
-// the commandline. Sadly this "globbing" will not work the way it is 
-// supposed in Win32, but luckily the whole globbing can be disabled by 
-// defining the following variable: 
+// the commandline. Sadly this "globbing" will not work the way it is
+// supposed in Win32, but luckily the whole globbing can be disabled by
+// defining the following variable:
 int _CRT_glob = 0;
 #endif
 
@@ -68,12 +67,12 @@ string current_filename, current_rule, parse_language;
 
 // class Main encapsulates the top level of control for the program
 // including command line handling
-class Main 
+class Main
 {
   // most of the data members of this class are either set
   // by default or gleaned from the command line
 
-// each of the data members of type string or int can be 
+// each of the data members of type string or int can be
 // set by a command line flag of the type --<member name>=<value>
 
   string outdir;
@@ -84,12 +83,12 @@ class Main
   string html_outfile;
   string xml_outfile;
   string lang;
-  int report_mask; 
+  int report_mask;
   int debug_mask;
   int files_parsed;
 
   // As we gather up the list of files to be processed
-  // we work out and record the appropriate language to 
+  // we work out and record the appropriate language to
   // use for each.
   typedef std::pair<string,string> file_entry;
   std::list<file_entry> file_list;
@@ -121,7 +120,7 @@ Main *app=NULL;
 
 Main::Main()
 {
-  report_mask=0xFFFF&(~(rtPROC2|rtSTRUCT2)) ;  
+  report_mask=0xFFFF&(~(rtPROC2|rtSTRUCT2)) ;
   debug_mask=0;
   files_parsed=0;
 }
@@ -138,8 +137,8 @@ void Main::HandleArgs(int argc, char **argv)
 	 (next_arg.substr(0,2)!="--")
 	 )
 	{
-	  // normally this will be a single file name, but 
-	  // the function below also encapsulates handling of 
+	  // normally this will be a single file name, but
+	  // the function below also encapsulates handling of
 	  // globbing (only required under Win32) and
 	  // the conventional interpretation of '-' to mean
 	  // read a list of files from standard input
@@ -160,7 +159,7 @@ void Main::HandleArgs(int argc, char **argv)
       else
 	{
 	  // the options below this point are all of the form --opt=val,
-	  // so we parse the argument to find the assignment 
+	  // so we parse the argument to find the assignment
 	  size_t assignment_pos=next_arg.find("=");
 	  if(assignment_pos==string::npos)
 	    {
@@ -268,12 +267,12 @@ void Main::HandleArgs(int argc, char **argv)
     }
 }
 
-void Main::AddFileArgument(const string& file_arg) 
+void Main::AddFileArgument(const string& file_arg)
 {
   if(file_arg=="-")
     {
       /*
-      ** add files listed on standard input to the list of files 
+      ** add files listed on standard input to the list of files
       ** to be processed
       */
       while(!std::cin.eof())
@@ -325,7 +324,7 @@ void Main::AddFileArgument(const string& file_arg)
       file_entry file_entry(file_arg,lang);
       file_list.push_back(file_entry);
       cout << file_arg << endl;
-#endif      
+#endif
     }
 }
 
@@ -333,10 +332,10 @@ void Main::AddFileArgument(const string& file_arg)
 /*
 ** method to parse all of the supplied list of files
 */
-int Main::ParseFiles() 
+int Main::ParseFiles()
 {
   FILE *f;
-  
+
   std::list<file_entry>::iterator file_iterator=file_list.begin();
   while(file_iterator!=file_list.end())
     {
@@ -346,7 +345,7 @@ int Main::ParseFiles()
       string file_language=entry.second;
       ParseStore ps(filename);
 
-      // The following objects are used to assist in the parsing 
+      // The following objects are used to assist in the parsing
       // process.
 
       if(file_language.size()==0)
@@ -355,20 +354,20 @@ int Main::ParseFiles()
 	}
 
       // CCCC supports a convention that the language may include an
-      // embedded '.', in which case the part before the . controls 
+      // embedded '.', in which case the part before the . controls
       // which parser runs, while the whole can be examined inside
       // the parser to check for special dialect handling.
       unsigned int period_pos=file_language.find(".");
       string base_language=file_language.substr(0,period_pos);
 
       f=fopen(filename.c_str(),"r");
-      if( f == NULL ) 
+      if( f == NULL )
 	{
 	  cerr << "Couldn't open " << filename << endl;
 	} else {
 	  DLGFileInput in(f);
 
-	  // show progress 
+	  // show progress
 	  cerr << "Processing " << filename;
 
 	  // The first case is just to allow symetric handling
@@ -379,10 +378,10 @@ int Main::ParseFiles()
 #ifdef CC_INCLUDED
 	  else if(
 	     (base_language=="c++") ||
-	     (base_language=="c") 
+	     (base_language=="c")
 	     )
 	    {
-	      cerr << " as C/C++ (" << file_language << ")" 
+	      cerr << " as C/C++ (" << file_language << ")"
 		   << endl;
 
 	      CLexer theLexer(&in);
@@ -398,10 +397,10 @@ int Main::ParseFiles()
 	      // This message is enabled by default when PCCTS is run with
 	      // tracing turned on (as it is by default in this application).
 	      // In the current case this is inappropriate as the C++ parser
-	      // uses guessing heavily to break ambiguities, and we expect 
+	      // uses guessing heavily to break ambiguities, and we expect
 	      // large numbers of guesses to be tested and to fail.
-	      // This message and the flag which gates it were added around 
-	      // PCCTS 1.33 MR10. 
+	      // This message and the flag which gates it were added around
+	      // PCCTS 1.33 MR10.
 	      // If you are building with an earlier version, this line should
 	      // cause an error and can safely be commented out.
 	      theParser.traceGuessOption(-1);
@@ -442,12 +441,12 @@ int Main::ParseFiles()
 #endif // ADA_INCLUDED
 	  else if(base_language=="")
 	  {
-		cerr << " - no parseable language identified";		
+		cerr << " - no parseable language identified";
 	  }
 	  else
 	    {
 	      cerr << "Unexpected language " << base_language.c_str()
-		   << " (" << file_language.c_str() 
+		   << " (" << file_language.c_str()
 		   << ") for file " << filename.c_str() << endl;
 	    }
 
@@ -494,17 +493,17 @@ void Main::GenerateXml()
 
 }
 
-void Main::HandleDebugOption(const string& arg) 
+void Main::HandleDebugOption(const string& arg)
 {
   /*
   ** arg may either be a number, or a string of letters denoting
-  ** facilities to be debugged.  
-  ** the string of letters is the public way - allowing input of a 
+  ** facilities to be debugged.
+  ** the string of letters is the public way - allowing input of a
   ** number is just there to support quickly adding a category of
   ** debug messages without having to change this file immediately
   */
   DebugMask=atoi(arg.c_str());
-  for (int i=0; arg[i]!='\0'; i++) 
+  for (int i=0; arg[i]!='\0'; i++)
     {
       switch (arg[i]) {
       case 'p' :
@@ -534,7 +533,7 @@ void Main::HandleDebugOption(const string& arg)
 void Main::HandleReportOption(const string& arg) {
   /*
   ** arg may either be a number, or a string of letters denoting
-  ** reports to be generated  
+  ** reports to be generated
   */
   report_mask=atoi(arg.c_str());
   for (int i=0; arg[i]!='\0'; i++) {
@@ -599,7 +598,7 @@ void Main::HandleReportOption(const string& arg) {
 /*
 ** giving credit where it is due
 */
-void Main::PrintCredits(ostream& os) 
+void Main::PrintCredits(ostream& os)
 {
   // the principal purpose of the constructor is to set up the
   // two lots of boilerplate text that this class requires
@@ -614,9 +613,9 @@ void Main::PrintCredits(ostream& os)
     "A program to analyse C and C++ source code and report on",
     "some simple software metrics",
     version_string.c_str(),
-    "Copyright Tim Littlefair, 1995, 1996, 1997, 1998, 1999, 2000", 
-    "with contributions from Bill McLean, Herman Hueni, Lynn Wilson ", 
-    "Peter Bell, Thomas Hieber and Kenneth H. Cox.", 
+    "Copyright Tim Littlefair, 1995, 1996, 1997, 1998, 1999, 2000",
+    "with contributions from Bill McLean, Herman Hueni, Lynn Wilson ",
+    "Peter Bell, Thomas Hieber and Kenneth H. Cox.",
     "",
     "The development of this program was heavily dependent on",
     "the Purdue Compiler Construction Tool Set (PCCTS) ",
@@ -645,15 +644,15 @@ void Main::DescribeOutput()
   {
       // make sure the user knows where the real output went
       // make sure the user knows where the real output went
-      cerr << endl 
+      cerr << endl
            << "Primary HTML output is in " << html_outfile << endl;
       if(report_mask & rtSEPARATE_MODULES)
-      { 
+      {
          cerr << "Detailed HTML reports on modules and source are in " << outdir << endl;
       }
       cerr << "Primary XML output is in " << xml_outfile << endl ;
       if(report_mask & rtSEPARATE_MODULES)
-      { 
+      {
          cerr << "Detailed XML reports on modules are in " << outdir << endl;
       }
       cerr << "Database dump is in " << db_outfile << endl << endl;
@@ -664,14 +663,14 @@ void Main::DescribeOutput()
   }
 }
 
-/* 
+/*
 ** the usage message is printed on cerr if unexpected options are found,
-** and on cout if option --help is found.  
+** and on cout if option --help is found.
 */
-void Main::PrintUsage(ostream& os) 
+void Main::PrintUsage(ostream& os)
 {
-  const char *usage_strings[] = 
-  { 
+  const char *usage_strings[] =
+  {
     "Usage: ",
     "cccc [options] file1.c ...  ",
     "Process files listed on command line.",
