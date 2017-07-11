@@ -18,21 +18,21 @@ The Purdue Compiler Construction Toolset (PCCTS) is required to compile CCCC. A 
 
 To install it :
 
-   > git clone https://github.com/thaddeus002/pccts
-   > cd pccts
-   > make
-   > su
-   > make install
+> git clone https://github.com/thaddeus002/pccts
+> cd pccts
+> make
+> su
+> make install
 
 ### get and build cccc
 
-   > git clone https://github.com/thaddeus002/cccc
-   > cd cccc
-   > make cccc
+> git clone https://github.com/thaddeus002/cccc
+> cd cccc
+> make cccc
 
 ### optionnaly run tests
 
-   > make test
+> make test
 
 This should end with the following message :
 
@@ -42,8 +42,8 @@ This should end with the following message :
 
 ### install CCCC
 
-   > su
-   > make install
+> su
+> make install
 
 ## Documentation
 
