@@ -17,14 +17,13 @@ CCCOPTS	= --lang=c++
 
 .PHONY : all cccc test
 
-all : cccc test
-
+all : cccc
 
 cccc :
 	$(MAKE) DEBUG=$(DEBUG) -C src $@ || exit $$?
 
 .NOTPARALLEL: cccc test
-test :
+test : cccc
 	$(MAKE) -C test || exit $$?
 
 DOCS	= doxygen
