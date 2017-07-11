@@ -16,7 +16,9 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-// cccc_tbl.cc
+
+/** \file cccc_tpl.cc */
+
 #ifndef _CCCC_TBL_BODY
 #define _CCCC_TBL_BODY
 
@@ -26,13 +28,13 @@
 
 #define LINE_BUFFER_SIZE 1000
 
-
-template <class T> CCCC_Table<T>::CCCC_Table()
-: sorted(true)
+/** Constructor */
+template <class T> CCCC_Table<T>::CCCC_Table() : sorted(true)
 {
   iter_ = map_t::end();
 }
 
+/** Destructor */
 template <class T> CCCC_Table<T>::~CCCC_Table()
 {
   // the container should manage the destruction of its own
@@ -62,8 +64,8 @@ int CCCC_Table<T>::get_count(const char* count_tag)
   return retval;
 }
 
-template<class T>
-T* CCCC_Table<T>::find(string name)
+/**  */
+template<class T> T* CCCC_Table<T>::find(string name)
 {
   T *retval=NULL;
   typename map_t::iterator value_iterator=map_t::find(name);
@@ -74,8 +76,11 @@ T* CCCC_Table<T>::find(string name)
   return retval;
 }
 
-template<class T>
-T* CCCC_Table<T>::find_or_insert(T* new_item_ptr)
+/**
+ * \return the objet in table with the same key of the paramètre. If there is not, insert
+ *  and return the parameter
+ */
+template<class T> T* CCCC_Table<T>::find_or_insert(T* new_item_ptr)
 {
   string new_key=new_item_ptr->key();
   T *retval=find(new_key);
@@ -89,8 +94,12 @@ T* CCCC_Table<T>::find_or_insert(T* new_item_ptr)
   return retval;
 }
 
-template<class T>
-bool CCCC_Table<T>::remove(T* old_item_ptr)
+/**
+ * Remove the item of the table if is present in it.
+ * 
+ * \return true if the item have been removed
+ */
+template<class T> bool CCCC_Table<T>::remove(T* old_item_ptr)
 {
   bool retval=false;
   typename map_t::iterator value_iterator=map_t::find(old_item_ptr->key());
@@ -102,6 +111,10 @@ bool CCCC_Table<T>::remove(T* old_item_ptr)
   return retval;
 }
 
+/**
+ * Sort the table.
+ * Beware, this function is a fake.
+ */
 template <class T> void CCCC_Table<T>::sort()
 {
   if(sorted==false)
@@ -110,17 +123,26 @@ template <class T> void CCCC_Table<T>::sort()
     }
 }
 
+/**
+ * Put iter_ to the beginning.
+ */
 template <class T> void CCCC_Table<T>::reset_iterator()
 {
   iter_=map_t::begin();
 }
 
+/**
+ * \return the first item of the table.
+ */
 template <class T> T* CCCC_Table<T>::first_item()
 {
   reset_iterator();
   return next_item();
 }
 
+/**
+ * \return the next item of the table.
+ */
 template <class T> T* CCCC_Table<T>::next_item()
 {
   T* retval=NULL;
@@ -132,6 +154,9 @@ template <class T> T* CCCC_Table<T>::next_item()
   return retval;
 }
 
+/**
+ * \return the number of records in the table
+ */
 template <class T> int CCCC_Table<T>::records()
 {
   return map_t::size();

@@ -16,11 +16,12 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-/*
- * cccc_rec.h
- * 
- * defines the database used by CCCC to generate a report
+
+/**
+ * \file cccc_rec.h
+ * \brief Defines the database used by CCCC to generate a report
  */
+
 #ifndef CCCC_REC_H
 #define CCCC_REC_H
 
@@ -46,15 +47,32 @@ class CCCC_Record
   string flags;
   virtual void merge_flags(string& new_flags);
  public:
+
   virtual ~CCCC_Record() {}
+
   virtual string name(int level) const;
+
   virtual string key() const;
+
   AugmentedBool get_flag(PSFlag psf) { return (AugmentedBool) flags[psf]; }
 
-  virtual void add_extent(CCCC_Item&);
+  /**
+   * Add an entry to extend_table if is not already in.
+   * \param is the data to create the extend to add
+   */
+  virtual void add_extent(CCCC_Item& is);
+
+  /**
+   * Sort the table.
+   */
   virtual void sort() { extent_table.sort(); }
+
   virtual int get_count(const char *count_tag)=0;
+
   friend int rank_by_string(const void *p1, const void *p2);
+
+  // getters et setters
+
   static CCCC_Project* get_active_project();
   static void set_active_project(CCCC_Project* prj);
 };
@@ -62,9 +80,5 @@ class CCCC_Record
 
 
 #endif // CCCC_REC_H
-
-
-
-
 
 

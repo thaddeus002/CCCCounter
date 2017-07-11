@@ -16,17 +16,17 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-/*
- * cccc_tbl.h
- * 
- * defines the database used by CCCC to generate a report
+
+/**
+ * \file cccc_tbl.h
+ * \brief Defines the database used by CCCC to generate a report.
  */
+ 
 #ifndef CCCC_TBL_H
 #define CCCC_TBL_H
 
 #include <iostream>
 #include <string>
-
 #include <map>
 
 using std::string;
@@ -34,8 +34,8 @@ using std::string;
 // CCCC_Table started its life as an array of pointers to CCCC_Records.
 // It will ultimately become identical to a std::map from string to T*.
 // In the mean time we are supporting a legacy API.
-template <class T> class CCCC_Table 
-: public std::map<string,T*>
+// T can be a CCCC_Extent, CCCC_Module, CCCC_Member or CCCC_UseRelationship.
+template <class T> class CCCC_Table : public std::map<string,T*>
 {
   typedef std::map<string,T*> map_t;
   typename map_t::iterator iter_;
@@ -44,6 +44,10 @@ template <class T> class CCCC_Table
  public:
   CCCC_Table();
   virtual ~CCCC_Table();
+
+  /**
+   * \return the number of records in the table
+   */
   int records();
   T* find(string name);
   T* find_or_insert(T* new_item_ptr);
