@@ -86,7 +86,7 @@ static const string CLIMOD_NODE_NAME  = "client_module";
 static const string DESC_NODE_NAME    = "description";
 static const string SRCREF_NODE_NAME     = "source_reference";
 
-static const string NOM_NODE_NAME       = "number_of_modules"; 
+static const string NOM_NODE_NAME       = "number_of_modules";
 static const string LOC_NODE_NAME       = "lines_of_code";
 static const string LOCPERMOD_NODE_NAME = "lines_of_code_per_module";
 static const string LOCPERCOM_NODE_NAME = "lines_of_code_per_line_of_comment";
@@ -144,11 +144,11 @@ static string ltrim(string value)
    return value.substr(i,MAX_LENGTH);
 }
 
-void CCCC_Xml_Stream::GenerateReports(CCCC_Project* prj, 
-				       int report_mask, 
-				       const string& file, 
-				       const string& dir) 
-{ 
+void CCCC_Xml_Stream::GenerateReports(CCCC_Project* prj,
+				       int report_mask,
+				       const string& file,
+				       const string& dir)
+{
   prjptr=prj;
   outdir=dir;
 
@@ -177,7 +177,7 @@ void CCCC_Xml_Stream::GenerateReports(CCCC_Project* prj,
     {
       main_xml_stream.Procedural_Detail();
     }
-  
+
   if(report_mask & rtOODESIGN)
     {
       main_xml_stream.OO_Design();
@@ -187,7 +187,7 @@ void CCCC_Xml_Stream::GenerateReports(CCCC_Project* prj,
     {
       main_xml_stream.Structural_Summary();
     }
-    
+
   if(report_mask & rtSTRUCT2)
     {
       main_xml_stream.Structural_Detail();
@@ -210,11 +210,11 @@ CCCC_Xml_Stream::CCCC_Xml_Stream(const string& fname, const string& info)
   fstr.open(fname.c_str());
   if(fstr.good() != TRUE)
     {
-      cerr << "failed to open " << fname.c_str() 
+      cerr << "failed to open " << fname.c_str()
 	   << " for output in directory " << outdir.c_str() << endl;
       exit(1);
     }
-    
+
   fstr << XML_PREAMBLE << endl
        << XML_COMMENT_BEGIN << info << XML_COMMENT_END << endl
        << XML_TAG_OPEN_BEGIN << PROJECT_NODE_NAME << XML_TAG_OPEN_END << endl;
@@ -222,22 +222,22 @@ CCCC_Xml_Stream::CCCC_Xml_Stream(const string& fname, const string& info)
 
 CCCC_Xml_Stream::~CCCC_Xml_Stream()
 {
-  fstr << XML_TAG_CLOSE_BEGIN << PROJECT_NODE_NAME << XML_TAG_CLOSE_END << endl; 
+  fstr << XML_TAG_CLOSE_BEGIN << PROJECT_NODE_NAME << XML_TAG_CLOSE_END << endl;
   fstr.close();
 }
 
 void CCCC_Xml_Stream::Timestamp()
 {
       time_t generationTime=time(NULL);
-      fstr << XML_TAG_OPEN_BEGIN << TIMESTAMP_NODE_NAME << XML_TAG_OPEN_END 
-           << ctime(&generationTime) 
-           << XML_TAG_CLOSE_BEGIN << TIMESTAMP_NODE_NAME << XML_TAG_CLOSE_END 	
+      fstr << XML_TAG_OPEN_BEGIN << TIMESTAMP_NODE_NAME << XML_TAG_OPEN_END
+           << ctime(&generationTime)
+           << XML_TAG_CLOSE_BEGIN << TIMESTAMP_NODE_NAME << XML_TAG_CLOSE_END
            << endl;
 }
 
 void  CCCC_Xml_Stream::Project_Summary() {
   // calculate the counts on which all displayed data will be based
-  int nom=prjptr->get_count("NOM");  // number of modules 
+  int nom=prjptr->get_count("NOM");  // number of modules
   int loc=prjptr->get_count("LOC");  // lines of code
   int mvg=prjptr->get_count("MVG");  // McCabes cyclomatic complexity
   int com=prjptr->get_count("COM");  // lines of comment
@@ -245,7 +245,7 @@ void  CCCC_Xml_Stream::Project_Summary() {
   int if4v=prjptr->get_count("IF4v");  // intermodule complexity (visible only)
   int if4c=prjptr->get_count("IF4c");  // intermodule complexity (concrete only)
   int rej=prjptr->rejected_extent_table.get_count("LOC");
-  
+
   fstr << XML_TAG_OPEN_BEGIN << SUMMARY_NODE_NAME << XML_TAG_OPEN_END << endl;
 
   Put_Metric_Node(NOM_NODE_NAME,nom);
@@ -267,14 +267,14 @@ void  CCCC_Xml_Stream::Project_Summary() {
   fstr << XML_TAG_CLOSE_BEGIN << SUMMARY_NODE_NAME << XML_TAG_CLOSE_END << endl;
 }
 
-void CCCC_Xml_Stream::OO_Design() 
+void CCCC_Xml_Stream::OO_Design()
 {
   fstr << XML_TAG_OPEN_BEGIN << OODESIGN_NODE_NAME << XML_TAG_OPEN_END << endl;
 
   CCCC_Module* mod_ptr=prjptr->module_table.first_item();
   int i=0;
   while(mod_ptr!=NULL)
-    { 
+    {
       i++;
       if( mod_ptr->is_trivial() == FALSE)
 	{
@@ -301,7 +301,7 @@ void CCCC_Xml_Stream::OO_Design()
   fstr << XML_TAG_CLOSE_BEGIN << OODESIGN_NODE_NAME << XML_TAG_CLOSE_END << endl;
 }
 
-void CCCC_Xml_Stream::Procedural_Summary() 
+void CCCC_Xml_Stream::Procedural_Summary()
 {
 
   fstr << XML_TAG_OPEN_BEGIN << PROCSUM_NODE_NAME << XML_TAG_OPEN_END << endl;
@@ -337,7 +337,7 @@ void CCCC_Xml_Stream::Procedural_Summary()
     fstr << XML_TAG_CLOSE_BEGIN << PROCSUM_NODE_NAME << XML_TAG_CLOSE_END << endl;
 }
 
-void CCCC_Xml_Stream::Structural_Summary() 
+void CCCC_Xml_Stream::Structural_Summary()
 {
   fstr << XML_TAG_OPEN_BEGIN << STRUCTSUM_NODE_NAME << XML_TAG_OPEN_END << endl;
 
@@ -376,7 +376,7 @@ void CCCC_Xml_Stream::Structural_Summary()
 	  fstr << XML_TAG_CLOSE_BEGIN << MODULE_NODE_NAME << XML_TAG_CLOSE_END << endl;
 	}
       module_ptr=prjptr->module_table.next_item();
-    }  
+    }
     fstr << XML_TAG_CLOSE_BEGIN << STRUCTSUM_NODE_NAME << XML_TAG_CLOSE_END << endl;
 }
 
@@ -384,8 +384,8 @@ void CCCC_Xml_Stream::Put_Structural_Details_Node(
    CCCC_Module *mod, CCCC_Project *prj, int mask, UserelNameLevel nl)
 {
 
-#if 0
-  std::cerr << "Relationships for " << mod->name(nlMODULE_NAME) 
+#ifdef DEBUG
+  std::cerr << "Relationships for " << mod->name(nlMODULE_NAME)
 	    << " (" << mod << ")" << std::endl;
 #endif
 
@@ -397,13 +397,13 @@ void CCCC_Xml_Stream::Put_Structural_Details_Node(
 
   if(mask==rmeCLIENT)
     {
-      nodeTag = CLIMOD_NODE_NAME;	
+      nodeTag = CLIMOD_NODE_NAME;
       relationship_map=&(mod->client_map);
 
     }
   else if(mask==rmeSUPPLIER)
     {
-      nodeTag = SUPMOD_NODE_NAME;	
+      nodeTag = SUPMOD_NODE_NAME;
       relationship_map=&(mod->supplier_map);
     }
 
@@ -415,7 +415,7 @@ void CCCC_Xml_Stream::Put_Structural_Details_Node(
     {
       fstr << XML_TAG_OPEN_BEGIN << nodeTag << XML_TAG_OPEN_END << endl;
       for(
-	  iter=relationship_map->begin(); 
+	  iter=relationship_map->begin();
 	  iter!=relationship_map->end();
 	  iter++
 	  )
@@ -445,7 +445,7 @@ void CCCC_Xml_Stream::Put_Structural_Details_Node(
     }
 }
 
-void CCCC_Xml_Stream::Structural_Detail() 
+void CCCC_Xml_Stream::Structural_Detail()
 {
   fstr << XML_TAG_OPEN_BEGIN << STRUCTDET_NODE_NAME << XML_TAG_OPEN_END << endl;
   CCCC_Module* module_ptr=prjptr->module_table.first_item();
@@ -456,7 +456,7 @@ void CCCC_Xml_Stream::Structural_Detail()
 	  Structural_Detail(module_ptr);
 	}
       module_ptr=prjptr->module_table.next_item();
-    }  
+    }
   fstr << XML_TAG_CLOSE_BEGIN << STRUCTDET_NODE_NAME << XML_TAG_CLOSE_END << endl;
 }
 
@@ -467,10 +467,10 @@ void CCCC_Xml_Stream::Procedural_Detail() {
   CCCC_Module* mod_ptr=prjptr->module_table.first_item();
   while(mod_ptr!=NULL)
     {
-      if( 
+      if(
 	 (mod_ptr->name(nlMODULE_TYPE)!="builtin") &&
 	 (mod_ptr->name(nlMODULE_TYPE)!="enum") &&
-	 (mod_ptr->name(nlMODULE_TYPE)!="union") 
+	 (mod_ptr->name(nlMODULE_TYPE)!="union")
 	 )
 	{
           fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
@@ -480,11 +480,11 @@ void CCCC_Xml_Stream::Procedural_Detail() {
           fstr << XML_TAG_CLOSE_BEGIN << MODULE_NODE_NAME << XML_TAG_CLOSE_END << endl;
 	}
       mod_ptr=prjptr->module_table.next_item();
-    }  
+    }
   fstr << XML_TAG_CLOSE_BEGIN << PROCDET_NODE_NAME << XML_TAG_CLOSE_END << endl;
 }
 
-void CCCC_Xml_Stream::Other_Extents() 
+void CCCC_Xml_Stream::Other_Extents()
 {
    fstr << XML_TAG_OPEN_BEGIN << OTHER_NODE_NAME << XML_TAG_OPEN_END << endl;
 
@@ -505,14 +505,14 @@ void CCCC_Xml_Stream::Other_Extents()
 }
 
 void CCCC_Xml_Stream::Put_Label_Node(string nodeTag, string label, int width,
-				     string ref_name, string ref_href, 
+				     string ref_name, string ref_href,
 				     CCCC_Record *rec_ptr)
 {
   if(label.size()>0)
     {
       fstr << XML_TAG_OPEN_BEGIN << nodeTag << XML_TAG_OPEN_END;
-      *this << label; 
-      fstr << XML_TAG_CLOSE_BEGIN << nodeTag << XML_TAG_CLOSE_END 
+      *this << label;
+      fstr << XML_TAG_CLOSE_BEGIN << nodeTag << XML_TAG_CLOSE_END
            << endl;
     }
   else
@@ -525,7 +525,7 @@ void CCCC_Xml_Stream::Put_Label_Node(string nodeTag, string label, int width,
       Put_Extent_List(*rec_ptr,true);
     }
 }
-  
+
 
 void CCCC_Xml_Stream::Put_Metric_Node(string nodeTag,
 				       int count, string tag)
@@ -543,7 +543,7 @@ void CCCC_Xml_Stream::Put_Metric_Node(string nodeTag,
 
 void  CCCC_Xml_Stream::Put_Metric_Node(string nodeTag,const CCCC_Metric& metric)
 {
-  fstr << XML_TAG_INLINE_BEGIN << nodeTag << XML_SPACE 
+  fstr << XML_TAG_INLINE_BEGIN << nodeTag << XML_SPACE
        << VALUE_ATTR << XML_EQUALS << XML_DQUOTE;
   *this << metric;
   fstr << XML_DQUOTE << XML_SPACE
@@ -568,7 +568,7 @@ void CCCC_Xml_Stream::Put_Extent_URL(const CCCC_Extent& extent)
 {
   string filename=extent.name(nlFILENAME);
   int linenumber=atoi(extent.name(nlLINENUMBER).c_str());
-  fstr << XML_TAG_INLINE_BEGIN << SRCREF_NODE_NAME << XML_SPACE 
+  fstr << XML_TAG_INLINE_BEGIN << SRCREF_NODE_NAME << XML_SPACE
        << FILE_ATTR << XML_EQUALS << XML_DQUOTE;
   *this << filename;
   fstr << XML_DQUOTE << XML_SPACE
@@ -577,19 +577,19 @@ void CCCC_Xml_Stream::Put_Extent_URL(const CCCC_Extent& extent)
   fstr << XML_DQUOTE << XML_SPACE << XML_TAG_INLINE_END << endl;
 }
 
-void CCCC_Xml_Stream::Put_Extent_Node(const CCCC_Extent& extent, int width, bool withDescription) 
+void CCCC_Xml_Stream::Put_Extent_Node(const CCCC_Extent& extent, int width, bool withDescription)
 {
   if(withDescription)
   {
-     fstr << XML_TAG_OPEN_BEGIN << DESC_NODE_NAME << XML_TAG_OPEN_END 
+     fstr << XML_TAG_OPEN_BEGIN << DESC_NODE_NAME << XML_TAG_OPEN_END
           << extent.name(nlDESCRIPTION)
-          << XML_TAG_CLOSE_BEGIN << DESC_NODE_NAME << XML_TAG_CLOSE_END 
+          << XML_TAG_CLOSE_BEGIN << DESC_NODE_NAME << XML_TAG_CLOSE_END
           << endl;
   }
   Put_Extent_URL(extent);
 }
 
-void CCCC_Xml_Stream::Put_Extent_List(CCCC_Record& record, bool withDescription) 
+void CCCC_Xml_Stream::Put_Extent_List(CCCC_Record& record, bool withDescription)
 {
   CCCC_Extent *ext_ptr=record.extent_table.first_item();
   while(ext_ptr!=NULL)
@@ -598,9 +598,9 @@ void CCCC_Xml_Stream::Put_Extent_List(CCCC_Record& record, bool withDescription)
            << endl;
       if(withDescription)
       {
-         fstr << XML_TAG_OPEN_BEGIN << DESC_NODE_NAME << XML_TAG_OPEN_END 
+         fstr << XML_TAG_OPEN_BEGIN << DESC_NODE_NAME << XML_TAG_OPEN_END
               << ext_ptr->name(nlDESCRIPTION)
-              << XML_TAG_CLOSE_BEGIN << DESC_NODE_NAME << XML_TAG_CLOSE_END 
+              << XML_TAG_CLOSE_BEGIN << DESC_NODE_NAME << XML_TAG_CLOSE_END
               << endl;
       }
       Put_Extent_URL(*ext_ptr);
@@ -612,13 +612,13 @@ void CCCC_Xml_Stream::Put_Extent_List(CCCC_Record& record, bool withDescription)
 
 // the next two methods define the two basic output operations through which
 // all of the higher level output operations are composed
-CCCC_Xml_Stream& operator <<(CCCC_Xml_Stream& os, const string& stg) 
+CCCC_Xml_Stream& operator <<(CCCC_Xml_Stream& os, const string& stg)
 {
   // initialise a character pointer to the start of the string's buffer
   const char *cptr=stg.c_str();
   while(*cptr!='\000') {
     char c=*cptr;
-	
+
     // the purpose of this is to filter out the characters which
     // must be escaped in HTML
     switch(c) {
@@ -632,7 +632,7 @@ CCCC_Xml_Stream& operator <<(CCCC_Xml_Stream& os, const string& stg)
   return os;
 }
 
-CCCC_Xml_Stream& operator <<(CCCC_Xml_Stream& os, const CCCC_Metric& mtc) 
+CCCC_Xml_Stream& operator <<(CCCC_Xml_Stream& os, const CCCC_Metric& mtc)
 {
   // by writing to the underlying ostream object, we avoid the escape
   // functionality
@@ -659,35 +659,35 @@ void CCCC_Xml_Stream::Separate_Modules()
 
 	  module_xml_str.Module_Summary(mod_ptr);
 
-          module_xml_str.fstr 
+          module_xml_str.fstr
              << XML_TAG_OPEN_BEGIN << MODDET_NODE_NAME << XML_TAG_OPEN_END
              << endl;
 	  module_xml_str.Module_Detail(mod_ptr);
-          module_xml_str.fstr 
+          module_xml_str.fstr
              << XML_TAG_CLOSE_BEGIN << MODDET_NODE_NAME << XML_TAG_CLOSE_END
              << endl;
-   
-          module_xml_str.fstr 
+
+          module_xml_str.fstr
              << XML_TAG_OPEN_BEGIN << PROCDET_NODE_NAME << XML_TAG_OPEN_END
              << endl;
 	  module_xml_str.Procedural_Detail(mod_ptr);
-          module_xml_str.fstr 
+          module_xml_str.fstr
              << XML_TAG_CLOSE_BEGIN << PROCDET_NODE_NAME << XML_TAG_CLOSE_END
              << endl;
 
-          module_xml_str.fstr 
+          module_xml_str.fstr
              << XML_TAG_OPEN_BEGIN << STRUCTDET_NODE_NAME << XML_TAG_OPEN_END
              << endl;
 	  module_xml_str.Structural_Detail(mod_ptr);
-          module_xml_str.fstr 
+          module_xml_str.fstr
              << XML_TAG_CLOSE_BEGIN << STRUCTDET_NODE_NAME << XML_TAG_CLOSE_END
              << endl;
 
 	}
       else
 	{
-#if 0
-	  cerr << mod_ptr->module_type << " " << mod_ptr->key() 
+#ifdef DEBUG
+	  cerr << mod_ptr->module_type << " " << mod_ptr->key()
 	       << " is trivial" << endl;
 #endif
 	}
@@ -699,13 +699,13 @@ void CCCC_Xml_Stream::Module_Detail(CCCC_Module *module_ptr)
 {
   // this function generates the contents of the table of definition
   // and declaration extents for a single module
-  
+
   // the output needs to be enveloped in a pair of <TABLE></TABLE> tags
   // these have not been put within the function because it is designed
   // to be used in two contexts:
   // 1. within the Separate_Modules function, wrapped directly in the table
   //    tags
-  // 2. within the Module_Detail function, where the table tags are 
+  // 2. within the Module_Detail function, where the table tags are
   //    around the output of many calls to this function (not yet implemented)
 
   CCCC_Record::Extent_Table::iterator eIter = module_ptr->extent_table.begin();
@@ -726,7 +726,7 @@ void CCCC_Xml_Stream::Module_Detail(CCCC_Module *module_ptr)
      Put_Metric_Node(COM_NODE_NAME,com);
      Put_Metric_Node(LOCPERCOM_NODE_NAME,ml_c);
      Put_Metric_Node(MVGPERCOM_NODE_NAME,mm_c);
-   
+
      eIter++;
   }
 }
@@ -735,19 +735,19 @@ void CCCC_Xml_Stream::Procedural_Detail(CCCC_Module *module_ptr)
 {
   // this function generates the contents of the procedural detail table
   // relating to a single module
-  
+
   // the output needs to be enveloped in a pair of <TABLE></TABLE> tags
   // these have not been put within the function because it is designed
   // to be used in two contexts:
   // 1. within the Separate_Modules function, wrapped directly in the table
   //    tags
-  // 2. within the Procedural_Detail function, where the table tags are 
+  // 2. within the Procedural_Detail function, where the table tags are
   //    around the output of many calls to this function
 
   CCCC_Module::member_map_t::iterator iter = module_ptr->member_map.begin();
 
       while(iter!=module_ptr->member_map.end())
-	{ 
+	{
           fstr << XML_TAG_OPEN_BEGIN << MEMBER_NODE_NAME << XML_TAG_OPEN_END << endl;
 
 	  CCCC_Member *mem_ptr=(*iter).second;
@@ -760,19 +760,19 @@ void CCCC_Xml_Stream::Procedural_Detail(CCCC_Module *module_ptr)
 	  CCCC_Metric ml_c(loc,com,"L_C");
 	  CCCC_Metric mm_c(mvg,com,"M_C");
 
-          Put_Metric_Node(LOC_NODE_NAME,mloc);
-          Put_Metric_Node(MVG_NODE_NAME,mmvg);
-          Put_Metric_Node(COM_NODE_NAME,com);
-          Put_Metric_Node(LOCPERCOM_NODE_NAME,ml_c);
-          Put_Metric_Node(MVGPERCOM_NODE_NAME,mm_c);
+      Put_Metric_Node(LOC_NODE_NAME,mloc);
+      Put_Metric_Node(MVG_NODE_NAME,mmvg);
+      Put_Metric_Node(COM_NODE_NAME,com);
+      Put_Metric_Node(LOCPERCOM_NODE_NAME,ml_c);
+      Put_Metric_Node(MVGPERCOM_NODE_NAME,mm_c);
 
 	  iter++;
 
-          fstr << XML_TAG_CLOSE_BEGIN << MEMBER_NODE_NAME << XML_TAG_CLOSE_END << endl;
+      fstr << XML_TAG_CLOSE_BEGIN << MEMBER_NODE_NAME << XML_TAG_CLOSE_END << endl;
 	}
 }
 
-void CCCC_Xml_Stream::Structural_Detail(CCCC_Module *module_ptr) 
+void CCCC_Xml_Stream::Structural_Detail(CCCC_Module *module_ptr)
 {
   fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
   Put_Label_Node(NAME_NODE_NAME,module_ptr->name(nlSIMPLE).c_str(), 0, "","");
@@ -781,7 +781,7 @@ void CCCC_Xml_Stream::Structural_Detail(CCCC_Module *module_ptr)
   fstr << XML_TAG_CLOSE_BEGIN << MODULE_NODE_NAME << XML_TAG_CLOSE_END << endl;
 }
 
-void CCCC_Xml_Stream::Module_Summary(CCCC_Module *module_ptr) 
+void CCCC_Xml_Stream::Module_Summary(CCCC_Module *module_ptr)
 {
   // calculate the counts on which all displayed data will be based
   // int nof=module_ptr->member_table.records(); // Number of functions
@@ -827,26 +827,10 @@ void CCCC_Xml_Stream::Module_Summary(CCCC_Module *module_ptr)
 }
 
 
-
 void CCCC_Xml_Stream::Source_Listing()
 {
 }
 
-#if 0
-static string pad_string(int target_width, string the_string, string padding)
-{
-  int spaces_required=target_width-the_string.size();
-  string pad_string;
-  while(spaces_required>0)
-    {
-      pad_string+=padding;
-      spaces_required--;
-    }
-  return pad_string+the_string;
-}
-#endif
-
-
 
 #ifdef UNIT_TEST
 int main()

@@ -1,17 +1,14 @@
-/*
- * cccc.h 
- * diagnostic and portability facilities for the cccc project
+/**
+ * \file cccc.h
+ * \brief diagnostic and portability facilities for the cccc project
  */
 
 #ifndef _CCCC_H__
 #define _CCCC_H__
 
-#ifdef _WIN32
-#pragma warning (disable:4786 4503)
-#endif
 
 // I am trying to standardise on using the ANSI C++ names
-// for the ANSI C header files, and bringing all of 
+// for the ANSI C header files, and bringing all of
 // the includes of these libraries into this file.
 // I have not yet attempted to purge includes for these
 // files from the other source files.
@@ -40,10 +37,10 @@ using std::cerr;
 
 // debugging facilities
 extern int DebugMask;
-enum DebugFlags { 
-  LEXER=0x01, 
-  PARSER=0x02, 
-  COUNTER=0x04, 
+enum DebugFlags {
+  LEXER=0x01,
+  PARSER=0x02,
+  COUNTER=0x04,
   MEMORY=0x08,
   EXTENT=0x10,
   DATABASE=0x20
@@ -57,20 +54,17 @@ extern CCCC_Project *prj;
 // a nasty global array of identifiers we want the lexer to ignore
 #define SKIP_IDENTIFIERS_ARRAY_SIZE 256
 extern char *skip_identifiers[SKIP_IDENTIFIERS_ARRAY_SIZE];
-#if 0
-#include "DLGLexer.h"
-#endif
 
 // These macros were used to cover differences between the way the
 // old strstream classes were used in Win32 and GNU builds.
 // The differences are no longer necessary.
 #define MAKE_STRSTREAM(X)     stringstream X;
 #define CONVERT_STRSTREAM(X)  (X)
-#define RELEASE_STRSTREAM(X)  
+#define RELEASE_STRSTREAM(X)
 
 
-// The -gd option generates uncompilable code with a missing 
-// variable called zzTracePrevRuleName if the generated 
+// The -gd option generates uncompilable code with a missing
+// variable called zzTracePrevRuleName if the generated
 // files cccc.cpp, java.cpp, ada.cpp don't include a version
 // of AParser.h seen with zzTRACE_RULES defined.
 // I'm not sure how this is supposed to work, but for the moment
@@ -84,13 +78,5 @@ extern char *skip_identifiers[SKIP_IDENTIFIERS_ARRAY_SIZE];
 #include "AParser.h"
 
 #endif
-
-
-
-
-
-
-
-
 
 

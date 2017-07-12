@@ -14,14 +14,14 @@ CCCC_Item::CCCC_Item(const string& s, char c)
   good=true;
 }
 
-CCCC_Item::CCCC_Item(const string& s) 
+CCCC_Item::CCCC_Item(const string& s)
 {
   buffer=s;
   delimiter='@';
   good=true;
 }
 
-CCCC_Item::CCCC_Item() 
+CCCC_Item::CCCC_Item()
 {
   buffer="";
   delimiter='@';
@@ -32,9 +32,6 @@ bool CCCC_Item::Insert(const string& s)
 {
   buffer+=s;
   buffer+=delimiter;
-#if 0
-  cerr << buffer << endl;
-#endif
   return good;
 }
 
@@ -43,7 +40,7 @@ bool CCCC_Item::Insert(const char* cptr)
   string s(cptr);
   return Insert(s);
 }
- 
+
 bool CCCC_Item::Extract(string& s)
 {
   size_t delimiter_position=buffer.find(delimiter);
@@ -55,7 +52,7 @@ bool CCCC_Item::Extract(string& s)
 	  buffer=tempBuffer;
     }
   else
-    { 
+    {
       good=false;
     }
   return good;
@@ -133,6 +130,6 @@ bool CCCC_Item::FromFile(ifstream& ifstr)
   return good;
 }
 
-  
+
 
 

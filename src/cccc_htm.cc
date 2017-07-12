@@ -655,7 +655,7 @@ void CCCC_Html_Stream::Put_Structural_Details_Cell(
 {
   fstr << "<TD WIDTH=50%>" << endl;
 
-#if 0
+#ifdef DEBUG
   std::cerr << "Relationships for " << mod->name(nlMODULE_NAME)
 	    << " (" << mod << ")" << std::endl;
 #endif
@@ -688,7 +688,7 @@ void CCCC_Html_Stream::Put_Structural_Details_Cell(
 	  AugmentedBool vis=ur_ptr->is_visible();
 	  AugmentedBool con=ur_ptr->is_concrete();
 
-#if 0
+#ifdef DEBUG
 	  std::cerr << ur_ptr->name(nlCLIENT)
 		    << " uses "
 		    << ur_ptr->name(nlSUPPLIER)
@@ -1093,7 +1093,7 @@ void CCCC_Html_Stream::Separate_Modules()
 	}
       else
 	{
-#if 0
+#ifdef DEBUG
 	  cerr << mod_ptr->module_type << " " << mod_ptr->key()
 	       << " is trivial" << endl;
 #endif
