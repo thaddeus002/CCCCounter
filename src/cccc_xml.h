@@ -17,6 +17,11 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
+/**
+ * \file cccc_xml.h
+ */
+
+
 #ifndef __CCCC_XML_H
 #define __CCCC_XML_H
 

@@ -1,4 +1,7 @@
-// cccc_itm.h
+/**
+ * \file cccc_itm.h
+ */
+
 #ifndef __CCCC_ITM_H
 #define __CCCC_ITM_H
 
@@ -16,6 +19,7 @@ class CCCC_Item
 {
 private:
   char delimiter;
+  // concatenation of string separated by delimiter + delimiter at the end
   string buffer;
   bool good;
 
@@ -24,8 +28,15 @@ public:
   CCCC_Item(const string& s);
   CCCC_Item(); 
 
+  /** add a string */
   bool Insert(const string& s); 
-  bool Insert(const char* cptr); 
+  bool Insert(const char* cptr);
+  /**
+   * Extract the first element in "buffer" and put it in "s".
+   * Erase the element from "buffer".
+   * Fail if no delimiter found in "buffer".
+   * \return true if and only if the function succeeded.
+   */
   bool Extract(string& s);
   bool Insert(int n); 
   bool Extract(int& n);
@@ -33,8 +44,14 @@ public:
   bool Extract(char& c);
   bool Insert(float f);
   bool Extract(float& f);
-
+  /**
+   * Copy the buffer in the stream.
+   */
   bool ToFile(ofstream& ofstr);
+  /**
+   * Read the buffer from the stream.
+   * The delimiter is the last character.
+   */
   bool FromFile(ifstream& ifstr);
 };
   

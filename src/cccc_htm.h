@@ -16,6 +16,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
+
 #ifndef __CCCC_HTM_H
 #define __CCCC_HTM_H
 
@@ -28,6 +29,7 @@
 #include "cccc_db.h"
 #include "cccc_met.h"
 
+
 enum ReportType {
   rtCONTENTS=0x0001, rtSUMMARY=0x0002,
   rtOODESIGN=0x0004,
@@ -39,6 +41,7 @@ enum ReportType {
   rtSHOW_GEN_TIME=0x800,
   rtCCCC=0x8000
 };
+
 
 
 class CCCC_Html_Stream {

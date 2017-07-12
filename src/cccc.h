@@ -1,6 +1,6 @@
 /**
  * \file cccc.h
- * \brief diagnostic and portability facilities for the cccc project
+ * \brief Diagnostic and portability facilities for the cccc project
  */
 
 #ifndef _CCCC_H__

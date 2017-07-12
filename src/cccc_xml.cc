@@ -16,27 +16,17 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-// cccc_xml.cc
 
-// this file defines XML output facilities for the CCCC project
+/**
+ * \file cccc_xml.cc
+ * \brief this file defines XML output facilities for the CCCC project
+ */
 
 #include "cccc.h"
 #include "cccc_itm.h"
 #include "cccc_xml.h"
 
-// I would love to use the C++ standard preprocessor
-// directive #if here, but I have had reports before now
-// of people who are using compilers which only support
-// #ifdef.
-#ifdef CCCC_CONF_W32VC
-#include <direct.h>
-#else
-#ifdef CCCC_CONF_W32BC
-#include <direct.h>
-#else
 #include <unistd.h>
-#endif
-#endif
 
 #include <string.h>
 #include <time.h>

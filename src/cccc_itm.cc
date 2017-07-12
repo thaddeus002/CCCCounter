@@ -1,4 +1,6 @@
-// cccc_itm.cc
+/**
+ * \file cccc_itm.cc
+ */
 
 #include "cccc.h"
 #include <fstream>
@@ -49,7 +51,7 @@ bool CCCC_Item::Extract(string& s)
       good=true;
       s=buffer.substr(0,delimiter_position);
       string tempBuffer=buffer.substr(delimiter_position+1);
-	  buffer=tempBuffer;
+      buffer=tempBuffer;
     }
   else
     {
@@ -129,7 +131,4 @@ bool CCCC_Item::FromFile(ifstream& ifstr)
     }
   return good;
 }
-
-
-
 

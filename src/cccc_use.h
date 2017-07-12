@@ -16,9 +16,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-/*
+
+/**
  * cccc_use.h
  */
+
 #ifndef CCCC_USE_H
 #define CCCC_USE_H
 
@@ -31,7 +33,7 @@ static const string USEEXT_PREFIX="CCCC_UseExt";
 
 enum UserelNameLevel { nlSUPPLIER=-1, nlCLIENT=-2, nlMEMBER=-3 };
 
-class CCCC_UseRelationship : public CCCC_Record 
+class CCCC_UseRelationship : public CCCC_Record
 {
   friend class CCCC_Project;
   string supplier, client, member;
@@ -56,9 +58,5 @@ class CCCC_UseRelationship : public CCCC_Record
 
 
 #endif // CCCC_USE_H
-
-
-
-
 
 

@@ -16,9 +16,12 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-// cccc_use.cc
 
-// implementation of CCCC_UseRelationship class
+
+/**
+ * \file cccc_use.cc
+ * \brief implementation of CCCC_UseRelationship class
+ */
 
 #include "cccc.h"
 
@@ -63,7 +66,7 @@ string CCCC_UseRelationship::name(int name_level) const
     }
 
   return namestr.c_str();
-}	
+}
 
 void CCCC_UseRelationship::add_extent(CCCC_Item& is)
 {
@@ -127,35 +130,35 @@ int CCCC_UseRelationship::get_count(const char* count_tag)
     {
       char suffix=count_tag[2];
       switch(suffix)
-	{
-	case 0:
-	  retval=1;
+      {
+        case 0:
+          retval=1;
 	  break;
 
-	case 'v':
-	  if(visible!=abFALSE)
-	    {
-	      retval=1;
-	    }
+        case 'v':
+          if(visible!=abFALSE)
+          {
+            retval=1;
+          }
 	  break;
 
-	case 'c':
-	  if(concrete!=abFALSE)
-	    { 
-	      retval=1;
-	    }
-	  break;
+        case 'c':
+          if(concrete!=abFALSE)
+          {
+            retval=1;
+          }
+          break;
 
 	default:
-	  cerr << "Unexpected count tag suffix" << count_tag << endl;
-	}
+          cerr << "Unexpected count tag suffix" << count_tag << endl;
+      }
     }
   else
     {
       cerr << "Unexpected count tag " << count_tag << endl;
     }
 
-	    
+
   return retval;
 }
 
@@ -215,53 +218,51 @@ int CCCC_UseRelationship::FromFile(ifstream& ifstr)
   CCCC_UseRelationship *found_uptr=NULL;
 
   if(
-     next_line.Extract(line_keyword_dummy) &&
-     next_line.Extract(this->supplier) &&
-     next_line.Extract(this->client) 
-     ) 
+    next_line.Extract(line_keyword_dummy) &&
+    next_line.Extract(this->supplier) &&
+    next_line.Extract(this->client) 
+  ) 
     {
-      found_uptr=
-	current_loading_project->userel_table.find_or_insert(this);
-      if(found_uptr==this)
-	{
-	  // the newly created instance of the module is the first
-	  // and has taken its place in the database, so we protect
-	  // it from deletion
-	  retval=RECORD_ADDED;
-	}
-      else
-	{
-	  retval=RECORD_TRANSCRIBED;
-	}
+    found_uptr=current_loading_project->userel_table.find_or_insert(this);
+    if(found_uptr==this)
+    {
+      // the newly created instance of the module is the first
+      // and has taken its place in the database, so we protect
+      // it from deletion
+      retval=RECORD_ADDED;
+    }
+    else
+    {
+      retval=RECORD_TRANSCRIBED;
+    }
  
-      // process extent records
-      while(PeekAtNextLinePrefix(ifstr,USEEXT_PREFIX))
-	{
-	  CCCC_Extent *new_extent=new CCCC_Extent;
-	  next_line.FromFile(ifstr);
-	  ifstr_line++;
-	  string supplier_dummy, client_dummy;
+    // process extent records
+    while(PeekAtNextLinePrefix(ifstr,USEEXT_PREFIX))
+    {
+      CCCC_Extent *new_extent=new CCCC_Extent;
+      next_line.FromFile(ifstr);
+      ifstr_line++;
+      string supplier_dummy, client_dummy;
 
-	  if(
-	     next_line.Extract(line_keyword_dummy) &&
-	     next_line.Extract(supplier_dummy) &&
-	     next_line.Extract(client_dummy) &&
-	     new_extent->GetFromItem(next_line)
-	     )
-	    {
-	      // We don't ever expect to find duplicated extent records
-	      // but just in case... 
-	      CCCC_Extent *found_eptr=
-		found_uptr->extent_table.find_or_insert(new_extent);
-	      if(found_eptr!=new_extent)
-		{
-		  cerr << "Failed to add extent for relationship "
-		       << found_uptr->key() << " at line " << ifstr_line 
-		       << endl;
-		  delete new_extent;
-		}
-	    }
-	}
+      if(
+        next_line.Extract(line_keyword_dummy) &&
+        next_line.Extract(supplier_dummy) &&
+        next_line.Extract(client_dummy) &&
+        new_extent->GetFromItem(next_line)
+      )
+      {
+        // We don't ever expect to find duplicated extent records
+        // but just in case... 
+        CCCC_Extent *found_eptr=found_uptr->extent_table.find_or_insert(new_extent);
+        if(found_eptr!=new_extent)
+        {
+          cerr << "Failed to add extent for relationship "
+            << found_uptr->key() << " at line " << ifstr_line 
+            << endl;
+          delete new_extent;
+        }
+      }
+    }
 
     } 
   else // extraction of module intial line failed
