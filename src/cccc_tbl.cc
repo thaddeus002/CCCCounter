@@ -24,6 +24,12 @@
 
 #include "cccc_itm.h"
 #include "cccc_tbl.h"
+
+#include "cccc_ext.h"
+#include "cccc_mod.h"
+#include "cccc_use.h"
+#include "cccc_mem.h"
+
 #include <cassert>
 
 #define LINE_BUFFER_SIZE 1000
@@ -96,7 +102,7 @@ template<class T> T* CCCC_Table<T>::find_or_insert(T* new_item_ptr)
 
 /**
  * Remove the item of the table if is present in it.
- * 
+ *
  * \return true if the item have been removed
  */
 template<class T> bool CCCC_Table<T>::remove(T* old_item_ptr)
@@ -161,6 +167,14 @@ template <class T> int CCCC_Table<T>::records()
 {
   return map_t::size();
 }
+
+// explicit template instantiations for the project are collected here
+
+template class CCCC_Table<CCCC_Extent>;
+template class CCCC_Table<CCCC_Module>;
+template class CCCC_Table<CCCC_UseRelationship>;
+template class CCCC_Table<CCCC_Member>;
+
 
 #endif // _CCCC_TBL_BODY
 

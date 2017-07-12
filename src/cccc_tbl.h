@@ -21,7 +21,7 @@
  * \file cccc_tbl.h
  * \brief Defines the database used by CCCC to generate a report.
  */
- 
+
 #ifndef CCCC_TBL_H
 #define CCCC_TBL_H
 
@@ -31,10 +31,12 @@
 
 using std::string;
 
-// CCCC_Table started its life as an array of pointers to CCCC_Records.
-// It will ultimately become identical to a std::map from string to T*.
-// In the mean time we are supporting a legacy API.
-// T can be a CCCC_Extent, CCCC_Module, CCCC_Member or CCCC_UseRelationship.
+/**
+ * CCCC_Table started its life as an array of pointers to CCCC_Records.
+ * It will ultimately become identical to a std::map from string to T*.
+ * In the mean time we are supporting a legacy API.
+ * T can be a CCCC_Extent, CCCC_Module, CCCC_Member or CCCC_UseRelationship.
+ */
 template <class T> class CCCC_Table : public std::map<string,T*>
 {
   typedef std::map<string,T*> map_t;
@@ -59,7 +61,6 @@ template <class T> class CCCC_Table : public std::map<string,T*>
   void sort();
 };
 
-#include "cccc_tbl.cc"
 
-#endif // CCCC_DB_H
+#endif // CCCC_TBL_H
 
