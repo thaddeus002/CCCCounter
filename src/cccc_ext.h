@@ -16,9 +16,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-/*
- * cccc_ext.h
+
+/**
+ * \file cccc_ext.h
  */
+
 #ifndef CCCC_EXT_H
 #define CCCC_EXT_H
 
@@ -30,11 +32,14 @@ using std::string;
 class CCCC_Item;
 
 enum ExtentNameLevel { nlFILENAME=-1, nlLINENUMBER=-2, nlDESCRIPTION=-3};
+/**
+ * This may be an object representation of an Item.
+ */
 class CCCC_Extent
 {
   friend class CCCC_Record;
   friend class CCCC_Project;
-  
+
   string filename;
   string linenumber;
   string description;
@@ -44,17 +49,37 @@ class CCCC_Extent
   Visibility v;
   static unsigned int nextkey;
   unsigned int extkey;
+
  public:
   CCCC_Extent();
+  /** read the variable in a item */
   CCCC_Extent(CCCC_Item& is);
 
-  string name( int index ) const;
-  string key() const; 
+  /**
+   * Get an element of the objet
+   * \param level which element to return : ExtentNameLevel, nlRANK, nlSEARCH (enum NameLevel)
+   */
+  string name(int level) const;
+
+  /**
+   * \return an unique key for this object.
+   */
+  string key() const;
+
+  /** This is the same than the constructor */
   int GetFromItem(CCCC_Item& item);
+
   int AddToItem(CCCC_Item& item);
-  Visibility get_visibility() const { return v; }
+
+
   int get_count(const char *count_tag);
+
+  // GETTERS
+
+  Visibility get_visibility() const { return v; }
+
   UseType get_usetype() const { return ut; }
+
   const char* get_description() const { return description.c_str(); }
 };
 

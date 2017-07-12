@@ -21,7 +21,7 @@
 
 
 #include <string>
-#include "cccc_db.h"
+
 #include "cccc_itm.h"
 
 enum EmphasisLevel { elLOW=0, elMEDIUM=1, elHIGH=2 };
@@ -84,10 +84,6 @@ class CCCC_Metric {
 
     
 #endif /* __CCCC_MET_H */
-
-
-
-
 
 
 
