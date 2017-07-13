@@ -1,20 +1,20 @@
-# CCCC
+# CCCCounter
 
 C and C++ Code Counter
 
 ## Presentation
 
-CCCC is a free software that performs analysis and reports metrics on source code written in C, C++ and Java, written by Tim Littlefair and others. The original source is still on [sourceforge](http://cccc.sourceforge.net).
+CCCCounter is a free software that performs analysis and reports metrics on source code written in C, C++ and Java. It is a fork of CCCC, written by Tim Littlefair and others, and whose source is on [sourceforge](http://cccc.sourceforge.net).
 
-CCCC is a command line tool, implemented for Linux and other POSIX-style platforms. Files to be analyzed are listed (typically on the command line, although support does exist for the list of files to be read from standard input. The program analyzes the files and generates a one or more reports in HTML or XML format on the content.
+CCCCounter is a command line tool, implemented for Linux and other POSIX-style platforms. Files to be analyzed are listed (typically on the command line, although support does exist for the list of files to be read from standard input. The program analyzes the files and generates a one or more reports in HTML or XML format on the content.
 
-The present project is a fork of CCCC based on a merge of several projects to keep the good ideas of each, the authors of which will be granted in `git log`.
+This fork is based on a merge of several projects to keep the good ideas of each, the authors of which will be granted in `git log`.
 
 ## Install
 
 ### Requirements
 
-The Purdue Compiler Construction Toolset (PCCTS) is required to compile CCCC. A version of this program can be found [here](https://github.com/thaddeus002/pccts).
+The Purdue Compiler Construction Toolset (PCCTS) is required to compile CCCCounter. A version of this program can be found [here](https://github.com/thaddeus002/pccts).
 
 To install it :
 
@@ -24,11 +24,11 @@ To install it :
 > su
 > make install
 
-### get and build cccc
+### get and build CCCCounter
 
-> git clone https://github.com/thaddeus002/cccc
-> cd cccc
-> make cccc
+> git clone https://github.com/thaddeus002/CCCCounter
+> cd CCCCounter
+> make
 
 ### optionnaly run tests
 
@@ -40,20 +40,20 @@ This should end with the following message :
     All tests passed
     ================
 
-### install CCCC
+### install CCCCounter
 
 > su
 > make install
 
 ## Documentation
 
-To start using CCCC, please read the [User Guide](doc/C_User_Guide.html).
+To start using CCCCounter, please read the [User Guide](doc/CCCCounter_User_Guide.html).
 
 ## License
 
-CCCC is released under the GNU General Public License V2 or newer. See [LICENSE](LICENSE).
+CCCCounter is released under the GNU General Public License V2 or newer. See [LICENSE](LICENSE).
 
-## Notes from the original author
+## Notes from the original author of CCCC
 
 CCCC was originally developed as a proof-of-concept tool for some ideas relating to software metrics which I was investigating as an academic research project. I have now completed the project and been awarded my PhD.
 
