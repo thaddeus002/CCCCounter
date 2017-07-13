@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>CCCC User Guide</title>
+	<title>CCCCounter User Guide</title>
 </head>
 
 <body vlink="#800080" link="#0000ff" lang="en-US">
@@ -12,7 +12,7 @@
 <table border="1" width="100%" cellspacing="1" cellpadding="2" bordercolor="#000000">
 	<tbody><tr>
 		<td>
-			<h1 align="center">User Guide for CCCC</h1>
+			<h1 align="center">User Guide for CCCCounter</h1>
 		</td>
 	</tr></tbody>
 </table>
@@ -25,23 +25,23 @@
         <li><h3><a href="#command">Command line syntax</a></h3></li>
         <li><h3><a href="#config">Configuration</a></h3></li>
         <li><h3><a href="#disclaimers">Disclaimers</a></h3></li>
-        <li><h3><a href="#getting">Getting CCCC</a></h3></li>
+        <li><h3><a href="#getting">Getting CCCCounter</a></h3></li>
     </ol>
 </summary>
 
 
 <h1><a name="intro"></a>Introduction</h1>
 
-<p>CCCC is a tool for the analysis of source code in various languages (primarily C++), which generates a report in HTML format on various measurements of the code processed. Although the tool was originally implemented to process C++ and ANSI C, the present version is also able to process Java source files, and support has been present in earlier versions for Ada95. The name CCCC stands for 'C and C++ Code Counter'.
+<p>CCCCounter is a tool for the analysis of source code in various languages (primarily C++), which generates a report in HTML format on various measurements of the code processed. Although the tool was originally implemented to process C++ and ANSI C, the present version is also able to process Java source files, and support has been present in earlier versions for Ada95. The name CCCCounter stands for 'C and C++ Code Counter'.
 </p>
 
 <p>Measurements of source code of this kind are generally referred to as 'software metrics', or more precisely 'software product metrics' (as the term 'software metrics` also covers measurements of the software process, which are called 'software process metrics'). There is a reasonable consensus among modern opinion leaders in the software engineering field that measurement of some kind is probably a Good Thing, although there is less consensus on what is worth measuring and what the measurements mean.
 </p>
 
-<p>CCCC has been developed as freeware, and is released in source code form. Users are encouraged to compile the program themselves, and to modify the source to reflect their preferences and interests.
+<p>CCCCounter has been developed as freeware, and is released in source code form. Users are encouraged to compile the program themselves, and to modify the source to reflect their preferences and interests.
 </p>
 
-<p>The simplest way of using CCCC is just to run it with the names of a selection of files on the command line like this:
+<p>The simplest way of using CCCCounter is just to run it with the names of a selection of files on the command line like this:
 </p>
 
 <p><tt>cccc my_types.h big.h small.h *.cc </tt>
@@ -55,7 +55,7 @@
 
 <p><tt>dir /b/s | cccc - </tt>(on DOS/Windows family platforms)</p>
 
-<p>CCCC will process each of the files specified on the command line (using standard wildcard processing were appropriate), or, if the '-' option is specified in the standard input stream. For each file, named, CCCC will examine the extension of the filename, and if the extension is recognized as indicating a supported language, the appropriate parser will run on the file. As each file is parsed, recognition of certain constructs will cause records to be written into an internal database. When all files have been processed, a report on the contents of the internal database will be generated in HTML format. By default the main summary HTML report is generated to the file cccc.htm in a subdirectory called .cccc of the the current working directory, with detailed reports on each module (i.e. C++ or Java class) identified by the analysis run.
+<p>CCCCounter will process each of the files specified on the command line (using standard wildcard processing were appropriate), or, if the '-' option is specified in the standard input stream. For each file, named, CCCCounter will examine the extension of the filename, and if the extension is recognized as indicating a supported language, the appropriate parser will run on the file. As each file is parsed, recognition of certain constructs will cause records to be written into an internal database. When all files have been processed, a report on the contents of the internal database will be generated in HTML format. By default the main summary HTML report is generated to the file cccc.htm in a subdirectory called .cccc of the the current working directory, with detailed reports on each module (i.e. C++ or Java class) identified by the analysis run.
 </p>
 
 <p>In addition to the summary and detailed HTML reports, the run will cause generation of corresponding summary and detailed reports in XML format, and a further file called cccc.db to be created. cccc.db will contain a dump of the internal database of the program in a format delimited with the character '@' (chosen because it is one of the few characters which cannot legally appear in C/C++ non-comment source code).
@@ -81,7 +81,7 @@
 
 <h1><a name="report"></a>Report Contents</h1>
 
-<p>The report generated by CCCC normally consists of six tables plus a table of contents at the beginning and some informational material about CCCC itself at the end.
+<p>The report generated by CCCCounter normally consists of six tables plus a table of contents at the beginning and some informational material about CCCCounter itself at the end.
 </p>
 
 <h3><a name="report_tables"></a>Tables generated</h3>
@@ -257,7 +257,7 @@
 			</p>
 		</td>
 		<td width="77%">
-			<p>This metric is derived by squaring the product of the fan-in and fan-out of each module. The original Henry-Kafura measure, which has been described as a measure of 'information flow complexity' includes a term for the length of the module under consideration, but CCCC uses the measure as modified by Shepperd, which omits this term on the basis that it debases the measure by combining two attributes which can and should be separately measured. <br>Corresponding to the variants on the fan-in and fan-out measures described above, similar variants are calculated on this metric.
+			<p>This metric is derived by squaring the product of the fan-in and fan-out of each module. The original Henry-Kafura measure, which has been described as a measure of 'information flow complexity' includes a term for the length of the module under consideration, but CCCCounter uses the measure as modified by Shepperd, which omits this term on the basis that it debases the measure by combining two attributes which can and should be separately measured. <br>Corresponding to the variants on the fan-in and fan-out measures described above, similar variants are calculated on this metric.
 			</p>
 		</td>
 	</tr>
@@ -305,14 +305,14 @@
 	</tr>
 </tbody></table>
 <h1><a name="counting"></a>Counting methods</h1>
-<p>CCCC implements simple algorithms to calculate each of the measures presented. The algorithms are intended to present a useful approximation to the underlying quantities, rather than meticulously exact counting: in general agreement with manual counts based on the same definitions should agree with CCCC to within 2-3%. If larger discrepancies are discovered, or if this level of agreement is not considered adequate, users are welcome to modify the source code to implement closer agreement, or to change the counting behaviour to reflect a desired basis of calculation. The basic definitions of each count are as follows:
+<p>CCCCounter implements simple algorithms to calculate each of the measures presented. The algorithms are intended to present a useful approximation to the underlying quantities, rather than meticulously exact counting: in general agreement with manual counts based on the same definitions should agree with CCCCounter to within 2-3%. If larger discrepancies are discovered, or if this level of agreement is not considered adequate, users are welcome to modify the source code to implement closer agreement, or to change the counting behaviour to reflect a desired basis of calculation. The basic definitions of each count are as follows:
 </p>
 <ul>
-	<li><p style="margin-bottom: 0in">Number of Modules (NOM)<br>CCCC defines modules in terms of a grouping of member functions: C++ classes and namespaces, Java classes and interfaces and Ada packages are all defined as modules. In addition to this, functions which are not members of one of these structures are treated as belonging to an anonymous module, which is counted if it has member functions.
+	<li><p style="margin-bottom: 0in">Number of Modules (NOM)<br>CCCCounter defines modules in terms of a grouping of member functions: C++ classes and namespaces, Java classes and interfaces and Ada packages are all defined as modules. In addition to this, functions which are not members of one of these structures are treated as belonging to an anonymous module, which is counted if it has member functions.
 	</p>
 	</li><li><p style="margin-bottom: 0in">Lines of Code (LOC)<br>This count follows the industry standard of counting non-blank, non-comment lines of source code. Preprocessor lines are treated as blank. Class and function declarations are counted, but declarations of global data are ignored. There may be some double counting of lines in class definitions as the algorithm treats the total over a module as the sum of lines belonging to the module itself and lines belonging to its member functions (the declarations and definitions of member functions in the body of the class definition will contribute to both counts).
 	</p>
-	</li><li><p style="margin-bottom: 0in">Comment Lines (COM)<br>Any line which contains any part of a comment for the language concerned is treated as a comment by CCCC, and is allocated to the module and member of the next following 'real' token. This ensures that leading comments are treated as part of the function or class definition which follows them. There is one exception to this rule: the Rational Rose design tool is known to insert directives into source files disguised as C++ comments with the prefix '//##'. These are not counted as comments, however all other comment structures are, even if there is no content within the comment delimiters, or the content is commented-out source code.
+	</li><li><p style="margin-bottom: 0in">Comment Lines (COM)<br>Any line which contains any part of a comment for the language concerned is treated as a comment by CCCCounter, and is allocated to the module and member of the next following 'real' token. This ensures that leading comments are treated as part of the function or class definition which follows them. There is one exception to this rule: the Rational Rose design tool is known to insert directives into source files disguised as C++ comments with the prefix '//##'. These are not counted as comments, however all other comment structures are, even if there is no content within the comment delimiters, or the content is commented-out source code.
 	</p>
 	</li><li><p>McCabe's Cyclomatic Complexity(MVG)<br>The formal definition of cyclomatic complexity is that it is the count of linearly independent paths through a flow of control graph derived from a subprogram. A pragmatic approximation to this can be found by counting language keywords and operators which introduce extra decision outcomes. This can be shown to be quite accurate in most cases. In the case of C++, the count is incremented for each of the following tokens: 'if','while','for','switch','break','&amp;&amp;','||'
 	</p>
@@ -324,9 +324,9 @@
 	</ul>
 </ul>
 <ul>
-	<li><p style="margin-bottom: 0in">Weighted methods per class (WMC)<br>This is a count of the member functions known to exist in a class. Knowledge of existence of a function is only gained from declarations or definitions directly contained in files processed by CCCC: files included by a preprocessor are ignored, and CCCC does not at present identify invocations of member or non-member functions within procedural code. 
+	<li><p style="margin-bottom: 0in">Weighted methods per class (WMC)<br>This is a count of the member functions known to exist in a class. Knowledge of existence of a function is only gained from declarations or definitions directly contained in files processed by CCCCounter: files included by a preprocessor are ignored, and CCCCounter does not at present identify invocations of member or non-member functions within procedural code. 
 	</p>
-	</li><li><p>Fan-In, Fan-Out (FI,FIc,FIv,FO,FOc,FOv)<br>Traditionally, use relationships between modules were identified by counting function invocations or access to module data in procedural code. CCCC identifies relationships only through structures apparent in the definitions of the interfaces of C++ classes or Java classes or interfaces. The specific relationships which can be detected are inheritance of a supplier class by a client, containment of an instance of a supplier class in a client, and the existence of member functions of the client class which accept or return an instance of the supplier. 
+	</li><li><p>Fan-In, Fan-Out (FI,FIc,FIv,FO,FOc,FOv)<br>Traditionally, use relationships between modules were identified by counting function invocations or access to module data in procedural code. CCCCounter identifies relationships only through structures apparent in the definitions of the interfaces of C++ classes or Java classes or interfaces. The specific relationships which can be detected are inheritance of a supplier class by a client, containment of an instance of a supplier class in a client, and the existence of member functions of the client class which accept or return an instance of the supplier. 
 	</p>
 </li></ul>
 <ul>
@@ -334,7 +334,7 @@
 		<p>While these relationships may seem unrelated to the invocation and module data counts, they are likely to show a strong corelation because of the fact that in an object oriented environment, it is likely (but not inevitable) that the low-level use relationships of invocation and direct access to data structures require an object of the class of the supplier module to be available. This availability can be through instantiation of an instance of the supplier class within procedural code, but will often be due to the existence of one of the higher level relationships described above.
 		</p>
 
-		<p>The counts of Fan-In and Fan-Out are regarded as a measure of the structural quality of a program, with high values of either (and particularly high values of both within the same module) indicating increased risk of changes required in one module requiring changes across other modules. CCCC chooses to define the relationship counts in such a way that each supplier or client module is counted only once, however many separate ways the relationship is detected. CCCC applies filtering to the relationships identified to distinguish between different kinds of uses which may carry with them different levels of structural risk. There are two filters: visibility and concreteness. 
+		<p>The counts of Fan-In and Fan-Out are regarded as a measure of the structural quality of a program, with high values of either (and particularly high values of both within the same module) indicating increased risk of changes required in one module requiring changes across other modules. CCCCounter chooses to define the relationship counts in such a way that each supplier or client module is counted only once, however many separate ways the relationship is detected. CCCCounter applies filtering to the relationships identified to distinguish between different kinds of uses which may carry with them different levels of structural risk. There are two filters: visibility and concreteness. 
 		</p>
 
 		<p>The visibility filter removes from consideration relationships which are known to be only accessible from the private interface of a module. Relationships which are defined in the visible part of the interface can be exploited by clients of the current module, thus forcing those clients also to be clients of the current module's supplier. Visible relationships also increase the range of operations available on an object, thus increasing the cognitive complexity of the interface from the point of view of a programmer required to use a module. 
@@ -351,7 +351,7 @@
 
 <h1><a name="command"></a>Command-line syntax</h1>
 
-<p>The command line flags supported by CCCC are defined in the file ccccmain.cc. A brief usage message can be generated on standard output by entering the command 'cccc --help'. The same message will be generated on standard error if an invalid command line is entered. As of version 3.pre57 the text generated by this command is as follows:</p>
+<p>The command line flags supported by CCCCounter are defined in the file ccccmain.cc. A brief usage message can be generated on standard output by entering the command 'cccc --help'. The same message will be generated on standard error if an invalid command line is entered. As of version 3.pre57 the text generated by this command is as follows:</p>
 
 <pre>Usage: 
 cccc [options] file1.c ...  
@@ -389,7 +389,7 @@ Options:
 
 <h1><a name="config"></a>Configuration</h1>
 
-<p>Much of the behaviour of CCCC can be controlled by a stream of configuration data. The file cccc_opt.cc contains the default value for this stream, which can be dumped using the --opt_outfile qualifier. The resulting file can then be edited to customize behaviour and loaded into a later run of cccc using the --opt_infile qualifier. As of version 3.pre57, the contents of the file dumped by the command cccc --opt_outfile=cccc.opt are as follows:</p>
+<p>Much of the behaviour of CCCCounter can be controlled by a stream of configuration data. The file cccc_opt.cc contains the default value for this stream, which can be dumped using the --opt_outfile qualifier. The resulting file can then be edited to customize behaviour and loaded into a later run of cccc using the --opt_infile qualifier. As of version 3.pre57, the contents of the file dumped by the command cccc --opt_outfile=cccc.opt are as follows:</p>
 
 <pre>CCCC_FileExt@.ADA@ada.95@
 CCCC_FileExt@.ADB@ada.95@
@@ -460,35 +460,27 @@ CCCC_Dialect@c++.stl@__STL_END_NAMESPACE@ignore@</pre>
 
 <h3><a name="config_treatment"></a>Treatment of metric values</h3>
 
-<p>Records in the configuration stream of type CCCC_MetTmnt control the treatment of values for each of the metrics defined by CCCC.</p>
+<p>Records in the configuration stream of type CCCC_MetTmnt control the treatment of values for each of the metrics defined by CCCCounter.</p>
 
 <h3><a name="config_ignore"></a>Ignoring compiler-specific keywords</h3>
 
-<p>Records in the configuration stream of type CCCC_Dialect control the handling of dialect-specific pseudo keywords by the CCCC parsers.
+<p>Records in the configuration stream of type CCCC_Dialect control the handling of dialect-specific pseudo keywords by the CCCCounter parsers.
 </p>
 
 <h1><a name="disclaimers"></a>Disclaimers</h1>
 
-<p>CCCC was produced as an artifact of an academic research project. The primary motivation was to provide a platform for the exploration of issues related to metrics. The program is not now, and will never become, a commercial standard supported product. While CCCC attempts to recover from parse failures, there are some language constructs which cause crashes, and others which result in code going unanalyzed. If CCCC does not report syntax errors and terminates normally, it is likely that all files have been analyzed, otherwise it is strongly recommended that the user does some kind of independent check on the quantity of code ignored, rather than relying on CCCC's own report on 'Rejected Extents'. 
+<p>While CCCCounter attempts to recover from parse failures, there are some language constructs which cause crashes, and others which result in code going unanalyzed. If CCCCounter does not report syntax errors and terminates normally, it is likely that all files have been analyzed, otherwise it is strongly recommended that the user does some kind of independent check on the quantity of code ignored, rather than relying on CCCCounter's own report on 'Rejected Extents'. 
 </p>
 
-<p>There is one further important disclaimer. As noted above, the primary motivation for the development of CCCC was to aid an academic project to investigate the use of metrics. Over the five years or so the project was running various research activities were conducted, culminating in a practical experiment into the value of metric analysis data in a simulated software engineering task. The aim of this final experiment was to attempt to demonstrate a benefit from the use of such data, its conclusion was that, at best, the presence of a benefit was "not proven". The research project, including the design and outcomes of the final experiment is described at http://www.fchs.ecu.edu.au/~tlittlef, which includes a link to download a PDF of the final PhD thesis arising from the project. 
+<h1><a name="getting"></a>Getting CCCCounter</h1>
+
+<p>The best place to look for information about CCCCounter is <a href="https://github.com/thaddeus002/CCCCounter">the CCCCounter home page</a>. 
 </p>
 
-<p>The CCCC project is now dormant. There are no plans for new releases, either to add new features to the program or to fix existing defects. The current version of the program is released under the GNU Public License, giving users the right to work on the source code to address any specific issues they have. The project is hosted on sourceforge.net, the primary developer, Tim Littlefair, can be contacted by email and will be happy to provide advice and encouragement. Contact details appear on the sourceforge website.</p>
+<p>The current version of the program is released under the GNU Public License, giving users the right to work on the source code to address any specific issues they have.</p>
 
-<h1><a name="getting"></a>Getting CCCC</h1>
+<p>The CCCCounter distribution needs a version of the Purdue Compiler Construction Toolset (PCCTS) originally created by Terence Parr and coworkers at Purdue University. This program can be found <a href="https://github.com/thaddeus002/pccts">here</a></p>
 
-<p>The best place to look for information about CCCC is <a href="http://cccc.sourceforge.net/">the CCCC home page at http://cccc.sourceforge.net</a>. 
-</p>
-
-<p>CCCC downloads are accessible via the standard SourceForge project hierarchy starting at <a href="http://sourceforge.net/projects/cccc">http://sourceforge.net/projects/cccc</a>. SourceForge also hosts mailing lists where new versions are announced and a bug tracker database for the project.</p>
-
-<p>The CCCC distribution includes a version of the Purdue Compiler Construction Toolset (PCCTS) originally created by Terence Parr and coworkers at Purdue University, later maintained by Tom Moog. Many thanks to Terence, his colleagues and Tom for developing this excellent tool, and for releasing it under terms which make it possible for it to be included in the CCCC distribution.</p>
-
-<p>The Win32 installer package for CCCC is created using version 2.0.18 of the "My Inno Setup Extensions" package by Jordan Russell, based on "Inno Setup" by Martjin Laan. This package can be downloaded from <a href="http://www.wintax.nl/isx">http://www.wintax.nl/isx</a></p>
-
-<p>The program will also require a C++ compiler to build. Past versions have been buildable with various versions of the GNU C++ compiler and/or Microsoft Visual C++, although the code is intended to be portable to a range of modern C++ compilers (with a bit of work in some cases, as the original code base dates back to times before the ANSI standardisation of the C++ language). The reference build tools for the current version are GCC version 3.3 and the freely distributed Microsoft Visual C++ Toolkit 2003. See <a href="http://msdn.microsoft.com/visualc/vctoolkit2003/"> http://msdn.microsoft.com/visualc/vctoolkit2003/</a> for details.</p>
-
+<p>The program will also require a C++98 compliant compiler to build. You can use gcc with option "-std=c++98" for this.</p>
 
 </body></html>
