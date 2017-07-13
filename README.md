@@ -47,7 +47,7 @@ This should end with the following message :
 
 ## Documentation
 
-To start using CCCCounter, please read the [User Guide](doc/CCCCounter_User_Guide.html).
+To start using CCCCounter, please read the [User Guide](docs/CCCCounter_User_Guide.html).
 
 ## License
 
