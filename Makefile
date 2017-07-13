@@ -11,16 +11,16 @@ DOX = doxygen
 # Options
 CCCOPTS	= --lang=c++
 
-
+PREFIX ?= /usr/local
 
 # Targets
 
 .PHONY : all cccc test
 
-all : cccc
+all : src/cccc
 
-cccc :
-	$(MAKE) DEBUG=$(DEBUG) -C src $@ || exit $$?
+src/cccc :
+	$(MAKE) DEBUG=$(DEBUG) -C src || exit $$?
 
 .NOTPARALLEL: cccc test
 test : cccc
@@ -56,8 +56,8 @@ mrproper:
 	$(MAKE) -C src mrproper
 	$(MAKE) -C test mrproper
 
-install :
-	install src/cccc /usr/local/bin/
+install : src/cccc
+	install src/cccc $(PREFIX)/bin/
 	@echo ===========================
 	@echo Installation succeeded!
 	@echo ===========================
