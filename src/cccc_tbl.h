@@ -35,7 +35,8 @@ using std::string;
  * CCCC_Table started its life as an array of pointers to CCCC_Records.
  * It will ultimately become identical to a std::map from string to T*.
  * In the mean time we are supporting a legacy API.
- * T can be a CCCC_Extent, CCCC_Module, CCCC_Member or CCCC_UseRelationship.
+ * T can be a CCCC_Extent, CCCC_Module,
+ * CCCC_Member or CCCC_UseRelationship.
  */
 template <class T> class CCCC_Table : public std::map<string,T*>
 {
@@ -51,13 +52,25 @@ template <class T> class CCCC_Table : public std::map<string,T*>
    * \return the number of records in the table
    */
   int records();
+
   T* find(string name);
+
   T* find_or_insert(T* new_item_ptr);
+
   bool remove(T* old_item_ptr);
+
   void reset_iterator();
+
   T* first_item();
+
   T* next_item();
+
+  /**
+   * \return the sum of the values of "count_tag" for all items in the
+   * table
+   */
   virtual int get_count(const char *count_tag);
+
   void sort();
 };
 

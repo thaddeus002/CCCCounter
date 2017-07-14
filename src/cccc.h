@@ -63,9 +63,5 @@ extern char *skip_identifiers[SKIP_IDENTIFIERS_ARRAY_SIZE];
 #define RELEASE_STRSTREAM(X)
 
 
-
-
-
 #endif
-
 

@@ -17,12 +17,16 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
-/** \file cccc_tpl.cc */
+/**
+ * \file cccc_tbl.cc
+ *
+ * Manage records.
+ */
 
 #ifndef _CCCC_TBL_BODY
 #define _CCCC_TBL_BODY
 
-#include "cccc_itm.h"
+
 #include "cccc_tbl.h"
 
 #include "cccc_ext.h"
@@ -30,7 +34,6 @@
 #include "cccc_use.h"
 #include "cccc_mem.h"
 
-#include <cassert>
 
 #define LINE_BUFFER_SIZE 1000
 
@@ -56,8 +59,7 @@ template <class T> CCCC_Table<T>::~CCCC_Table()
     }
 }
 
-template<class T>
-int CCCC_Table<T>::get_count(const char* count_tag)
+template<class T> int CCCC_Table<T>::get_count(const char* count_tag)
 {
   int retval=0;
   T* itemptr=first_item();
@@ -70,7 +72,9 @@ int CCCC_Table<T>::get_count(const char* count_tag)
   return retval;
 }
 
-/**  */
+/**
+ * \return the item corresponding to "name" or NULL if it not exist.
+ */
 template<class T> T* CCCC_Table<T>::find(string name)
 {
   T *retval=NULL;

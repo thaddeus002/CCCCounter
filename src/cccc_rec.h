@@ -19,7 +19,7 @@
 
 /**
  * \file cccc_rec.h
- * \brief Defines the database used by CCCC to generate a report
+ * \brief Defines a record of the database used by CCCC to generate a report
  */
 
 #ifndef CCCC_REC_H
@@ -27,7 +27,7 @@
 
 #include "cccc_tbl.h"
 #include "cccc_ext.h"
-#include "cccc_utl.h"
+
 
 /**
  * The entities held within the database need to be able to return a variety
@@ -38,6 +38,7 @@
  * using negative indexes.
  */
 enum NameLevel { nlRANK, nlSEARCH, nlSIMPLE, nlLOCAL, nlGLOBAL };
+
 class CCCC_Record
 {
   friend class CCCC_Html_Stream;

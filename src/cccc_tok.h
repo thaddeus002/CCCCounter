@@ -25,7 +25,6 @@
 #ifndef __CCCC_TOK_H
 #define __CCCC_TOK_H
 
-#include "cccc.h"
 
 // before we go into the token header file, the compiler must have seen
 // a definition for enum ANTLRTokenType
