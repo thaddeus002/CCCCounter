@@ -16,10 +16,10 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-/*
+
+/**
  * cccc_tok.h
- * definition of the token class interface for the cccc project
- *
+ * definition of the token class interface for the cccc project.
  */
 
 #ifndef __CCCC_TOK_H
@@ -27,7 +27,7 @@
 
 #include "cccc.h"
 
-// before we go into the token header file, the compiler must have seen 
+// before we go into the token header file, the compiler must have seen
 // a definition for enum ANTLRTokenType
 // there are three conflicting 'real' definitions, one in use by each parser
 // if we have seen one of these, we do not need to worry, otherwise we
@@ -38,14 +38,14 @@ enum ANTLRTokenType { DUMMY,DEFINITION };
 #endif
 
 #include "AToken.h"
-#include "cccc.h"
 
 
-/*
-** the class definition for ANTLRToken
-** Note that the name ANTLRToken is required to be either a class or a typedef
-** by the PCCTS support code
-*/
+
+/**
+ * the class definition for ANTLRToken
+ * Note that the name ANTLRToken is required to be either a class or a typedef
+ * by the PCCTS support code
+ */
 class ANTLRToken : public ANTLRCommonToken {
 
   // Lexical counting is done by attaching running counts of each of the
@@ -68,11 +68,11 @@ class ANTLRToken : public ANTLRCommonToken {
   ANTLRToken(ANTLRToken& copyTok);
   ANTLRToken();
   ANTLRToken& operator=(ANTLRToken& copyTok);
-  
+
   virtual ~ANTLRToken();
 
-  virtual ANTLRAbstractToken *makeToken(ANTLRTokenType tt, 
-					ANTLRChar *txt, 
+  virtual ANTLRAbstractToken *makeToken(ANTLRTokenType tt,
+					ANTLRChar *txt,
 					int line);
 
   static void IncrementNesting() { RunningNesting++; }
@@ -91,4 +91,4 @@ extern ANTLRToken currentLexerToken;
 
 #endif
 
- 
+

@@ -1,6 +1,7 @@
-// ccccmain.cc
-// command line interface implementation for the cccc project
-
+/**
+ * \file ccccmain.cc
+ * command line interface implementation for the cccc project
+ */
 
 
 #include "cccc.h"
@@ -11,14 +12,7 @@
 #include <list>
 #include <iterator>
 
-#ifdef _WIN32
-#include <direct.h>
-#include <io.h>
-#define HANDLE intptr_t
-#define INVALID_HANDLE_VALUE -1
-#else
 #include <sys/stat.h>
-#endif
 
 #include "cccc_itm.h"
 #include "cccc_opt.h"
@@ -29,6 +23,7 @@
 #include "cccc_xml.h"
 
 // support for languages is now a compile-time option
+
 #ifdef CC_INCLUDED
 #include "CParser.h"
 #include "CLexer.h"

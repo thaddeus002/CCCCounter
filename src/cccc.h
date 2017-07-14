@@ -63,19 +63,8 @@ extern char *skip_identifiers[SKIP_IDENTIFIERS_ARRAY_SIZE];
 #define RELEASE_STRSTREAM(X)
 
 
-// The -gd option generates uncompilable code with a missing
-// variable called zzTracePrevRuleName if the generated
-// files cccc.cpp, java.cpp, ada.cpp don't include a version
-// of AParser.h seen with zzTRACE_RULES defined.
-// I'm not sure how this is supposed to work, but for the moment
-// I am including it here which should make all three files OK.
-// Note that this could break again if the header files shift around
-// and AParser.h gets read before zzTRACE_RULES is defined.
-// Another option is turning -gd off, but its the way we do the
-// cccc -dp debug output which is very useful.
-#include "cccc_tok.h"
-#define zzTRACE_RULES
-#include "AParser.h"
+
+
 
 #endif
 

@@ -16,8 +16,9 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-/*
- * cccc_ext.cc
+
+/**
+ * \file cccc_ext.cc
  */
 
 #include "cccc_itm.h"
@@ -34,10 +35,10 @@ CCCC_Extent::CCCC_Extent()
   extkey=++nextkey;
 }
 
-CCCC_Extent::CCCC_Extent(CCCC_Item& is) 
+CCCC_Extent::CCCC_Extent(CCCC_Item& is)
 {
   char v_as_char='!', ut_as_char='!';
- 
+
   if(
      is.Extract(filename) &&
      is.Extract(linenumber) &&
@@ -73,7 +74,7 @@ int CCCC_Extent::AddToItem(CCCC_Item& item)
      item.Insert(count_buffer) &&
      item.Insert((char) v) &&
      item.Insert((char) ut)
-     )
+    )
     {
       retval=TRUE;
     }
@@ -142,7 +143,9 @@ string CCCC_Extent::name(int level) const
   return rtnbuf.c_str();
 }
 
-string CCCC_Extent::key() const { return name(nlRANK); }
+string CCCC_Extent::key() const {
+    return name(nlRANK);
+}
 
 int CCCC_Extent::get_count(const char* count_tag) {
   int retval=0;
@@ -160,15 +163,6 @@ int CCCC_Extent::get_count(const char* count_tag) {
     }
   return retval;
 }
-
-
-
-
-
-
-
-
-
 
 
 

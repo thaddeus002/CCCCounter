@@ -32,6 +32,8 @@ using std::string;
 class CCCC_Item;
 
 enum ExtentNameLevel { nlFILENAME=-1, nlLINENUMBER=-2, nlDESCRIPTION=-3};
+
+
 /**
  * This may be an object representation of an Item.
  */

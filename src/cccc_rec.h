@@ -29,14 +29,16 @@
 #include "cccc_ext.h"
 #include "cccc_utl.h"
 
-// The entities held within the database need to be able to return a variety 
-// of kinds of name including a simple name (typically one word), a fully 
-// qualified local name (i.e as used within a class), and a fully 
-// qualified global name.
-// Subclasses may also have particular other names, which should be defined
-// using negative indexes.
+/**
+ * The entities held within the database need to be able to return a variety
+ * of kinds of name including a simple name (typically one word), a fully
+ * qualified local name (i.e as used within a class), and a fully
+ * qualified global name.
+ * Subclasses may also have particular other names, which should be defined
+ * using negative indexes.
+ */
 enum NameLevel { nlRANK, nlSEARCH, nlSIMPLE, nlLOCAL, nlGLOBAL };
-class CCCC_Record 
+class CCCC_Record
 {
   friend class CCCC_Html_Stream;
   friend class CCCC_Xml_Stream;
