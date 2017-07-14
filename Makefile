@@ -15,15 +15,15 @@ PREFIX ?= /usr/local
 
 # Targets
 
-.PHONY : all cccc test
+.PHONY : all src/cccc test
 
 all : src/cccc
 
 src/cccc :
 	$(MAKE) DEBUG=$(DEBUG) -C src || exit $$?
 
-.NOTPARALLEL: cccc test
-test : cccc
+.NOTPARALLEL: src/cccc test
+test : src/cccc
 	$(MAKE) -C test || exit $$?
 
 DOCS	= doxygen
