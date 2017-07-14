@@ -16,6 +16,13 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
+
+/**
+ * \file cccc_met.h
+ * \brief Definition of class Metric_Treatment and CCCC_Metric
+ */
+
+
 #ifndef __CCCC_MET_H
 #define __CCCC_MET_H
 
@@ -29,11 +36,13 @@ enum EmphasisLevel { elLOW=0, elMEDIUM=1, elHIGH=2 };
 class CCCC_Html_Stream;
 class CCCC_Metric;
 
-// the single class CCCC_Metric which will be defined later in this file 
-// will be used for all metrics
-// differences in output formats will be handled by giving each object
-// of type CCCC_Metric a pointer to a an object of type Metric_Treatment
-// which will be held in a global array called Metric_Treatment_Table
+/**
+ * the single class CCCC_Metric which will be defined later in this file
+ * will be used for all metrics
+ * differences in output formats will be handled by giving each object
+ * of type CCCC_Metric a pointer to a an object of type Metric_Treatment
+ * which will be held in a global array called Metric_Treatment_Table
+ */
 class Metric_Treatment
 {
   friend class CCCC_Metric;
@@ -43,28 +52,28 @@ class Metric_Treatment
   // a short code string is used to search for the metric treatment, and
   // it has a full name
   string code, name;
-  
+
   // lower_threshold and upper_threshold are the levels at which the metric
   // is interpreted as moving between low, medium and high emphasis levels
   float lower_threshold, upper_threshold;
-  
-  // for ratio type metrics, we provide the facility for screening out of 
+
+  // for ratio type metrics, we provide the facility for screening out of
   // items for which the numerator lies below a given value
   // e.g. we may impose a standard of 1 line of comment per 3 of code, but
   // say that we do not require this standard to apply to routines shorter
   // than 5 lines
   int numerator_threshold;
-  
+
   // preferred display width and number of decimal places
   int width, precision;
 
- public:  
+ public:
   Metric_Treatment(CCCC_Item& treatment_line);
 
   friend class CCCC_Options;
 };
 
-// the main metric class
+/** the main metric class */
 class CCCC_Metric {
   Metric_Treatment* treatment;
   float numerator, denominator;
@@ -80,11 +89,7 @@ class CCCC_Metric {
   string name() const;
   string value_string() const;
 };
-    
 
-    
+
 #endif /* __CCCC_MET_H */
-
-
-
 

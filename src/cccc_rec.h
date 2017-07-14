@@ -19,7 +19,7 @@
 
 /**
  * \file cccc_rec.h
- * \brief Defines a record of the database used by CCCC to generate a report
+ * \brief Defines the database used by CCCC to generate a report
  */
 
 #ifndef CCCC_REC_H

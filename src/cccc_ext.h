@@ -28,28 +28,35 @@
 using std::string;
 
 #include "cccc_utl.h"
+#include "cccc_itm.h"
 
-class CCCC_Item;
 
+/**
+ * Identifie a parametre of the objet.
+ * To use with CCCC_Extent::name()
+ */
 enum ExtentNameLevel { nlFILENAME=-1, nlLINENUMBER=-2, nlDESCRIPTION=-3};
 
 
 /**
- * This may be an object representation of an Item.
+ * This may be an object representation of an code Item.
  */
 class CCCC_Extent
 {
-  friend class CCCC_Record;
-  friend class CCCC_Project;
-
+  // item data
   string filename;
   string linenumber;
   string description;
   string flags;
+  /** ? */
   string count_buffer;
   UseType ut;
   Visibility v;
+
+  // internal data
+  /** this is for initialyse extkey */
   static unsigned int nextkey;
+  /** instance index */
   unsigned int extkey;
 
  public:
@@ -86,9 +93,6 @@ class CCCC_Extent
 };
 
 #endif // CCCC_EXT_H
-
-
-
 
 
 

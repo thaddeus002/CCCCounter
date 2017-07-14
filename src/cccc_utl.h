@@ -35,10 +35,11 @@
 #ifndef __CCCC_UTL_H
 #define __CCCC_UTL_H
 
-#include "cccc.h"
 #include <map>
 #include <vector>
+#include "cccc.h"
 #include "cccc_tok.h"
+#include "cccc_itm.h"
 
 // The -gd option generates uncompilable code with a missing
 // variable called zzTracePrevRuleName if the generated
@@ -55,9 +56,6 @@
 
 class ANTLRAbstractToken;
 class ANTLRTokenPtr;
-class CCCC_Item;
-
-
 class AST;
 
 /**

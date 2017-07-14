@@ -20,12 +20,11 @@
 #ifndef __CCCC_HTM_H
 #define __CCCC_HTM_H
 
-#include "cccc.h"
 
 #include <fstream>
-
 #include <time.h>
 
+#include "cccc.h"
 #include "cccc_db.h"
 #include "cccc_met.h"
 

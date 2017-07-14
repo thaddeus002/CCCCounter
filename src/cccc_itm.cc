@@ -2,12 +2,11 @@
  * \file cccc_itm.cc
  */
 
-#include "cccc.h"
 #include <fstream>
-
-#include "cccc_itm.h"
 #include <cstdio>
 #include <cmath>
+
+#include "cccc_itm.h"
 
 CCCC_Item::CCCC_Item(const string& s, char c)
 {
@@ -60,6 +59,9 @@ bool CCCC_Item::Extract(string& s)
   return good;
 }
 
+/**
+ * insert an integer at the end of buffer.
+ */
 bool CCCC_Item::Insert(int n)
 {
   char numbuf[64];
@@ -67,6 +69,9 @@ bool CCCC_Item::Insert(int n)
   return Insert(numbuf);
 }
 
+/**
+ * extract the first element as an integer.
+ */
 bool CCCC_Item::Extract(int& n)
 {
   string numstr;
@@ -75,6 +80,10 @@ bool CCCC_Item::Extract(int& n)
   return retval;
 }
 
+
+/**
+ * Insert a single char at the end of buffer.
+ */
 bool CCCC_Item::Insert(char c)
 {
   char charbuf[2];
@@ -125,9 +134,6 @@ bool CCCC_Item::FromFile(ifstream& ifstr)
     {
       delimiter=buffer[buffer.size()-1];
       good=true;
-#if 0
-      cerr << "Delimiter is " << delimiter << endl;
-#endif
     }
   return good;
 }

@@ -16,7 +16,8 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-/*
+
+/**
  * cccc_mod.h
  */
 #ifndef CCCC_MOD_H
@@ -25,21 +26,20 @@
 #include "cccc.h"
 
 #include "cccc_rec.h"
-
-class CCCC_Item;
-class CCCC_Project;
-class CCCC_UseRelationship;
-class CCCC_Member;
+#include "cccc_itm.h"
+#include "cccc_prj.h"
+#include "cccc_use.h"
+#include "cccc_mem.h"
 
 
 static const string MODULE_PREFIX="CCCC_Module";
 static const string MODEXT_PREFIX="CCCC_ModExt";
 
 
-enum ModuleNameLevel 
+enum ModuleNameLevel
 { nlMODULE_TYPE=-1, nlMODULE_NAME=-2, nlMODULE_TYPE_AND_NAME=-3 };
 
-class CCCC_Module : public CCCC_Record 
+class CCCC_Module : public CCCC_Record
 {
   friend class CCCC_Project;
   friend class CCCC_Html_Stream;
@@ -55,14 +55,14 @@ class CCCC_Module : public CCCC_Record
   relationship_map_t supplier_map;
 
   CCCC_Module();
-  
+
 public:
 
-  string name(int name_level) const; 
-    
+  string name(int name_level) const;
+
   int FromFile(ifstream& infile);
   int ToFile(ofstream& outfile);
-  
+
   virtual int get_count(const char *count_tag);
   int is_trivial();
 };

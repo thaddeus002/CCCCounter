@@ -27,10 +27,10 @@ private:
 public:
   CCCC_Item(const string& s, char c);
   CCCC_Item(const string& s);
-  CCCC_Item(); 
+  CCCC_Item();
 
-  /** add a string */
-  bool Insert(const string& s); 
+  /** add a string as new field at the end of buffer */
+  bool Insert(const string& s);
   bool Insert(const char* cptr);
   /**
    * Extract the first element in "buffer" and put it in "s".
@@ -39,8 +39,17 @@ public:
    * \return true if and only if the function succeeded.
    */
   bool Extract(string& s);
-  bool Insert(int n); 
+  /**
+   * insert an integer at the end of buffer.
+   */
+  bool Insert(int n);
+  /**
+   * extract the first element as an integer.
+   */
   bool Extract(int& n);
+  /**
+   * Insert a single char at the end of buffer.
+   */
   bool Insert(char c);
   bool Extract(char& c);
   bool Insert(float f);
@@ -55,8 +64,6 @@ public:
    */
   bool FromFile(ifstream& ifstr);
 };
-  
+
 #endif
-
-
 

@@ -18,7 +18,7 @@
 */
 
 /**
- * cccc_use.h
+ * \file cccc_use.h
  */
 
 #ifndef CCCC_USE_H
