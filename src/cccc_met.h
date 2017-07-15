@@ -88,12 +88,14 @@ class CCCC_Metric {
   Metric_Treatment* treatment;
   float numerator, denominator;
   friend CCCC_Metric& operator+(const CCCC_Metric&, const CCCC_Metric&);
+  void set_treatment(const char* code);
+  void set_ratio(float _num, float _denom=1.0);
+
  public:
   CCCC_Metric();
   CCCC_Metric(int n, const char* treatment_tag="");
   CCCC_Metric(int n, int d, const char* treatment_tag="");
-  void set_treatment(const char* code);
-  void set_ratio(float _num, float _denom=1.0);
+
   EmphasisLevel emphasis_level() const;
   string code() const;
   string name() const;

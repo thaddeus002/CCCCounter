@@ -16,7 +16,6 @@
 
 #include "cccc_itm.h"
 #include "cccc_opt.h"
-#include "cccc_met.h"
 #include "cccc_db.h"
 #include "cccc_utl.h"
 #include "cccc_htm.h"
@@ -60,8 +59,10 @@ int _CRT_glob = 0;
 */
 string current_filename, current_rule, parse_language;
 
-// class Main encapsulates the top level of control for the program
-// including command line handling
+/**
+ * class Main encapsulates the top level of control for the program
+ * including command line handling
+ */
 class Main
 {
   // most of the data members of this class are either set
@@ -280,53 +281,16 @@ void Main::AddFileArgument(const string& file_arg)
     }
   else
     {
-
-#ifdef _WIN32
-      /*
-      ** In Win32 we will have to expand all wildcards ourself, because the
-      ** shell won't do this for us.
-      ** This code reworked for 3.1.1 because we are now using the Visual C++ 2003
-      ** Toolkit, which does not provide the same APIs as Visual Studio 5/6.
-      */
-      _finddata_t fd;
-      HANDLE sh = _findfirst(file_arg.c_str(), &fd);
-
-      // 3.pre40
-      // I discovered (by behaviour, not documentation) that
-      // the structure returned by FindFirstFile etc. only includes
-      // the final filename component, even if the search pattern
-      // included a directory.
-      // This is going to be a bugger to fix...
-      string directoryPrefix;
-      size_t directoryPrefixLength = file_arg.find_last_of("/\\");
-      if(directoryPrefixLength!=string::npos)
-      {
-        directoryPrefix = string(file_arg,0,directoryPrefixLength+1);
-      }
-      // Was it as easy as that?...
-
-      int findnextReturnValue = 0;
-      while (findnextReturnValue==0)
-	{
-	  string sFileName=directoryPrefix;
-          sFileName.append(fd.name);
-	  file_entry file_entry(sFileName,lang);
-	  file_list.push_back(file_entry);
-	  findnextReturnValue = _findnext(sh, &fd);
-	}
-      _findclose(sh);
-#else
       file_entry file_entry(file_arg,lang);
       file_list.push_back(file_entry);
       cout << file_arg << endl;
-#endif
     }
 }
 
 
-/*
-** method to parse all of the supplied list of files
-*/
+/**
+ * method to parse all of the supplied list of files
+ */
 int Main::ParseFiles()
 {
   FILE *f;
@@ -590,9 +554,9 @@ void Main::HandleReportOption(const string& arg) {
   }
 }
 
-/*
-** giving credit where it is due
-*/
+/**
+ * giving credit where it is due
+ */
 void Main::PrintCredits(ostream& os)
 {
   // the principal purpose of the constructor is to set up the
@@ -629,8 +593,6 @@ void Main::PrintCredits(ostream& os)
       os << *string_ptr << endl;
       string_ptr++;
     }
-
-
 }
 
 void Main::DescribeOutput()
@@ -658,10 +620,10 @@ void Main::DescribeOutput()
   }
 }
 
-/*
-** the usage message is printed on cerr if unexpected options are found,
-** and on cout if option --help is found.
-*/
+/**
+ * the usage message is printed on cerr if unexpected options are found,
+ * and on cout if option --help is found.
+ */
 void Main::PrintUsage(ostream& os)
 {
   const char *usage_strings[] =
@@ -722,11 +684,7 @@ int main(int argc, char **argv)
   if(app->filesParsed()>0)
   {
       prj->reindex();
-#ifdef _WIN32
-      _mkdir(app->outdir.c_str());
-#else
       mkdir(app->outdir.c_str(),0777);
-#endif
       app->DumpDatabase();
 
       // generate html output
