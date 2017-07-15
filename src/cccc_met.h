@@ -28,7 +28,7 @@
 
 
 #include <string>
-
+#include <fstream>
 #include "cccc_itm.h"
 
 enum EmphasisLevel { elLOW=0, elMEDIUM=1, elHIGH=2 };
@@ -49,28 +49,36 @@ class Metric_Treatment
   friend void add_treatment(CCCC_Item&);
   friend CCCC_Html_Stream& operator <<(CCCC_Html_Stream&,const CCCC_Metric&);
 
-  // a short code string is used to search for the metric treatment, and
-  // it has a full name
+  /**
+   * a short code string is used to search for the metric treatment, and
+   * it has a full name
+   */
   string code, name;
 
-  // lower_threshold and upper_threshold are the levels at which the metric
-  // is interpreted as moving between low, medium and high emphasis levels
+  /**
+   * lower_threshold and upper_threshold are the levels at which the metric
+   * is interpreted as moving between low, medium and high emphasis levels
+   */
   float lower_threshold, upper_threshold;
 
-  // for ratio type metrics, we provide the facility for screening out of
-  // items for which the numerator lies below a given value
-  // e.g. we may impose a standard of 1 line of comment per 3 of code, but
-  // say that we do not require this standard to apply to routines shorter
-  // than 5 lines
+  /**
+   * for ratio type metrics, we provide the facility for screening out of
+   * items for which the numerator lies below a given value
+   * e.g. we may impose a standard of 1 line of comment per 3 of code, but
+   * say that we do not require this standard to apply to routines shorter
+   * than 5 lines
+   */
   int numerator_threshold;
 
-  // preferred display width and number of decimal places
-  int width, precision;
+  /** preferred display width */
+  int width;
+  /** preferred display number of decimal places */
+  int precision;
 
  public:
   Metric_Treatment(CCCC_Item& treatment_line);
-
-  friend class CCCC_Options;
+  /** write the content of the object in a stream with CCCC_Item format */
+  void write(ofstream& optstr);
 };
 
 /** the main metric class */

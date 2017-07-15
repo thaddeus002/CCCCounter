@@ -16,15 +16,18 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-// cccc_opt.cc
-#include "cccc.h"
-#include <fstream>
 
+/** \file cccc_opt.cc */
+
+
+#include <fstream>
+#include <map>
+
+#include "cccc.h"
 #include "cccc_opt.h"
 #include "cccc_utl.h"
 #include "cccc_met.h"
 
-#include <map>
 
 typedef std::map<string,string> file_extension_language_map_t;
 typedef std::map<string,Metric_Treatment*> metric_treatment_map_t;
@@ -58,7 +61,7 @@ void add_treatment(CCCC_Item& treatment_line)
 	Metric_Treatment *new_treatment=new Metric_Treatment(treatment_line);
 	metric_treatment_map_t::iterator iter=
 		treatment_map.find(new_treatment->code);
-	
+
 	if(iter!=treatment_map.end())
     {
 		delete (*iter).second;
@@ -66,7 +69,7 @@ void add_treatment(CCCC_Item& treatment_line)
     }
 	else
     {
-		metric_treatment_map_t::value_type 
+		metric_treatment_map_t::value_type
 			treatment_pair(new_treatment->code,new_treatment);
 		treatment_map.insert(treatment_pair);
     }
@@ -78,7 +81,7 @@ static void add_dialect_keyword(CCCC_Item& dialect_keyword_line)
 	if(
 		dialect_keyword_line.Extract(dialect) &&
 		dialect_keyword_line.Extract(keyword) &&
-		dialect_keyword_line.Extract(policy) 
+		dialect_keyword_line.Extract(policy)
 		)
     {
 		dialect_keyword_map_t::key_type kt(dialect,keyword);
@@ -87,30 +90,27 @@ static void add_dialect_keyword(CCCC_Item& dialect_keyword_line)
     }
 }
 
+/**
+ * \param option a CCCC_Item with the option type as first item
+ */
 void CCCC_Options::Add_Option(CCCC_Item& option)
 {
-	string first_token;
-	bool retval=option.Extract(first_token);
-	
-	if(retval==false)
-    {
-		// do nothing
-    }
-	else if(first_token=="CCCC_FileExt")
-    {
-		add_file_extension(option);
-    }
-	else if(first_token=="CCCC_MetTmnt")
-    {
-		add_treatment(option);
-    }
-	else if(first_token=="CCCC_Dialect")
-    {
-		add_dialect_keyword(option);
-    }
-	else
-    {
-		retval=false;
+    string first_token;
+
+    if(option.Extract(first_token)) {
+
+        if(first_token=="CCCC_FileExt")
+        {
+            add_file_extension(option);
+        }
+        else if(first_token=="CCCC_MetTmnt")
+        {
+            add_treatment(option);
+        }
+        else if(first_token=="CCCC_Dialect")
+        {
+            add_dialect_keyword(option);
+        }
     }
 }
 
@@ -129,24 +129,15 @@ void CCCC_Options::Save_Options(const string& filename)
 		extLine.Insert((*felIter).second.c_str());
 		extLine.ToFile(optstr);
     }
-	
+
 	metric_treatment_map_t::iterator tIter;
 	for(tIter=treatment_map.begin();
 	tIter!=treatment_map.end();
 	++tIter)
     {
-		CCCC_Item tmtLine;
-		tmtLine.Insert("CCCC_MetTmnt");
-		tmtLine.Insert((*tIter).second->code); 
-		tmtLine.Insert((*tIter).second->lower_threshold);
-		tmtLine.Insert((*tIter).second->upper_threshold);
-		tmtLine.Insert((*tIter).second->numerator_threshold);
-		tmtLine.Insert((*tIter).second->width);     
-		tmtLine.Insert((*tIter).second->precision);
-		tmtLine.Insert((*tIter).second->name);
-		tmtLine.ToFile(optstr);
+        (*tIter).second->write(optstr);
     }
-	
+
 	dialect_keyword_map_t::iterator dkIter;
 	for(dkIter=dialect_keyword_map.begin();
 	dkIter!=dialect_keyword_map.end();
@@ -164,7 +155,7 @@ void CCCC_Options::Save_Options(const string& filename)
 void CCCC_Options::Load_Options(const string& filename)
 {
 	ifstream optstr(filename.c_str());
-	
+
 	while(optstr.good())
     {
 		CCCC_Item option_line;
@@ -175,16 +166,16 @@ void CCCC_Options::Load_Options(const string& filename)
 			Add_Option(option_line);
 		}
     }
-	
+
 }
 
 // initialise using hard-coded defaults
 void CCCC_Options::Load_Options()
-{  
+{
 	int i=0;
-	
+
 	const char **option_ptr;
-	
+
 	option_ptr=default_fileext_options;
 	while( (*option_ptr)!=NULL)
     {
@@ -194,7 +185,7 @@ void CCCC_Options::Load_Options()
 		Add_Option(option_line);
 		option_ptr++;
     }
-	
+
 	option_ptr=default_treatment_options;
 	while( (*option_ptr)!=NULL)
     {
@@ -204,7 +195,7 @@ void CCCC_Options::Load_Options()
 		Add_Option(option_line);
 		option_ptr++;
     }
-	
+
 	option_ptr=default_dialect_options;
 	while( (*option_ptr)!=NULL)
     {
@@ -222,7 +213,7 @@ string CCCC_Options::getFileLanguage(const string& filename)
 	string retval;
 	string extension;
 	file_extension_language_map_t::iterator iter;
-	
+
 	size_t extpos=filename.rfind(".");
 	if(extpos!=string::npos)
     {
@@ -315,14 +306,14 @@ const char *default_fileext_options[]=
 
 	// The language associated with the empty file extension would be used as a default
 	// if defined.
-	// This is presently disabled so that we don't process files in 
+	// This is presently disabled so that we don't process files in
 	// MSVC projects like .rc, .odl which are not in C++.
 	// "@c++.ansi@",
 
 	NULL
 };
 
-const char *default_treatment_options[] = 
+const char *default_treatment_options[] =
 {
 	// metric treatments
 	// all metric values are displayed using the class CCCC_Metric, which may be
@@ -334,32 +325,32 @@ const char *default_treatment_options[] =
 	// describing a policy for its display (class Metric_Treatment)
 	//
 	// the fields of each treatment record are as follows:
-	// TAG     the short string of characters used as the lookup key. 
+	// TAG     the short string of characters used as the lookup key.
 	// T1, T2  two numeric thresholds which are the lower bounds for the ratio of
-	// the metric's numerator and denominator beyond which the 
+	// the metric's numerator and denominator beyond which the
 	//  value is treated as high or extreme by the analyser
 	//  these will be displayed in emphasized fonts, and if the browser
 	//  supports the BGCOLOR attribute, extreme values will have a red
 	//  background, while high values will have a yellow background.
 	//  The intent is that high values should be treated as suspicious but
-	//  tolerable in moderation, whereas extreme values should almost 
-	//  always be regarded as defects (not necessarily that you will fix 
+	//  tolerable in moderation, whereas extreme values should almost
+	//  always be regarded as defects (not necessarily that you will fix
 	//  them).
 	// NT  a third threshold which supresses calculation of ratios where
 	//     the numerator is lower than NT.
 	//     The principal reason for doing this is to prevent ratios like L_C
-	//  being shown as *** (infinity) and displayed as extreme when the 
+	//  being shown as *** (infinity) and displayed as extreme when the
 	//  denominator is 0, providing the numerator is sufficiently low.
 	//  Suitable values are probably similar to those for T1.
 	// W       the width of the metric (total number of digits).
 	// P       the precision of the metric (digits after the decimal point).
 	// Comment a free form field extending to the end of the line.
-	
+
 	// TAG      T1      T2   NT  W  P Comment
 	"LOCf@      30@    100@   0@ 6@ 0@Lines of code/function@",
-	"LOCm@     500@   2000@   0@ 6@ 0@Lines of code/single module@", 
-	"LOCper@   500@   2000@   0@ 6@ 3@Lines of code/average module@", 
-	"LOCp@  999999@ 999999@   0@ 6@ 0@Lines of code/project@", 
+	"LOCm@     500@   2000@   0@ 6@ 0@Lines of code/single module@",
+	"LOCper@   500@   2000@   0@ 6@ 3@Lines of code/average module@",
+	"LOCp@  999999@ 999999@   0@ 6@ 0@Lines of code/project@",
 	"MVGf@      10@     30@   0@ 6@ 0@Cyclomatic complexity/function@",
 	"MVGm@     200@   1000@   0@ 6@ 0@Cyclomatic complexity/single module@",
 	"MVGper@   200@   1000@   0@ 6@ 3@Cyclomatic complexity/average module@",
@@ -377,7 +368,7 @@ const char *default_treatment_options[] =
 	"IF4@      100@   1000@   0@ 6@ 0@Henry-Kafura/Shepperd measure (overall)@",
 	"IF4v@      30@    100@   0@ 6@ 0@Henry-Kafura/Shepperd measure (visible)@",
 	"IF4c@      30@    100@   0@ 6@ 0@Henry-Kafura/Shepperd measure (concrete)@",
-	 // WMC stands for weighted methods per class, 
+	 // WMC stands for weighted methods per class,
 	 // the suffix distinguishes the weighting function
 	 "WMC1@      30@    100@   0@ 6@ 0@Weighting function=1 unit per method@",
 	 "WMCv@      10@     30@   0@ 6@ 0@Weighting function=1 unit per visible method@",
@@ -388,22 +379,22 @@ const char *default_treatment_options[] =
 	 NULL
 };
 
-const char *default_dialect_options[] = 
+const char *default_dialect_options[] =
 {
-	// This configuration item allows the description of 
+	// This configuration item allows the description of
 	// dialects in which C/C++ identifiers get treated
 	// as supplementary keyword.  The rules specified
 	// here (or in the runtime option file, if specified)
-	// allow the parser to make the call 
+	// allow the parser to make the call
 	// CCCC_Options::dialect_keyword_policy(lang,kw) which
-	// returns a string.  If nothing is known about the 
+	// returns a string.  If nothing is known about the
 	// pair <lang,kw>, an empty string is returned.  If
-	// an entry is specified here the associated string is 
+	// an entry is specified here the associated string is
 	// returned, which is called the policy, which the
 	// parser uses to guide its actions.  The most common
-	// policy is to ignore, but any string can be 
+	// policy is to ignore, but any string can be
 	// specified, providing the person implementing
-	// the parser can think of an intelligent way to 
+	// the parser can think of an intelligent way to
 	// proceed.
 	"c++.mfc@BEGIN_MESSAGE_MAP@start_skipping@",
 	"c++.mfc@END_MESSAGE_MAP@stop_skipping@",

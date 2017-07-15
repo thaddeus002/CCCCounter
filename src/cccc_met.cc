@@ -16,7 +16,8 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-// cccc_met.cc
+
+/** \file cccc_met.cc */
 
 #include "cccc.h"
 #include "cccc_itm.h"
@@ -36,7 +37,7 @@ Metric_Treatment::Metric_Treatment(CCCC_Item& treatment_line)
   width=0;
   precision=0;
 
-  string option_dummy, treatment_dummy, lothresh_str, 
+  string option_dummy, treatment_dummy, lothresh_str,
     hithresh_str, numthresh_str, width_str, precision_str;
 
   if(
@@ -56,41 +57,56 @@ Metric_Treatment::Metric_Treatment(CCCC_Item& treatment_line)
     }
 }
 
-CCCC_Metric::CCCC_Metric() 
-{ 
-  set_ratio(0,0); 
-  set_treatment(""); 
+
+void Metric_Treatment::write(ofstream& optstr) {
+    CCCC_Item tmtLine;
+	tmtLine.Insert("CCCC_MetTmnt");
+	tmtLine.Insert(code);
+	tmtLine.Insert(lower_threshold);
+	tmtLine.Insert(upper_threshold);
+	tmtLine.Insert(numerator_threshold);
+	tmtLine.Insert(width);
+	tmtLine.Insert(precision);
+	tmtLine.Insert(name);
+	tmtLine.ToFile(optstr);
 }
 
-CCCC_Metric::CCCC_Metric(int n, const char* treatment_tag) 
-{ 
-  set_ratio(n,1); set_treatment(treatment_tag); 
+
+CCCC_Metric::CCCC_Metric()
+{
+  set_ratio(0,0);
+  set_treatment("");
 }
 
-CCCC_Metric::CCCC_Metric(int n, int d, const char* treatment_tag) 
-{ 
-  set_ratio(n,d); set_treatment(treatment_tag); 
+CCCC_Metric::CCCC_Metric(int n, const char* treatment_tag)
+{
+  set_ratio(n,1); set_treatment(treatment_tag);
 }
 
-void CCCC_Metric::set_treatment(const char* code) 
+CCCC_Metric::CCCC_Metric(int n, int d, const char* treatment_tag)
+{
+  set_ratio(n,d); set_treatment(treatment_tag);
+}
+
+void CCCC_Metric::set_treatment(const char* code)
 {
   treatment=CCCC_Options::getMetricTreatment(code);
 }
 
-void CCCC_Metric::set_ratio(float _num, float _denom) 
-{ 
+void CCCC_Metric::set_ratio(float _num, float _denom)
+{
   numerator=_num; denominator=_denom;
 }
-   
-EmphasisLevel CCCC_Metric::emphasis_level() const 
-{ 
+
+EmphasisLevel CCCC_Metric::emphasis_level() const
+{
   EmphasisLevel retval=elLOW;
   if(treatment!=NULL && numerator>treatment->numerator_threshold)
     {
       if( numerator > (treatment->upper_threshold*denominator) )
 	{
 	  retval=elHIGH;
-	} 
+	}
       else if(numerator> (treatment->lower_threshold*denominator) )
 	{
 	  retval=elMEDIUM;
@@ -99,26 +115,26 @@ EmphasisLevel CCCC_Metric::emphasis_level() const
   return retval;
 }
 
-string CCCC_Metric::code() const 
-{ 
+string CCCC_Metric::code() const
+{
   string retval;
   if(treatment != NULL) { retval=treatment->code; }
-  return retval; 
+  return retval;
 }
 
-string CCCC_Metric::name() const 
-{ 
+string CCCC_Metric::name() const
+{
   string retval;
   if(treatment != NULL) { retval=treatment->name; }
-  return retval; 
+  return retval;
 }
-    
+
 string CCCC_Metric::value_string() const
 {
   string retval;
   char numerator_too_low='-';
   char infinity='*';
-  
+
   ostringstream valuestr;
   valuestr.setf(std::ios::fixed);
   int width=6, precision=0;
@@ -156,7 +172,7 @@ string CCCC_Metric::value_string() const
          // numerator 21 and denominator 16 are combined to give the
          // value 1.2125 exactly, which Visual Studio renders as 1.213,
          // GCC renders as 1.212.  For consistency with the existing
-         // reference data, I choose to apply a very small downward 
+         // reference data, I choose to apply a very small downward
          // rounding factor.  The rounding factor is only applied if
          // the value is not exactly equal to zero, as applying it
          // to zero causes the value to be displayed as -0.0 instead
