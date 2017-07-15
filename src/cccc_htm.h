@@ -104,7 +104,9 @@ class CCCC_Html_Stream {
   // general-purpose constructor with standard preamble
   CCCC_Html_Stream(const string& fname, const string& info);
 
-  // destructor with standard trailer
+  /**
+   * this terminate the output file and close the stream.
+   */
   ~CCCC_Html_Stream();
 };
 
@@ -112,9 +114,11 @@ CCCC_Html_Stream& operator <<(CCCC_Html_Stream& os, const string& stg);
 CCCC_Html_Stream& operator <<(CCCC_Html_Stream& os, const CCCC_Metric& mtc);
 CCCC_Html_Stream& operator <<(CCCC_Html_Stream& os, const CCCC_Extent& ext);
 
-// this class is added to support the generation of an HTML file
-// containing the source analysed by the run, with anchors embedded at
-// each of the lines referred to in the other parts of the report
+/**
+ * this class is added to support the generation of an HTML file
+ * containing the source analysed by the run, with anchors embedded at
+ * each of the lines referred to in the other parts of the report
+ */
 class Source_Anchor
 {
   // if this looks more like a struct to you, it does to me too...

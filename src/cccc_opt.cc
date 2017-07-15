@@ -60,7 +60,7 @@ void add_treatment(CCCC_Item& treatment_line)
 {
 	Metric_Treatment *new_treatment=new Metric_Treatment(treatment_line);
 	metric_treatment_map_t::iterator iter=
-		treatment_map.find(new_treatment->code);
+		treatment_map.find(new_treatment->getCode());
 
 	if(iter!=treatment_map.end())
     {
@@ -70,7 +70,7 @@ void add_treatment(CCCC_Item& treatment_line)
 	else
     {
 		metric_treatment_map_t::value_type
-			treatment_pair(new_treatment->code,new_treatment);
+			treatment_pair(new_treatment->getCode(),new_treatment);
 		treatment_map.insert(treatment_pair);
     }
 }

@@ -16,31 +16,21 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-// cccc_htm.cc
 
-// this file defines HTML output facilities for the CCCC project
+/**
+ * \file cccc_htm.cc
+ * \brief this file defines HTML output facilities for the CCCC project.
+ */
+
 
 #include "cccc.h"
 #include "cccc_itm.h"
 #include "cccc_htm.h"
+#include "cccc_utl.h"
 
-// I would love to use the C++ standard preprocessor
-// directive #if here, but I have had reports before now
-// of people who are using compilers which only support
-// #ifdef.
-#ifdef CCCC_CONF_W32VC
-#include <direct.h>
-#else
-#ifdef CCCC_CONF_W32BC
-#include <direct.h>
-#else
 #include <unistd.h>
-#endif
-#endif
-
 #include <time.h>
 #include <sys/stat.h>
-#include "cccc_utl.h"
 
 
 typedef std::map<string,Source_Anchor> source_anchor_map_t;

@@ -33,21 +33,18 @@
 
 enum EmphasisLevel { elLOW=0, elMEDIUM=1, elHIGH=2 };
 
-class CCCC_Html_Stream;
 class CCCC_Metric;
 
 /**
- * the single class CCCC_Metric which will be defined later in this file
- * will be used for all metrics
- * differences in output formats will be handled by giving each object
+ * The single class CCCC_Metric which will be defined later in this file
+ * will be used for all metrics.
+ * Differences in output formats will be handled by giving each object
  * of type CCCC_Metric a pointer to a an object of type Metric_Treatment
  * which will be held in a global array called Metric_Treatment_Table
  */
 class Metric_Treatment
 {
   friend class CCCC_Metric;
-  friend void add_treatment(CCCC_Item&);
-  friend CCCC_Html_Stream& operator <<(CCCC_Html_Stream&,const CCCC_Metric&);
 
   /**
    * a short code string is used to search for the metric treatment, and
@@ -79,9 +76,14 @@ class Metric_Treatment
   Metric_Treatment(CCCC_Item& treatment_line);
   /** write the content of the object in a stream with CCCC_Item format */
   void write(ofstream& optstr);
+  /** \return the short code string is used to search for the metric treatment */
+  string getCode() {return code; }
 };
 
-/** the main metric class */
+/**
+ * The main metric class.
+ * Used for all metrics.
+ */
 class CCCC_Metric {
   Metric_Treatment* treatment;
   float numerator, denominator;
