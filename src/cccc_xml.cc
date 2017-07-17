@@ -794,7 +794,7 @@ void CCCC_Xml_Stream::Module_Summary(CCCC_Module *module_ptr)
   fstr << XML_TAG_OPEN_BEGIN << MODSUM_NODE_NAME << XML_TAG_OPEN_END << endl;
 
   Put_Metric_Node(LOC_NODE_NAME,loc,"LOCm");
-  Put_Metric_Node(LOCPERMEM_NODE_NAME,loc,nof,"LOCg");
+  Put_Metric_Node(LOCPERMEM_NODE_NAME,loc,nof,"LOCf");
   Put_Metric_Node(MVG_NODE_NAME,mvg,"MVGm");
   Put_Metric_Node(MVGPERMEM_NODE_NAME,mvg,nof,"MVGf");
   Put_Metric_Node(LOC_NODE_NAME,com,"COMm");

@@ -1242,7 +1242,7 @@ void CCCC_Html_Stream::Module_Summary(CCCC_Module *module_ptr)
   Put_Label_Cell("Lines of Code");
   Put_Label_Cell("LOC");
   Put_Metric_Cell(loc,"LOCm");
-  Put_Metric_Cell(loc,nof,"LOCg");
+  Put_Metric_Cell(loc,nof,"LOCf");
   fstr << "</TR>" << endl;
 
   fstr << "<TR>" << endl;
