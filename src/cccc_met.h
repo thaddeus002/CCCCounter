@@ -81,13 +81,17 @@ class Metric_Treatment
 };
 
 /**
- * The main metric class.
- * Used for all metrics.
+ * \brief The main metric class, used for all metrics.
+ *
+ * It has a numerator and a denominator (the metric value is
+ * numerator / denominator). The denominator is generally 1.
+ *
+ * A Metric_Treatment associated with this object define how to show
+ * the value (value_string, emphasis).
  */
 class CCCC_Metric {
   Metric_Treatment* treatment;
   float numerator, denominator;
-  friend CCCC_Metric& operator+(const CCCC_Metric&, const CCCC_Metric&);
   void set_treatment(const char* code);
   void set_ratio(float _num, float _denom=1.0);
 
@@ -96,9 +100,23 @@ class CCCC_Metric {
   CCCC_Metric(int n, const char* treatment_tag="");
   CCCC_Metric(int n, int d, const char* treatment_tag="");
 
+  /**
+   * \return the emphasis to use for the value : normal, warning,
+   * or too high.
+   */
   EmphasisLevel emphasis_level() const;
+
+  /** \return the short metric code */
   string code() const;
+
+  /** \return the full matric name */
   string name() const;
+
+  /**
+   * \return a string that contain the metric value. This string contains
+   * only '*' characters for infinite (when the denominator is null), or
+   * only '-' characters for non significative value (numerator too low).
+   */
   string value_string() const;
 };
 
