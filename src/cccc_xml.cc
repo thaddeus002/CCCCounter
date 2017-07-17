@@ -821,14 +821,3 @@ void CCCC_Xml_Stream::Source_Listing()
 {
 }
 
-
-#ifdef UNIT_TEST
-int main()
-{
-  CCCC_Project *prj_ptr=test_project_ptr();
-  CCCC_Xml_Stream os(*prj_ptr,"cccc.htm",".");
-  return 0;
-}
-#endif
-
-

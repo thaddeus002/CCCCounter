@@ -1502,23 +1502,4 @@ void Source_Anchor::Emit_SPACE(ofstream& fstr)
   fstr << space_string.c_str();
 }
 
-
-
-#ifdef UNIT_TEST
-int main()
-{
-  CCCC_Project *prj_ptr=test_project_ptr();
-  CCCC_Html_Stream os(*prj_ptr,"cccc.htm",".");
-  return 0;
-}
-#endif
-
-
-
-
-
-
-
-
-
 
