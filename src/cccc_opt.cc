@@ -166,10 +166,9 @@ void CCCC_Options::Load_Options(const string& filename)
 			Add_Option(option_line);
 		}
     }
-
 }
 
-// initialise using hard-coded defaults
+/** initialise using hard-coded defaults */
 void CCCC_Options::Load_Options()
 {
 	int i=0;
@@ -240,7 +239,7 @@ string CCCC_Options::getFileLanguage(const string& filename)
 	return retval;
 }
 
-// map a metric name to a Metric_Treatment object
+/** map a metric name to a Metric_Treatment object */
 Metric_Treatment *CCCC_Options::getMetricTreatment(const string& metric_tag)
 {
 	Metric_Treatment *retval=NULL;

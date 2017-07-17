@@ -58,6 +58,18 @@ Metric_Treatment::Metric_Treatment(CCCC_Item& treatment_line)
 }
 
 
+Metric_Treatment::Metric_Treatment() {
+
+  code = "DEF";
+  name = "Unnamed value";
+  lower_threshold=1e9;
+  upper_threshold=1e9;
+  numerator_threshold=0;
+  width=6;
+  precision=0;
+}
+
+
 void Metric_Treatment::write(ofstream& optstr) {
     CCCC_Item tmtLine;
 	tmtLine.Insert("CCCC_MetTmnt");
@@ -72,64 +84,24 @@ void Metric_Treatment::write(ofstream& optstr) {
 }
 
 
-CCCC_Metric::CCCC_Metric()
-{
-  set_ratio(0,0);
-  set_treatment("");
-}
-
-CCCC_Metric::CCCC_Metric(int n, const char* treatment_tag)
-{
-  set_ratio(n,1); set_treatment(treatment_tag);
-}
-
-CCCC_Metric::CCCC_Metric(int n, int d, const char* treatment_tag)
-{
-  set_ratio(n,d); set_treatment(treatment_tag);
-}
-
-void CCCC_Metric::set_treatment(const char* code)
-{
-  treatment=CCCC_Options::getMetricTreatment(code);
-}
-
-void CCCC_Metric::set_ratio(float _num, float _denom)
-{
-  numerator=_num; denominator=_denom;
-}
-
-EmphasisLevel CCCC_Metric::emphasis_level() const
+EmphasisLevel Metric_Treatment::emphasis_level(int numerator, int denominator)
 {
   EmphasisLevel retval=elLOW;
-  if(treatment!=NULL && numerator>treatment->numerator_threshold)
+  if(numerator>numerator_threshold)
     {
-      if( numerator > (treatment->upper_threshold*denominator) )
-	{
-	  retval=elHIGH;
-	}
-      else if(numerator> (treatment->lower_threshold*denominator) )
-	{
-	  retval=elMEDIUM;
-	}
+      if( numerator > (upper_threshold*denominator) )
+        {
+	      retval=elHIGH;
+        }
+      else if(numerator > (lower_threshold*denominator) )
+        {
+          retval=elMEDIUM;
+	    }
     }
   return retval;
 }
 
-string CCCC_Metric::code() const
-{
-  string retval;
-  if(treatment != NULL) { retval=treatment->code; }
-  return retval;
-}
-
-string CCCC_Metric::name() const
-{
-  string retval;
-  if(treatment != NULL) { retval=treatment->name; }
-  return retval;
-}
-
-string CCCC_Metric::value_string() const
+string Metric_Treatment::value_string(int numerator, int denominator)
 {
   string retval;
   char numerator_too_low='-';
@@ -137,19 +109,10 @@ string CCCC_Metric::value_string() const
 
   ostringstream valuestr;
   valuestr.setf(std::ios::fixed);
-  int width=6, precision=0;
-  float n_threshold=0, low_threshold=1e9, high_threshold=1e9;
-  if(treatment!=NULL)
-    {
-      width=treatment->width;
-      precision=treatment->precision;
-      n_threshold=treatment->numerator_threshold;
-      low_threshold=treatment->lower_threshold;
-      high_threshold=treatment->upper_threshold;
-    }
+
   valuestr.width(width);
   valuestr.precision(precision);
-  if(numerator<n_threshold)
+  if(numerator<numerator_threshold)
     {
       string too_low_string(width,numerator_too_low);
       valuestr << too_low_string;
@@ -184,6 +147,57 @@ string CCCC_Metric::value_string() const
     }
   retval=valuestr.str();
   return retval;
+}
+
+
+CCCC_Metric::CCCC_Metric()
+{
+  set_ratio(0,0);
+  set_treatment("");
+}
+
+CCCC_Metric::CCCC_Metric(int n, const char* treatment_tag)
+{
+  set_ratio(n,1); set_treatment(treatment_tag);
+}
+
+CCCC_Metric::CCCC_Metric(int n, int d, const char* treatment_tag)
+{
+  set_ratio(n,d); set_treatment(treatment_tag);
+}
+
+void CCCC_Metric::set_treatment(const char* code)
+{
+  treatment=CCCC_Options::getMetricTreatment(code);
+
+  if(treatment == NULL) {
+    treatment = new Metric_Treatment();
+  }
+}
+
+void CCCC_Metric::set_ratio(float _num, float _denom)
+{
+  numerator=_num; denominator=_denom;
+}
+
+EmphasisLevel CCCC_Metric::emphasis_level() const
+{
+  return treatment->emphasis_level(numerator, denominator);
+}
+
+string CCCC_Metric::code() const
+{
+  return treatment->getCode();
+}
+
+string CCCC_Metric::name() const
+{
+  return treatment->getName();
+}
+
+string CCCC_Metric::value_string() const
+{
+  return treatment->value_string(numerator, denominator);
 }
 
 const char *internal_treatments[] =

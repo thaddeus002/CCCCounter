@@ -31,9 +31,9 @@
 #include <fstream>
 #include "cccc_itm.h"
 
+/** Alert level based on metric's value */
 enum EmphasisLevel { elLOW=0, elMEDIUM=1, elHIGH=2 };
 
-class CCCC_Metric;
 
 /**
  * The single class CCCC_Metric which will be defined later in this file
@@ -44,8 +44,6 @@ class CCCC_Metric;
  */
 class Metric_Treatment
 {
-  friend class CCCC_Metric;
-
   /**
    * a short code string is used to search for the metric treatment, and
    * it has a full name
@@ -69,15 +67,37 @@ class Metric_Treatment
 
   /** preferred display width */
   int width;
+
   /** preferred display number of decimal places */
   int precision;
 
  public:
+
   Metric_Treatment(CCCC_Item& treatment_line);
+  /** default constructor */
+  Metric_Treatment();
+
   /** write the content of the object in a stream with CCCC_Item format */
   void write(ofstream& optstr);
+
   /** \return the short code string is used to search for the metric treatment */
   string getCode() {return code; }
+
+  /** \return the full metric name */
+  string getName() {return name; }
+
+  /**
+   * For the value of the metric, give the emphasis level.
+   * \param numerator
+   * \param denominator 1 by default
+   * \return the emphasis to use for theses values
+   */
+  EmphasisLevel emphasis_level(int numerator, int denominator=1);
+
+  /**
+   * Represent a metric value as a string.
+   */
+  string value_string(int numerator, int denominator);
 };
 
 /**
