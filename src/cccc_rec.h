@@ -65,11 +65,6 @@ class CCCC_Record
    */
   virtual void add_extent(CCCC_Item& is);
 
-  /**
-   * Sort the table.
-   */
-  virtual void sort() { extent_table.sort(); }
-
   virtual int get_count(const char *count_tag)=0;
 
   friend int rank_by_string(const void *p1, const void *p2);

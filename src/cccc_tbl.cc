@@ -38,7 +38,7 @@
 #define LINE_BUFFER_SIZE 1000
 
 /** Constructor */
-template <class T> CCCC_Table<T>::CCCC_Table() : sorted(true)
+template <class T> CCCC_Table<T>::CCCC_Table()
 {
   iter_ = map_t::end();
 }
@@ -98,7 +98,6 @@ template<class T> T* CCCC_Table<T>::find_or_insert(T* new_item_ptr)
     {
       typename map_t::value_type new_pair(new_key,new_item_ptr);
       map_t::insert(new_pair);
-      sorted=false;
       retval=new_item_ptr;
     }
   return retval;
@@ -119,18 +118,6 @@ template<class T> bool CCCC_Table<T>::remove(T* old_item_ptr)
       retval=true;
     }
   return retval;
-}
-
-/**
- * Sort the table.
- * Beware, this function is a fake.
- */
-template <class T> void CCCC_Table<T>::sort()
-{
-  if(sorted==false)
-    {
-      sorted=true;
-    }
 }
 
 /**

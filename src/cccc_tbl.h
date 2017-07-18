@@ -42,7 +42,7 @@ template <class T> class CCCC_Table : public std::map<string,T*>
 {
   typedef std::map<string,T*> map_t;
   typename map_t::iterator iter_;
-  bool sorted;
+
 
  public:
   CCCC_Table();
@@ -53,16 +53,37 @@ template <class T> class CCCC_Table : public std::map<string,T*>
    */
   int records();
 
+  /**
+   * \return the item corresponding to "name" or NULL if it not exist.
+   */
   T* find(string name);
 
+  /**
+   * \return the objet in table with the same key of the paramètre. If there is not, insert
+   *  and return the parameter
+   */
   T* find_or_insert(T* new_item_ptr);
 
+  /**
+   * Remove the item of the table if is present in it.
+   *
+   * \return true if the item have been removed
+   */
   bool remove(T* old_item_ptr);
 
+  /**
+   * Put the map iterator to the beginning.
+   */
   void reset_iterator();
 
+  /**
+   * \return the first item of the table.
+   */
   T* first_item();
 
+  /**
+   * \return the next item of the table.
+   */
   T* next_item();
 
   /**
@@ -70,8 +91,6 @@ template <class T> class CCCC_Table : public std::map<string,T*>
    * table
    */
   virtual int get_count(const char *count_tag);
-
-  void sort();
 };
 
 

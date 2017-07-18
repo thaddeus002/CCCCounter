@@ -30,7 +30,7 @@
 #include "cccc_db.h"
 
 
-CCCC_UseRelationship::CCCC_UseRelationship(CCCC_Item& is) 
+CCCC_UseRelationship::CCCC_UseRelationship(CCCC_Item& is)
 {
   is.Extract(client);
   is.Extract(member);
@@ -41,7 +41,7 @@ CCCC_UseRelationship::CCCC_UseRelationship(CCCC_Item& is)
 }
 
 string CCCC_UseRelationship::name(int name_level) const
-{ 
+{
   string namestr;
 
   switch(name_level)
@@ -52,7 +52,7 @@ string CCCC_UseRelationship::name(int name_level) const
       namestr.append(" uses ");
       namestr.append(supplier);
       break;
-      
+
     case nlSUPPLIER:
       namestr=supplier;
       break;
@@ -122,7 +122,7 @@ void CCCC_UseRelationship::add_extent(CCCC_Item& is)
     }
 }
 
-int CCCC_UseRelationship::get_count(const char* count_tag) 
+int CCCC_UseRelationship::get_count(const char* count_tag)
 {
   int retval=0;
 
@@ -163,7 +163,7 @@ int CCCC_UseRelationship::get_count(const char* count_tag)
 }
 
 
-  
+
 CCCC_Module* CCCC_UseRelationship::supplier_module_ptr(CCCC_Project *prj)
 {
   return prj->module_table.find(supplier.c_str());
@@ -194,14 +194,14 @@ int CCCC_UseRelationship::ToFile(ofstream& ofstr)
       extent_line.Insert(client);
       extent_ptr->AddToItem(extent_line);
       extent_line.ToFile(ofstr);
-     
+
       extent_ptr=extent_table.next_item();
     }
-  
+
   if(ofstr.good())
     {
       retval=TRUE;
-    } 
+    }
 
   return retval;
 }
@@ -212,7 +212,7 @@ int CCCC_UseRelationship::FromFile(ifstream& ifstr)
   CCCC_Item next_line;
   next_line.FromFile(ifstr);
   ifstr_line++;
-  
+
   string line_keyword_dummy;
 
   CCCC_UseRelationship *found_uptr=NULL;
@@ -220,8 +220,8 @@ int CCCC_UseRelationship::FromFile(ifstream& ifstr)
   if(
     next_line.Extract(line_keyword_dummy) &&
     next_line.Extract(this->supplier) &&
-    next_line.Extract(this->client) 
-  ) 
+    next_line.Extract(this->client)
+  )
     {
     found_uptr=current_loading_project->userel_table.find_or_insert(this);
     if(found_uptr==this)
@@ -235,7 +235,7 @@ int CCCC_UseRelationship::FromFile(ifstream& ifstr)
     {
       retval=RECORD_TRANSCRIBED;
     }
- 
+
     // process extent records
     while(PeekAtNextLinePrefix(ifstr,USEEXT_PREFIX))
     {
@@ -252,19 +252,19 @@ int CCCC_UseRelationship::FromFile(ifstream& ifstr)
       )
       {
         // We don't ever expect to find duplicated extent records
-        // but just in case... 
+        // but just in case...
         CCCC_Extent *found_eptr=found_uptr->extent_table.find_or_insert(new_extent);
         if(found_eptr!=new_extent)
         {
           cerr << "Failed to add extent for relationship "
-            << found_uptr->key() << " at line " << ifstr_line 
+            << found_uptr->key() << " at line " << ifstr_line
             << endl;
           delete new_extent;
         }
       }
     }
 
-    } 
+    }
   else // extraction of module intial line failed
     {
       // unexpected problem with the input
@@ -281,10 +281,8 @@ int CCCC_UseRelationship::FromFile(ifstream& ifstr)
       ifstr_line++;
       cerr << "Ignoring userel extent on line " << ifstr_line << endl;
     }
- 
+
   return retval;
 }
-
-
 
 

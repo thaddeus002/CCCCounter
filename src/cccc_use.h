@@ -43,6 +43,9 @@ class CCCC_UseRelationship : public CCCC_Record
 
  public:
   string name( int index ) const;
+  /**
+   * \param is item @client@member@supplier
+   */
   CCCC_UseRelationship(CCCC_Item& is);
   int FromFile(ifstream& infile);
   int ToFile(ofstream& outfile);
