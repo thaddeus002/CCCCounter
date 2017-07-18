@@ -22,12 +22,11 @@
 #include "cccc.h"
 #include "cccc_itm.h"
 #include "cccc_met.h"
+#include "cccc_opt.h"
+
 #include <sstream>
 using std::ostringstream;
 
-#include "cccc_opt.h"
-
-extern const char *internal_treatments[];
 
 Metric_Treatment::Metric_Treatment(CCCC_Item& treatment_line)
 {
@@ -199,33 +198,3 @@ string CCCC_Metric::value_string() const
 {
   return treatment->value_string(numerator, denominator);
 }
-
-const char *internal_treatments[] =
-{
-  "LOCf@30@100@0@6@0@Lines of code/function@",
-  "LOCm@500@2000@0@6@0@Lines of code/module @",
-  "LOCp@999999@999999@0@6@0@Lines of code/project @",
-  "MVGf@10@30@0@6@0@Cyclomatic complexity/function@",
-  "MVGm@200@1000@0@6@0@Cyclomatic complexity/module@",
-  "MVGp@999999@999999@0@6@0@Cyclomatic complexity/project@",
-  "COM@999999@999999@0@6@0@Comment lines@",
-  "M_C@5@10@5@6@3@MVG/COM McCabe/comment line@",
-  "L_C@7@30@20@6@3@LOC/COM Lines of code/comment line@",
-  "FI@12@20@0@6@0@Fan in (overall)@",
-  "FIv@6@12@0@6@0@Fan in (visible uses only)@",
-  "FIc@6@12@0@6@0@Fan in (concrete uses only)@",
-  "FO@12@20@0@6@0@Fan out (overall)@",
-  "FOv@6@12@0@6@0@Fan out (visible uses only)@",
-  "FOc@6@12@0@6@0@Fan out (concrete uses only)@",
-  "IF4@100@1000@0@6@0@Henry-Kafura/Shepperd measure (overall)@",
-  "IF4v@30@100@0@6@0@Henry-Kafura/Shepperd measure (visible only)@",
-  "IF4c@30@100@0@6@0@Henry-Kafura/Shepperd measure (concrete only)@",
-  "WMC1@30@100@0@6@0@Weighting function = 1 unit per method@",
-  "WMCv@10@30@0@6@0@Weighting function = 1 unit per visible method@",
-  "DIT@3@60@6@0@Depth of Inheritance Tree@",
-  "NOC@4@15@0@6@0@Number of children@",
-  "CBO@12@30@0@6@0@Coupling between objects@",
-  NULL
-};
-
-
