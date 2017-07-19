@@ -18,17 +18,17 @@ The Purdue Compiler Construction Toolset (PCCTS) is required to compile CCCCount
 
 To install it :
 
-> git clone https://github.com/thaddeus002/pccts
-> cd pccts
-> make
-> su
-> make install
+    git clone https://github.com/thaddeus002/pccts
+    cd pccts
+    make
+    su
+    make install
 
 ### get and build CCCCounter
 
-> git clone https://github.com/thaddeus002/CCCCounter
-> cd CCCCounter
-> make
+    git clone https://github.com/thaddeus002/CCCCounter
+    cd CCCCounter
+    make
 
 ### optionnaly run tests
 
@@ -42,8 +42,8 @@ This should end with the following message :
 
 ### install CCCCounter
 
-> su
-> make install
+    su
+    make install
 
 ## Documentation
 
