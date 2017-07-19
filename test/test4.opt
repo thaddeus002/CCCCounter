@@ -56,6 +56,7 @@ CCCC_MetTmnt@M_C@5.000000@10.000000@5@6@3@MVG/COM McCabe/comment line@
 CCCC_MetTmnt@NOC@4.000000@15.000000@0@6@0@Number of children@
 CCCC_MetTmnt@WMC1@30.000000@100.000000@0@6@0@Weighting function=1 unit per method@
 CCCC_MetTmnt@WMCv@10.000000@30.000000@0@6@0@Weighting function=1 unit per visible method@
+CCCC_MetTmnt@DEF@999999@999999@0@6@0@Default format@
 CCCC_Dialect@c++.mfc@BEGIN_MESSAGE_MAP@start_skipping@
 CCCC_Dialect@c++.mfc@END_MESSAGE_MAP@stop_skipping@
 CCCC_Dialect@c++.stl@__STL_BEGIN_NAMESPACE@ignore@

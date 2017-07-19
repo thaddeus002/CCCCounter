@@ -246,7 +246,9 @@ Metric_Treatment *CCCC_Options::getMetricTreatment(const string& metric_tag)
 	metric_treatment_map_t::iterator iter=treatment_map.find(metric_tag);
 	if(iter!=treatment_map.end())
     {
-		retval=(*iter).second;
+		retval=iter->second;
+    } else {
+        retval=treatment_map.find("DEF")->second;
     }
 	return retval;
 }
@@ -258,7 +260,7 @@ string CCCC_Options::dialectKeywordPolicy(const string& lang, const string& kw)
 	dialect_keyword_map_t::const_iterator iter=dialect_keyword_map.find(kt);
 	if(iter!=dialect_keyword_map.end())
     {
-		retval=(*iter).second;
+		retval=iter->second;
     }
 	return retval;
 }
@@ -375,6 +377,7 @@ const char *default_treatment_options[] =
 	 "NOC@	       4@     15@   0@ 6@ 0@Number of children@",
 	 "CBO@	      12@     30@   0@ 6@ 0@Coupling between objects@",
 	 "8.3@    999999@ 999999@   0@ 8@ 3@General format for fixed precision 3 d.p.@",
+         "DEF@    999999@ 999999@   0@ 6@ 0@Default format@",
 	 NULL
 };
 

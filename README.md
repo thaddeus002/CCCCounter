@@ -32,7 +32,7 @@ To install it :
 
 ### optionnaly run tests
 
-> make test
+    make test
 
 This should end with the following message :
 

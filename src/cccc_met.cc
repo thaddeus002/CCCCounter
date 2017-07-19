@@ -168,10 +168,6 @@ CCCC_Metric::CCCC_Metric(int n, int d, const char* treatment_tag)
 void CCCC_Metric::set_treatment(const char* code)
 {
   treatment=CCCC_Options::getMetricTreatment(code);
-
-  if(treatment == NULL) {
-    treatment = new Metric_Treatment();
-  }
 }
 
 void CCCC_Metric::set_ratio(float _num, float _denom)
