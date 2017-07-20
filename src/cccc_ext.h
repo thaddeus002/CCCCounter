@@ -78,6 +78,7 @@ class CCCC_Extent
   /** This is the same than the constructor */
   int GetFromItem(CCCC_Item& item);
 
+  /** Add the infos of this objet to an item */
   int AddToItem(CCCC_Item& item);
 
 

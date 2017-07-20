@@ -25,12 +25,10 @@
 #ifndef CCCC_PRJ_H
 #define CCCC_PRJ_H
 
-#include "cccc_itm.h"
 #include "cccc_rec.h"
 #include "cccc_mod.h"
 #include "cccc_mem.h"
 #include "cccc_use.h"
-#include "cccc_ext.h"
 
 
 static const string REJEXT_PREFIX="CCCC_RejExt";
@@ -70,6 +68,7 @@ class CCCC_Project : public CCCC_Record
     CCCC_Extent *extent_ptr;
     ExtentTableEntry() : table_ptr(NULL), extent_ptr(NULL) {}
   };
+
   typedef std::multimap<string, ExtentTableEntry> FileExtentTable;
   FileExtentTable file_extent_table;
 

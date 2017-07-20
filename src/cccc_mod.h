@@ -18,15 +18,14 @@
 */
 
 /**
- * cccc_mod.h
+ * \file cccc_mod.h
  */
+
 #ifndef CCCC_MOD_H
 #define CCCC_MOD_H
 
-#include "cccc.h"
 
 #include "cccc_rec.h"
-#include "cccc_itm.h"
 #include "cccc_prj.h"
 #include "cccc_use.h"
 #include "cccc_mem.h"
@@ -44,7 +43,9 @@ class CCCC_Module : public CCCC_Record
   friend class CCCC_Project;
   friend class CCCC_Html_Stream;
   friend class CCCC_Xml_Stream;
+
   CCCC_Project *project;
+
   string module_name, module_type;
 
   typedef std::map<string,CCCC_Member*> member_map_t;
@@ -68,8 +69,6 @@ public:
 };
 
 #endif // CCCC_MOD_H
-
-
 
 
 

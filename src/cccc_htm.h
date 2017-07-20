@@ -17,6 +17,11 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
+/**
+ * \file cccc_htm.h
+ * \brief this file defines HTML output facilities for the CCCC project
+ */
+
 #ifndef __CCCC_HTM_H
 #define __CCCC_HTM_H
 
@@ -28,7 +33,9 @@
 #include "cccc_db.h"
 #include "cccc_met.h"
 
-
+/**
+ * Kind of report to insert in the HTML file.
+ */
 enum ReportType {
   rtCONTENTS=0x0001, rtSUMMARY=0x0002,
   rtOODESIGN=0x0004,
@@ -41,8 +48,10 @@ enum ReportType {
   rtCCCC=0x8000
 };
 
-
-
+/**
+ * \class CCCC_Html_Stream
+ * \brief ?
+ */
 class CCCC_Html_Stream {
   friend CCCC_Html_Stream& operator <<(CCCC_Html_Stream& os,
 				       const string& stg);
@@ -73,6 +82,13 @@ class CCCC_Html_Stream {
 
   void Separate_Module_Link(CCCC_Module *module_ptr);
 
+  /**
+   * \fn Put_Section_Heading(string, string, int)
+   * \brief Put a tag <Hi> in the HTML file. Where i is the level.
+   * \param heading_title title string
+   * \param heading_tag name of the link to this tag
+   * \param heading_level level of the H tag : H1, H2, ...
+   */
   void Put_Section_Heading(string section_name,string section_tag,
 			   int section_level);
   void Put_Section_TOC_Entry(string section_name, string section_href,
@@ -101,7 +117,7 @@ class CCCC_Html_Stream {
   static void GenerateReports(CCCC_Project* project, int report_mask,
 			      const string& outfile, const string& outdir);
 
-  // general-purpose constructor with standard preamble
+  /** general-purpose constructor with standard preamble */
   CCCC_Html_Stream(const string& fname, const string& info);
 
   /**
