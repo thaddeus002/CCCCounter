@@ -43,6 +43,11 @@ template <class T> class CCCC_Table : public std::map<string,T*>
   typedef std::map<string,T*> map_t;
   typename map_t::iterator iter_;
 
+  /**
+   * Put the map iterator to the beginning.
+   */
+  void reset_iterator();
+
 
  public:
   CCCC_Table();
@@ -70,11 +75,6 @@ template <class T> class CCCC_Table : public std::map<string,T*>
    * \return true if the item have been removed
    */
   bool remove(T* old_item_ptr);
-
-  /**
-   * Put the map iterator to the beginning.
-   */
-  void reset_iterator();
 
   /**
    * \return the first item of the table.
