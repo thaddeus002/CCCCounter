@@ -40,6 +40,10 @@ enum RelationshipMaskElements
   rmeABSTRACT=0x40, rmeCONCRETE=0x80, rmeABSTRACT_OR_CONCRETE=0xC0
 };
 
+/**
+ * A CCCC_Project is a CCCC_Record with four tables :
+ * modules, members, useRelationship and rejected extents
+ */
 class CCCC_Project : public CCCC_Record
 {
   friend class CCCC_Html_Stream;
@@ -83,14 +87,15 @@ class CCCC_Project : public CCCC_Record
   void add_userel(CCCC_Item& use_data_line);
   void add_rejected_extent(CCCC_Item& rejected_data_line);
 
-  // this function is used after loading and/or analysis
-  // has been completed to (re)create the maps owned by
-  // each module of its members and relationships
+  /**
+   * this function is used after loading and/or analysis
+   * has been completed to (re)create the maps owned by
+   * each module of its members and relationships
+   */
   void reindex();
 
   int get_count(const char *count_tag);
 
-  string name(int level) const;
 
   int FromFile(ifstream& infile);
   int ToFile(ofstream& outfile);
