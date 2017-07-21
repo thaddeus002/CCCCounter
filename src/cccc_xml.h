@@ -25,14 +25,10 @@
 #ifndef __CCCC_XML_H
 #define __CCCC_XML_H
 
-#include "cccc.h"
 
 #include <fstream>
-
 #include <time.h>
 
-#include "cccc_db.h"
-#include "cccc_met.h"
 
 // Ideally, this class would be defined to reuse common
 // facilities abstracted from CCCC_Html_Stream.

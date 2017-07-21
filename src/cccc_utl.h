@@ -63,6 +63,7 @@ class AST;
  * only C and C++ are implemented as yet
  */
 enum Language { lAUTO, lCPLUSPLUS, lANSIC, lJAVA, lADA };
+
 extern Language global_language, file_language;
 
 enum Visibility {
@@ -194,9 +195,9 @@ class ParseUtility {
   ANTLR_Assisted_Parser *parser;
   int trace_depth;
   static int stack_depth;
-  static string   stack_tokentext[MAX_STACK_DEPTH];
-  static int           stack_tokenline[MAX_STACK_DEPTH];
-  static string   stack_rules[MAX_STACK_DEPTH];
+  static string stack_tokentext[MAX_STACK_DEPTH];
+  static int    stack_tokenline[MAX_STACK_DEPTH];
+  static string stack_rules[MAX_STACK_DEPTH];
 
   // copy constructor and assignment operator are private to
   // prevent unexpected copying
