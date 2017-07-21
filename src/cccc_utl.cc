@@ -35,7 +35,6 @@
 #include <cassert>
 #include <iomanip>
 using std::ios;
-//using std::trunc;
 using std::ends;
 using std::setw;
 using std::setiosflags;
@@ -54,12 +53,12 @@ ParseUtility* ParseUtility::theCurrentInstance=NULL;
 ParseStore* ParseStore::theCurrentInstance=NULL;
 
 // insertion and extraction functions intended to support enumerations
-void insert_enum(ostream& os, int e) 
-{ 
+void insert_enum(ostream& os, int e)
+{
   os << (char) e;
 }
 
-void extract_enum(istream& is, int& e) 
+void extract_enum(istream& is, int& e)
 {
   e=0;
   is >> (char&) e;
@@ -104,21 +103,21 @@ string ParseUtility::lookahead_text(int n)
   for(i=1; i<=n; i++)
     {
       if(parser->LT(i) != NULL)
-	{
-	  retval=retval+parser->LT(i)->getText();
-	  retval=retval+" ";
-	}
+  {
+    retval=retval+parser->LT(i)->getText();
+    retval=retval+" ";
+  }
     }
   return retval;
 }
 
-void ParseUtility::resynchronize(int initial_nesting, 
-				 SetWordType *resync_token_class, 
-				 ANTLRTokenPtr& resync_token)
+void ParseUtility::resynchronize(int initial_nesting,
+         SetWordType *resync_token_class,
+         ANTLRTokenPtr& resync_token)
 {
   // the interface for resynchronisation is as follows:
-  // the caller supplies a nesting level at which the resynchronisation must 
-  // occur, and a token class containing all of the tokens which can 
+  // the caller supplies a nesting level at which the resynchronisation must
+  // occur, and a token class containing all of the tokens which can
   // be accepted to delimit the resynchronisation
   // this function will scan until it finds that it is at the correct level and
   // the next token of lookahead is in the resynchronisation set
@@ -134,36 +133,36 @@ void ParseUtility::resynchronize(int initial_nesting,
 
   int resynchronising=1;
   while(resynchronising)
+  {
+    parser->consumeUntil(resync_token_class);
+    if(
+	(MY_TOK(parser->LT(1))->getNestingLevel() > initial_nesting) &&
+        (parser->LT(2) != NULL)
+        )
     {
-      parser->consumeUntil(resync_token_class);
-      if( 
-	 (MY_TOK(parser->LT(1))->getNestingLevel() > initial_nesting) &&
-	 (parser->LT(2) != NULL)
-	 )
-	{
-	  parser->consume();
-	}
-      else
-	{
-	  // we are ready to resynchronise
-	  resynchronising=0;
-	  string2=parser->LT(1)->getText();
-	  line2=parser->LT(1)->getLine();
-	}
+      parser->consume();
     }
+    else
+    {
+      // we are ready to resynchronise
+      resynchronising=0;
+      string2=parser->LT(1)->getText();
+      line2=parser->LT(1)->getLine();
+    }
+  }
 
   // we now consume a succession of tokens from the resynchronisation token
   // class until we come across a token which is not in the set, or the
   // nesting level changes
   resync_token=parser->LT(1);
   while(
-	parser->set_el(parser->LT(1)->getType(),resync_token_class) &&
-	( MY_TOK(parser->LT(1))->getNestingLevel() == initial_nesting) 
-	)
+  parser->set_el(parser->LT(1)->getType(),resync_token_class) &&
+  ( MY_TOK(parser->LT(1))->getNestingLevel() == initial_nesting)
+  )
     {
       string2=parser->LT(1)->getText();
       line2=parser->LT(1)->getLine();
- 
+
       resync_text+=parser->LT(1)->getText();
       resync_text+=" ";
       resync_token=parser->LT(1);
@@ -171,8 +170,8 @@ void ParseUtility::resynchronize(int initial_nesting,
       parser->consume();
     }
 
-  cerr << "Unrecognized section from " 
-       << string1.c_str() << " on line " << line1 << " to " 
+  cerr << "Unrecognized section from "
+       << string1.c_str() << " on line " << line1 << " to "
        << string2.c_str() << " on line " << line2 << endl
        << "=====ignored section begins=====" << endl
        << resync_text.c_str() << endl
@@ -182,7 +181,7 @@ void ParseUtility::resynchronize(int initial_nesting,
 
 ParseUtility::ParseUtility(ANTLRParser *parser)
 {
-  // This is designed as a serial-singleton class (e.g. many 
+  // This is designed as a serial-singleton class (e.g. many
   // instances may exist over time but no more than one at a
   // time).
   // For the lifetime of an instance, the static member theCurrentInstance
@@ -206,28 +205,28 @@ ParseUtility::~ParseUtility()
 // and a relative name.
 string ParseUtility::scopeCombine(const string& baseScope, const string& name)
 {
-	// I am presently (as at 3.pre44) experimenting with
-	// how I handle scopes.  The present code has a policy
-	// of discarding scope information altogether and defining
-	// modules based solely on the final component of the 
-	// fully qualified name.
-	// This variable may become a parameter to control policy in this
-	// area.
-	bool bIgnoreScope=true;
-	string retval;
-	if(bIgnoreScope)
-	{
-		retval=name;
-	}
-	else if(baseScope.size()>0 && name.size()>0)
-	{
-		retval=baseScope+"::"+name;
-	}
-	else
-	{
-		retval=baseScope+name;
-	}
-	
+  // I am presently (as at 3.pre44) experimenting with
+  // how I handle scopes.  The present code has a policy
+  // of discarding scope information altogether and defining
+  // modules based solely on the final component of the
+  // fully qualified name.
+  // This variable may become a parameter to control policy in this
+  // area.
+  bool bIgnoreScope=true;
+  string retval;
+  if(bIgnoreScope)
+  {
+    retval=name;
+  }
+  else if(baseScope.size()>0 && name.size()>0)
+  {
+    retval=baseScope+"::"+name;
+  }
+  else
+  {
+    retval=baseScope+name;
+  }
+
   return retval;
 }
 
@@ -236,7 +235,7 @@ ParseStore::ParseStore(const string& filename)
 , pendingLexicalCounts(static_cast<int>(tcLAST),0)
 , flag(static_cast<int>(psfLAST)+1,'?')
 {
-  // This is designed as a serial-singleton class (e.g. many 
+  // This is designed as a serial-singleton class (e.g. many
   // instances may exist over time but no more than one at a
   // time).
   // For the lifetime of an instance, the static member theCurrentInstance
@@ -249,7 +248,7 @@ ParseStore::ParseStore(const string& filename)
 ParseStore::~ParseStore()
 {
   // If the current object came from the default constructor
-  // it is the primary singleton instance and we wish to 
+  // it is the primary singleton instance and we wish to
   // set the static pointer to itself back to null.  Otherwise,
   // it was a cached copy, and we don't really care.
   if(theCurrentInstance==this)
@@ -259,14 +258,14 @@ ParseStore::~ParseStore()
 }
 
 int ParseStore::get_flag(PSFlag psf) const {
-  return int(flag[psf]); 
+  return int(flag[psf]);
 }
 
-void ParseStore::set_flag(PSFlag psf, int value) { 
+void ParseStore::set_flag(PSFlag psf, int value) {
   flag[psf]=value;
 }
 
-void ParseStore::set_flag(Visibility value) { 
+void ParseStore::set_flag(Visibility value) {
   MAKE_STRSTREAM(ofstr);
   ofstr << value;
   flag[psfVISIBILITY]=(ofstr.str())[0];
@@ -277,17 +276,17 @@ Visibility ParseStore::get_visibility()
 {
   return static_cast<Visibility>(flag[psfVISIBILITY]);
 }
-  
-string ParseStore::filename() 
-{ 
-  return theFilename; 
+
+string ParseStore::filename()
+{
+  return theFilename;
 }
 
-void 
+void
 ParseStore::
 insert_extent(CCCC_Item& os, int startLine, int endLine,
-	      const string& description, const string& flags,
-	      UseType ut, bool allocate_lexcounts) 
+        const string& description, const string& flags,
+        UseType ut, bool allocate_lexcounts)
 {
   os.Insert(theFilename);
   os.Insert(startLine);
@@ -303,35 +302,35 @@ insert_extent(CCCC_Item& os, int startLine, int endLine,
   if(allocate_lexcounts==true)
     {
       LineLexicalCountMatrix::iterator extentStartIter =
-	lineLexicalCounts.lower_bound(startLine); 
+  lineLexicalCounts.lower_bound(startLine);
       LineLexicalCountMatrix::iterator extentEndIter =
-	lineLexicalCounts.upper_bound(endLine-1); 
+  lineLexicalCounts.upper_bound(endLine-1);
       LineLexicalCountMatrix::iterator llcmIter;
       for(llcmIter=extentStartIter;
-	  llcmIter!=extentEndIter; 
-	  ++llcmIter)
-	{
-	  // This record relates to a line within the current
-	  // extent.
-	  for(i=0; i<tcLAST; i++)
-	    {	
-	      lexical_counts_for_this_extent[i]+=(*llcmIter).second[i];
-	    }
-	}
-      // The lexical occurrences mentioned in the records processed 
+    llcmIter!=extentEndIter;
+    ++llcmIter)
+  {
+    // This record relates to a line within the current
+    // extent.
+    for(i=0; i<tcLAST; i++)
+      {
+        lexical_counts_for_this_extent[i]+=(*llcmIter).second[i];
+      }
+  }
+      // The lexical occurrences mentioned in the records processed
       // above are now been accounted for in the database, so we
       // purge these records.  This has the effect of allowing
       // accurate accounting on nested extents (i.e. the outer
-      // extent will only be reported as containing lines which 
+      // extent will only be reported as containing lines which
       // are not already listed in the inner extent).
       lineLexicalCounts.erase(extentStartIter,extentEndIter);
 
       ostringstream lexcount_str;
 
       lexcount_str << "LOC:" << lexical_counts_for_this_extent[tcCODELINES]
-		   << " COM:" << lexical_counts_for_this_extent[tcCOMLINES]
-		   << " MVG:" << lexical_counts_for_this_extent[tcMCCABES_VG]
-		   << ends;
+       << " COM:" << lexical_counts_for_this_extent[tcCOMLINES]
+       << " MVG:" << lexical_counts_for_this_extent[tcMCCABES_VG]
+       << ends;
 
       os.Insert(lexcount_str.str().c_str());
 
@@ -345,12 +344,12 @@ insert_extent(CCCC_Item& os, int startLine, int endLine,
 }
 
 
-  
-void ParseStore::record_module_extent(int startLine, int endLine, 
-				      const string& moduleName, 
-				      const string& moduleType,
-				      const string& description,
-				      UseType ut)
+
+void ParseStore::record_module_extent(int startLine, int endLine,
+              const string& moduleName,
+              const string& moduleType,
+              const string& description,
+              UseType ut)
 {
   // See the lengthy comment in record_userel_extent about
   // why we are filtering for empty module names.
@@ -360,32 +359,32 @@ void ParseStore::record_module_extent(int startLine, int endLine,
     module_line.Insert(moduleName);
     module_line.Insert(moduleType);
     insert_extent(module_line,startLine,endLine,
-	 description,flags(),ut,true);
+    description,flags(),ut,true);
     prj->add_module(module_line);
   }
 }
 
-void ParseStore::record_function_extent(int startLine, int endLine, 
-					const string& returnType, 
-					const string& moduleName,
-					const string& memberName, 
-					const string& paramList,
-					const string& description,
-					Visibility visibility,
-					UseType ut)
+void ParseStore::record_function_extent(int startLine, int endLine,
+          const string& returnType,
+          const string& moduleName,
+          const string& memberName,
+          const string& paramList,
+          const string& description,
+          Visibility visibility,
+          UseType ut)
 {
   // We require every call to this function to specify a member
   // function name and a parameter list.
   if(memberName.size()>0)
   {
     // If the moduleName is an empty string, we remap this to the
-	// string "anonymous".  This implies that we treat all
-	// C-style functions as belonging to a single module.
-	string mappedModuleName = moduleName;
+    // string "anonymous".  This implies that we treat all
+    // C-style functions as belonging to a single module.
+    string mappedModuleName = moduleName;
     if(mappedModuleName.size()==0)
-	{
-	   mappedModuleName = "anonymous";
-	}
+    {
+       mappedModuleName = "anonymous";
+    }
 
     CCCC_Item function_line;
     function_line.Insert(mappedModuleName);
@@ -403,54 +402,54 @@ void ParseStore::record_function_extent(int startLine, int endLine,
 }
 
 void ParseStore::record_userel_extent(int startLine, int endLine,
-				      const string& clientName, 
-				      const string& memberName,
-				      const string& serverName,
-				      const string& description,
-				      Visibility visibility,
-				      UseType ut)
+              const string& clientName,
+              const string& memberName,
+              const string& serverName,
+              const string& description,
+              Visibility visibility,
+              UseType ut)
 {
   CCCC_Item userel_line;
-  
+
   // This function should not be invoked unless the clientName
   // and serverName are non-empty strings, however it appears
-  // that in test case prn16.java the parser does execute the 
+  // that in test case prn16.java the parser does execute the
   // actions of the 'implementsClause' rule, even though there
   // is no 'implements' keyword outside comments in the program
   // text.
-  // I don't understand this, but as a workaround, I filter at 
+  // I don't understand this, but as a workaround, I filter at
   // this point and ensure that if either clientName or serverName
   // is empty, no action is taken.
   if(clientName.size()>0 && serverName.size()>0)
   {
-	  userel_line.Insert(clientName);
-	  userel_line.Insert(memberName);
-	  userel_line.Insert(serverName);
+    userel_line.Insert(clientName);
+    userel_line.Insert(memberName);
+    userel_line.Insert(serverName);
 
-	  // for data member definitions, we record lexical data for the
-	  // extent,
-	  // for inheritance and parameter relationships we do not
-	  bool record_lexcounts=false;
-	  switch(ut)
-		{
-		case utHASBYVAL:
-		case utHASBYREF:
-		  record_lexcounts=true;
-		  break;
-		default:
-		  record_lexcounts=false;
-		}
+    // for data member definitions, we record lexical data for the
+    // extent,
+    // for inheritance and parameter relationships we do not
+    bool record_lexcounts=false;
+    switch(ut)
+    {
+    case utHASBYVAL:
+    case utHASBYREF:
+      record_lexcounts=true;
+      break;
+    default:
+      record_lexcounts=false;
+    }
 
-	  string baseFlags=flags();
-	  baseFlags[psfVISIBILITY]=visibility;
-	  insert_extent(userel_line,startLine,endLine,
-			description,baseFlags,ut,record_lexcounts);
-	  prj->add_userel(userel_line);
-   }
+    string baseFlags=flags();
+    baseFlags[psfVISIBILITY]=visibility;
+    insert_extent(userel_line,startLine,endLine,
+      description,baseFlags,ut,record_lexcounts);
+    prj->add_userel(userel_line);
+  }
 }
 
-void ParseStore::record_other_extent(int startLine, int endLine, 
-					  const string& description)
+void ParseStore::record_other_extent(int startLine, int endLine,
+            const string& description)
 {
   CCCC_Item rejext_line;
   insert_extent(rejext_line,startLine,endLine,description,flags(),utREJECTED,true);
@@ -461,100 +460,101 @@ static void toktrace(ANTLRAbstractToken *tok)
 {
   // at the LHS we put out information about the current token
   if(tok != NULL)
-    {
-      DbgMsg(PARSER,cerr,
-	     std::setw(6) << tok->getLine() 
-	     << std::setw(4) << (int)tok->getType()
-	     << std::setiosflags(ios::left) 
-	     << std::resetiosflags(ios::right) 
-	     << std::setw(20) << tok->getText()
-	     );
-    }
+  {
+    DbgMsg(PARSER,cerr,
+       std::setw(6) << tok->getLine()
+       << std::setw(4) << (int)tok->getType()
+       << std::setiosflags(ios::left)
+       << std::resetiosflags(ios::right)
+       << std::setw(20) << tok->getText()
+       );
+  }
   else
-    {
-      DbgMsg(PARSER,cerr,std::setw(30)<<"");
-    }
+  {
+    DbgMsg(PARSER,cerr,std::setw(30)<<"");
+  }
 }
 
 enum InOrOut { IO_IN, IO_OUT };
 
-static void rectrace(const char *rulename, 
-		     const char *dir_indic, 
-		     int guessing, 
-		     ANTLRAbstractToken *tok)
+static void rectrace(const char *rulename,
+         const char *dir_indic,
+         int guessing,
+         ANTLRAbstractToken *tok)
 {
   static int trace_depth=0;
   if(guessing)
-    {
-      DbgMsg(PARSER,cerr,
-	     setw(trace_depth*4+1) << "" << dir_indic 
-	     << "?" << rulename << endl);
-    }
+  {
+    DbgMsg(PARSER,cerr,
+       setw(trace_depth*4+1) << "" << dir_indic
+       << "?" << rulename << endl);
+  }
   else
-    {
-      trace_depth=((ANTLRToken*) tok)->getNestingLevel();
-      DbgMsg(PARSER,cerr,
-	     setw(trace_depth*4)<< "" << dir_indic << rulename << endl);
-    }
+  {
+    trace_depth=((ANTLRToken*) tok)->getNestingLevel();
+    DbgMsg(PARSER,cerr,
+     setw(trace_depth*4)<< "" << dir_indic << rulename << endl);
+  }
 }
 
 void ParseUtility::tracein(
-			   const char *rulename, int guessing, 
-			   ANTLRAbstractToken *tok)
+         const char *rulename, int guessing,
+         ANTLRAbstractToken *tok)
 {
   if(guessing == 0)
-    {
-      stack_tokentext[stack_depth]=tok->getText();
-      stack_tokenline[stack_depth]=tok->getLine();
-      stack_rules[stack_depth]=rulename;
-      stack_depth++;
-    }
+  {
+    stack_tokentext[stack_depth]=tok->getText();
+    stack_tokenline[stack_depth]=tok->getLine();
+    stack_rules[stack_depth]=rulename;
+    stack_depth++;
+  }
 
   // first put out the token details
   toktrace(tok);
-  
+
   // then the indented recognition trace
   rectrace(rulename,"-> ",guessing,tok);
 }
 
-void ParseUtility::traceout(const char *rulename, 
-			    int guessing, 
-			    ANTLRAbstractToken *tok)
+void ParseUtility::traceout(const char *rulename,
+          int guessing,
+          ANTLRAbstractToken *tok)
 {
   if(guessing == 0)
+  {
+    stack_depth--;
+    // some error checking...
+    if(stack_depth<0)
     {
-      stack_depth--;
-      // some error checking...
-      if(stack_depth<0)
-	{
-	  cerr << "ParseUtility::traceout negative stack depth - "
-	       << "exiting from rule " << rulename 
-	       << " at " << tok->getText() << " on line " << tok->getLine() 
-	       << endl;
-	}
-      else if(rulename!=stack_rules[stack_depth])
-	{
-	  cerr << "ParseStore::traceout rule name mismatch - "
-	       << rulename << "!=" << stack_rules[stack_depth] << endl;
-	}
-      stack_tokentext[stack_depth]="";
-      stack_tokenline[stack_depth]=0;
-      stack_rules[stack_depth]="";
+      cerr << "ParseUtility::traceout negative stack depth - "
+         << "exiting from rule " << rulename
+         << " at " << tok->getText() << " on line " << tok->getLine()
+         << endl;
     }
+    else if(rulename!=stack_rules[stack_depth])
+    {
+      cerr << "ParseStore::traceout rule name mismatch - "
+         << rulename << "!=" << stack_rules[stack_depth] << endl;
+    }
+    
+    stack_tokentext[stack_depth]="";
+    stack_tokenline[stack_depth]=0;
+    stack_rules[stack_depth]="";
+  }
   // first put out the token details
   toktrace(tok);
   rectrace(rulename,"<- ",guessing,tok);
 }
-  
+
 void ParseUtility::syn(
   _ANTLRTokenPtr tok, ANTLRChar *egroup, SetWordType *eset,
-  ANTLRTokenType etok, int k) 
+  ANTLRTokenType etok, int k)
 {
   string filename=ParseStore::currentInstance()->filename();
   if(tok != NULL)
     {
-      cerr << filename << '(' << tok->getLine() << "):" 
-	   << " syntax error at token " << tok->getText() << endl;
+      cerr << filename << '(' << tok->getLine() << "):"
+     << " syntax error at token " << tok->getText() << endl;
     }
   else
     {
@@ -562,56 +562,51 @@ void ParseUtility::syn(
     }
 
 #if 1
-	  // The logic in the other half of this #if section
-	  // generated too much noise for some people's taste.
-	  // It's only really useful to myself (TJL) or anyone
-	  // else with a taste for debugging cccc.g/java.g etc.
-	  int i=stack_depth-1;
-      cerr << filename << '(' << stack_tokenline[i] 
-	   << "): trying to match " << stack_rules[i]
-	   << " at '" << stack_tokentext[i] << "'"
-	   << endl;
+    // The logic in the other half of this #if section
+    // generated too much noise for some people's taste.
+    // It's only really useful to myself (TJL) or anyone
+    // else with a taste for debugging cccc.g/java.g etc.
+    int i=stack_depth-1;
+      cerr << filename << '(' << stack_tokenline[i]
+     << "): trying to match " << stack_rules[i]
+     << " at '" << stack_tokentext[i] << "'"
+     << endl;
 #else
   cerr << "Parser context:" << endl;
   for(int i=stack_depth-1; i>=0; i--)
     {
-      cerr << filename << '(' << stack_tokenline[i] 
-	   << "): trying to match " << stack_rules[i]
-	   << " at '" << stack_tokentext[i] << "'"
-	   << endl;
-    }	
+      cerr << filename << '(' << stack_tokenline[i]
+     << "): trying to match " << stack_rules[i]
+     << " at '" << stack_tokentext[i] << "'"
+     << endl;
+    }
   cerr << endl;
 #endif
-}	
+}
 
 void ParseStore::endOfLine(int line)
 {
   // We only do the processing below if the line which has just
   // ended contained at least one non-skippable token
-  // The flag which tells us whether this is true is set in the 
+  // The flag which tells us whether this is true is set in the
   // token constructor
   if(ANTLRToken::bCodeLine)
   {
-	pendingLexicalCounts[tcCODELINES]++;
-    LineLexicalCountMatrix::value_type 
-      vt(line,LexicalCountArray(static_cast<int>(tcLAST),0));
+    pendingLexicalCounts[tcCODELINES]++;
+    LineLexicalCountMatrix::value_type vt(line,LexicalCountArray(static_cast<int>(tcLAST),0));
 
     for(int i=0; i<tcLAST; i++)
-      {
-	vt.second[i]=pendingLexicalCounts[i];
-	pendingLexicalCounts[i]=0;
-      }
+    {
+      vt.second[i]=pendingLexicalCounts[i];
+      pendingLexicalCounts[i]=0;
+    }
+
     lineLexicalCounts.insert(vt);
 
-	// reset the flat for next time
-	ANTLRToken::bCodeLine=false;
+    // reset the flat for next time
+    ANTLRToken::bCodeLine=false;
   }
 }
-
-
-
-
-
 
 
 

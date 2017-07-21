@@ -45,18 +45,10 @@ int DebugMask=0;
 
 char *skip_identifiers[SKIP_IDENTIFIERS_ARRAY_SIZE];
 
-#if defined(_WIN32) && defined(__GNUG__)
-// Cygnus gcc for Win32 B19 will try to expand wildcards that are given at
-// the commandline. Sadly this "globbing" will not work the way it is
-// supposed in Win32, but luckily the whole globbing can be disabled by
-// defining the following variable:
-int _CRT_glob = 0;
-#endif
 
-
-/*
-** global variables to hold default values for various things
-*/
+/**
+ * global variables to hold default values for various things
+ */
 string current_filename, current_rule, parse_language;
 
 /**
@@ -68,8 +60,8 @@ class Main
   // most of the data members of this class are either set
   // by default or gleaned from the command line
 
-// each of the data members of type string or int can be
-// set by a command line flag of the type --<member name>=<value>
+  // each of the data members of type string or int can be
+  // set by a command line flag of the type --<member name>=<value>
 
   string outdir;
   string db_infile;
@@ -89,8 +81,10 @@ class Main
   typedef std::pair<string,string> file_entry;
   std::list<file_entry> file_list;
 
-// this function encapsulates adding an argument to the file_list
-// for the time being, on Win32 only, it also performs filename globbing
+  /**
+   * this function encapsulates adding an argument to the file_list
+   * for the time being, on Win32 only, it also performs filename globbing
+   */
   void AddFileArgument(const string&);
 
 public:
@@ -126,165 +120,163 @@ void Main::HandleArgs(int argc, char **argv)
   bool accepting_options=true;
 
   for(int i=1; i<argc; i++)
+  {
+    string next_arg=argv[i];
+    if(
+   (accepting_options==false) ||
+   (next_arg.substr(0,2)!="--")
+   )
+  {
+    // normally this will be a single file name, but
+    // the function below also encapsulates handling of
+    // globbing (only required under Win32) and
+    // the conventional interpretation of '-' to mean
+    // read a list of files from standard input
+    AddFileArgument(next_arg);
+  }
+    else if(next_arg=="--")
+  {
+    // we support the conventional use of a bare -- to turn
+    // off option processing and allow filenames that look like
+    // options to be accepted
+    accepting_options=false;
+  }
+    else if(next_arg=="--help")
+  {
+    PrintUsage(cout);
+    exit(1);
+  }
+    else
+  {
+    // the options below this point are all of the form --opt=val,
+    // so we parse the argument to find the assignment
+    size_t assignment_pos=next_arg.find("=");
+    if(assignment_pos==string::npos)
     {
-      string next_arg=argv[i];
-      if(
-	 (accepting_options==false) ||
-	 (next_arg.substr(0,2)!="--")
-	 )
-	{
-	  // normally this will be a single file name, but
-	  // the function below also encapsulates handling of
-	  // globbing (only required under Win32) and
-	  // the conventional interpretation of '-' to mean
-	  // read a list of files from standard input
-	  AddFileArgument(next_arg);
-	}
-      else if(next_arg=="--")
-	{
-	  // we support the conventional use of a bare -- to turn
-	  // off option processing and allow filenames that look like
-	  // options to be accepted
-	  accepting_options=false;
-	}
-      else if(next_arg=="--help")
-	{
-	  PrintUsage(cout);
-	  exit(1);
-	}
-      else
-	{
-	  // the options below this point are all of the form --opt=val,
-	  // so we parse the argument to find the assignment
-	  size_t assignment_pos=next_arg.find("=");
-	  if(assignment_pos==string::npos)
-	    {
-	      cerr << "Unexpected option " << next_arg << endl;
-	      PrintUsage(cerr);
-	      exit(2);
-	    }
-	  else
-	    {
-	      string next_opt=next_arg.substr(0,assignment_pos);
-	      string next_val=next_arg.substr(assignment_pos+1);
-
-	      if(next_opt=="--outdir")
-		{
-		  outdir=next_val;
-		}
-	      else if(next_opt=="--db_infile")
-		{
-		  db_infile=next_val;
-		}
-	      else if(next_opt=="--db_outfile")
-		{
-		  db_outfile=next_val;
-		}
-	      else if(next_opt=="--opt_infile")
-		{
-		  opt_infile=next_val;
-		}
-	      else if(next_opt=="--opt_outfile")
-		{
-		  opt_outfile=next_val;
-		}
-	      else if(next_opt=="--html_outfile")
-		{
-		  html_outfile=next_val;
-		}
-	      else if(next_opt=="--xml_outfile")
-		{
-		  xml_outfile=next_val;
-		}
-
-	      else if(next_opt=="--lang")
-		{
-		  lang=next_val;
-		}
-	      else if(next_opt=="--report_mask")
-		{
-		  // The report option may either be an integer flag vector
-		  // in numeric format (including hex) or may be a string of
-		  // characters (see HandleReportOption for what they mean).
-		  HandleReportOption(next_val.c_str());
-		}
-	      else if(next_opt=="--debug_mask")
-		{
-		  // The report option may either be an integer flag vector
-		  // in numeric format (including hex) or may be a string of
-		  // characters (see HandleDebugOption for what they mean).
-		  HandleDebugOption(next_val.c_str());
-		}
-	      else
-		{
-		  cerr << "Unexpected option " << next_opt << endl;
-		  PrintUsage(cerr);
-		  exit(3);
-		}
-	    }
-	}
+      cerr << "Unexpected option " << next_arg << endl;
+      PrintUsage(cerr);
+      exit(2);
     }
+    else
+    {
+      string next_opt=next_arg.substr(0,assignment_pos);
+      string next_val=next_arg.substr(assignment_pos+1);
+
+        if(next_opt=="--outdir")
+    {
+      outdir=next_val;
+    }
+      else if(next_opt=="--db_infile")
+    {
+      db_infile=next_val;
+    }
+      else if(next_opt=="--db_outfile")
+    {
+      db_outfile=next_val;
+    }
+      else if(next_opt=="--opt_infile")
+    {
+      opt_infile=next_val;
+    }
+      else if(next_opt=="--opt_outfile")
+    {
+      opt_outfile=next_val;
+    }
+      else if(next_opt=="--html_outfile")
+    {
+      html_outfile=next_val;
+    }
+      else if(next_opt=="--xml_outfile")
+    {
+      xml_outfile=next_val;
+    }
+      else if(next_opt=="--lang")
+    {
+      lang=next_val;
+    }
+      else if(next_opt=="--report_mask")
+    {
+      // The report option may either be an integer flag vector
+      // in numeric format (including hex) or may be a string of
+      // characters (see HandleReportOption for what they mean).
+      HandleReportOption(next_val.c_str());
+    }
+        else if(next_opt=="--debug_mask")
+    {
+      // The report option may either be an integer flag vector
+      // in numeric format (including hex) or may be a string of
+      // characters (see HandleDebugOption for what they mean).
+      HandleDebugOption(next_val.c_str());
+    }
+      else
+    {
+      cerr << "Unexpected option " << next_opt << endl;
+      PrintUsage(cerr);
+      exit(3);
+        }
+      }
+    }
+  }
 
   // we fill in defaults for things which have not been set
   if(outdir=="")
-    {
-      outdir=".cccc";
-    }
+  {
+    outdir=".cccc";
+  }
   if(db_outfile=="")
-    {
-      db_outfile=outdir+"/cccc.db";
-    }
+  {
+    db_outfile=outdir+"/cccc.db";
+  }
   if(html_outfile=="")
-    {
-      html_outfile=outdir+"/cccc.html";
-    }
+  {
+    html_outfile=outdir+"/cccc.html";
+  }
   if(xml_outfile=="")
-    {
-      xml_outfile=outdir+"/cccc.xml";
-    }
+  {
+    xml_outfile=outdir+"/cccc.xml";
+  }
   if(opt_outfile=="")
-    {
-      opt_outfile=outdir+"/cccc.opt";
-    }
+  {
+    opt_outfile=outdir+"/cccc.opt";
+  }
 
   // the other strings all default to empty values
 
-
   if(opt_infile=="")
-    {
-      CCCC_Options::Load_Options();
+  {
+    CCCC_Options::Load_Options();
 
-      // save the options so that they can be edited
-      CCCC_Options::Save_Options(opt_outfile);
-    }
+    /** save the options so that they can be edited */
+    CCCC_Options::Save_Options(opt_outfile);
+  }
   else
-    {
-      CCCC_Options::Load_Options(opt_infile);
-    }
+  {
+    CCCC_Options::Load_Options(opt_infile);
+  }
 }
 
 void Main::AddFileArgument(const string& file_arg)
 {
   if(file_arg=="-")
+  {
+    /*
+    ** add files listed on standard input to the list of files
+    ** to be processed
+    */
+    while(!std::cin.eof())
     {
-      /*
-      ** add files listed on standard input to the list of files
-      ** to be processed
-      */
-      while(!std::cin.eof())
-	{
-	  string filename;
-	  std::cin >> filename;
-	  file_entry file_entry(filename,lang);
-	  file_list.push_back(file_entry);
-	}
-    }
-  else
-    {
-      file_entry file_entry(file_arg,lang);
+      string filename;
+      std::cin >> filename;
+      file_entry file_entry(filename,lang);
       file_list.push_back(file_entry);
-      cout << file_arg << endl;
     }
+  }
+  else
+  {
+    file_entry file_entry(file_arg,lang);
+    file_list.push_back(file_entry);
+    cout << file_arg << endl;
+  }
 }
 
 
@@ -297,124 +289,123 @@ int Main::ParseFiles()
 
   std::list<file_entry>::iterator file_iterator=file_list.begin();
   while(file_iterator!=file_list.end())
+  {
+    const file_entry &entry=*file_iterator;
+
+    string filename=entry.first;
+    string file_language=entry.second;
+    ParseStore ps(filename);
+
+    // The following objects are used to assist in the parsing
+    // process.
+
+    if(file_language.size()==0)
     {
-	  const file_entry &entry=*file_iterator;
+      file_language=CCCC_Options::getFileLanguage(filename);
+    }
 
-      string filename=entry.first;
-      string file_language=entry.second;
-      ParseStore ps(filename);
+    // CCCC supports a convention that the language may include an
+    // embedded '.', in which case the part before the . controls
+    // which parser runs, while the whole can be examined inside
+    // the parser to check for special dialect handling.
+    unsigned int period_pos=file_language.find(".");
+    string base_language=file_language.substr(0,period_pos);
 
-      // The following objects are used to assist in the parsing
-      // process.
+    f=fopen(filename.c_str(),"r");
+    if( f == NULL )
+    {
+      cerr << "Couldn't open " << filename << endl;
+    } else {
+      DLGFileInput in(f);
 
-      if(file_language.size()==0)
-	{
-	  file_language=CCCC_Options::getFileLanguage(filename);
-	}
+      // show progress
+      cerr << "Processing " << filename;
 
-      // CCCC supports a convention that the language may include an
-      // embedded '.', in which case the part before the . controls
-      // which parser runs, while the whole can be examined inside
-      // the parser to check for special dialect handling.
-      unsigned int period_pos=file_language.find(".");
-      string base_language=file_language.substr(0,period_pos);
-
-      f=fopen(filename.c_str(),"r");
-      if( f == NULL )
-	{
-	  cerr << "Couldn't open " << filename << endl;
-	} else {
-	  DLGFileInput in(f);
-
-	  // show progress
-	  cerr << "Processing " << filename;
-
-	  // The first case is just to allow symetric handling
-	  // of the optional inclusion of support for each language
-	  if(0)
-	    {
-	    }
+      // The first case is just to allow symetric handling
+      // of the optional inclusion of support for each language
+      if(0)
+      {
+      }
 #ifdef CC_INCLUDED
-	  else if(
-	     (base_language=="c++") ||
-	     (base_language=="c")
-	     )
-	    {
-	      cerr << " as C/C++ (" << file_language << ")"
-		   << endl;
+      else if(
+       (base_language=="c++") ||
+       (base_language=="c")
+       )
+      {
+        cerr << " as C/C++ (" << file_language << ")" << endl;
 
-	      CLexer theLexer(&in);
-	      ANTLRTokenBuffer thePipe(&theLexer);
-	      theLexer.setToken(&currentLexerToken);
-	      CParser theParser(&thePipe);
-	      ParseUtility pu(&theParser);
+        CLexer theLexer(&in);
+        ANTLRTokenBuffer thePipe(&theLexer);
+        theLexer.setToken(&currentLexerToken);
+        CParser theParser(&thePipe);
+        ParseUtility pu(&theParser);
 
-	      theParser.init(filename,file_language);
+        theParser.init(filename,file_language);
 
-	      // This function turns of the annoying "guess failed" messages
-	      // every time a syntactic predicate fails.
-	      // This message is enabled by default when PCCTS is run with
-	      // tracing turned on (as it is by default in this application).
-	      // In the current case this is inappropriate as the C++ parser
-	      // uses guessing heavily to break ambiguities, and we expect
-	      // large numbers of guesses to be tested and to fail.
-	      // This message and the flag which gates it were added around
-	      // PCCTS 1.33 MR10.
-	      // If you are building with an earlier version, this line should
-	      // cause an error and can safely be commented out.
-	      theParser.traceGuessOption(-1);
+        // This function turns of the annoying "guess failed" messages
+        // every time a syntactic predicate fails.
+        // This message is enabled by default when PCCTS is run with
+        // tracing turned on (as it is by default in this application).
+        // In the current case this is inappropriate as the C++ parser
+        // uses guessing heavily to break ambiguities, and we expect
+        // large numbers of guesses to be tested and to fail.
+        // This message and the flag which gates it were added around
+        // PCCTS 1.33 MR10.
+        // If you are building with an earlier version, this line should
+        // cause an error and can safely be commented out.
+        theParser.traceGuessOption(-1);
 
-	      theParser.start();
-              files_parsed++;
-	    }
+        theParser.start();
+        files_parsed++;
+      }
 #endif // CC_INCLUDED
 #ifdef JAVA_INCLUDED
-	  else if(base_language=="java")
-	    {
-	      cerr << " as Java" << endl;
+      else if(base_language=="java")
+      {
+        cerr << " as Java" << endl;
 
-	      JLexer theLexer(&in);
-	      ANTLRTokenBuffer thePipe(&theLexer);
-	      theLexer.setToken(&currentLexerToken);
-	      JParser theParser(&thePipe);
-	      theParser.init(filename,file_language);
-	      theParser.traceGuessOption(-1);
-	      theParser.compilationUnit();
-              files_parsed++;
-	    }
+        JLexer theLexer(&in);
+        ANTLRTokenBuffer thePipe(&theLexer);
+        theLexer.setToken(&currentLexerToken);
+        JParser theParser(&thePipe);
+        theParser.init(filename,file_language);
+        theParser.traceGuessOption(-1);
+        theParser.compilationUnit();
+        files_parsed++;
+      }
 #endif // JAVA_INCLUDED
 #ifdef ADA_INCLUDED
-	  else if(base_language=="ada")
-	    {
-	      cerr << " as Ada" << endl;
+      else if(base_language=="ada")
+      {
+        cerr << " as Ada" << endl;
 
-	      ALexer theLexer(&in);
-	      ANTLRTokenBuffer thePipe(&theLexer);
-	      theLexer.setToken(&currentLexerToken);
-	      AdaPrser theParser(&thePipe);
-	      theParser.init(filename,file_language);
-	      theParser.traceGuessOption(-1);
-	      theParser.goal_symbol();
-              files_parsed++;
-	    }
+        ALexer theLexer(&in);
+        ANTLRTokenBuffer thePipe(&theLexer);
+        theLexer.setToken(&currentLexerToken);
+        AdaPrser theParser(&thePipe);
+        theParser.init(filename,file_language);
+        theParser.traceGuessOption(-1);
+        theParser.goal_symbol();
+        files_parsed++;
+      }
 #endif // ADA_INCLUDED
-	  else if(base_language=="")
-	  {
-		cerr << " - no parseable language identified";
-	  }
-	  else
-	    {
-	      cerr << "Unexpected language " << base_language.c_str()
-		   << " (" << file_language.c_str()
-		   << ") for file " << filename.c_str() << endl;
-	    }
+      else if(base_language=="")
+      {
+        cerr << " - no parseable language identified";
+      }
+      else
+      {
+        cerr << "Unexpected language " << base_language.c_str()
+       << " (" << file_language.c_str()
+       << ") for file " << filename.c_str() << endl;
+      }
 
-	  // close the file
-	  fclose(f);
-	}
-
-      file_iterator++;
+      // close the file
+      fclose(f);
     }
+
+    file_iterator++;
+  }
 
   return 0;
 }
@@ -429,10 +420,10 @@ int Main::LoadDatabase()
 {
   int retval=0;
   if(db_infile!="")
-    {
-      ifstream infile(db_infile.c_str());
-      retval=prj->FromFile(infile);
-    }
+  {
+    ifstream infile(db_infile.c_str());
+    retval=prj->FromFile(infile);
+  }
   return retval;
 }
 
@@ -441,7 +432,6 @@ void Main::GenerateHtml()
   cerr << endl << "Generating HTML reports" << endl;
 
   CCCC_Html_Stream::GenerateReports(prj,report_mask,html_outfile,outdir);
-
 }
 
 void Main::GenerateXml()
@@ -449,51 +439,52 @@ void Main::GenerateXml()
   cerr << endl << "Generating XML reports" << endl;
 
   CCCC_Xml_Stream::GenerateReports(prj,report_mask,xml_outfile,outdir);
-
 }
 
+/**
+ * \param arg may either be a number, or a string of letters denoting
+ * facilities to be debugged.
+ * the string of letters is the public way - allowing input of a
+ * number is just there to support quickly adding a category of
+ * debug messages without having to change this file immediately
+ */
 void Main::HandleDebugOption(const string& arg)
 {
-  /*
-  ** arg may either be a number, or a string of letters denoting
-  ** facilities to be debugged.
-  ** the string of letters is the public way - allowing input of a
-  ** number is just there to support quickly adding a category of
-  ** debug messages without having to change this file immediately
-  */
   DebugMask=atoi(arg.c_str());
   for (int i=0; arg[i]!='\0'; i++)
-    {
-      switch (arg[i]) {
-      case 'p' :
-	DebugMask |= PARSER;
-	break;
+  {
+    switch (arg[i]) {
+    case 'p' :
+      DebugMask |= PARSER;
+      break;
 
-      case 'l' :
-	DebugMask |= LEXER;
-	break;
+    case 'l' :
+      DebugMask |= LEXER;
+      break;
 
-      case 'c' :
-	DebugMask |= COUNTER;
-	break;
+    case 'c' :
+      DebugMask |= COUNTER;
+      break;
 
-      case 'm' :
-	DebugMask |= MEMORY;
-	break;
+    case 'm' :
+      DebugMask |= MEMORY;
+      break;
 
-      case 'x' :
-      case 'X' :
-	DebugMask = 0xFF;
-	break;
-      }
+    case 'x' :
+    case 'X' :
+      DebugMask = 0xFF;
+      break;
     }
+  }
 }
 
+
+/**
+ * \param arg may either be a number, or a string of letters denoting
+ * reports to be generated
+ */
 void Main::HandleReportOption(const string& arg) {
-  /*
-  ** arg may either be a number, or a string of letters denoting
-  ** reports to be generated
-  */
+
   report_mask=atoi(arg.c_str());
   for (int i=0; arg[i]!='\0'; i++) {
     switch (arg[i]) {
@@ -587,36 +578,38 @@ void Main::PrintCredits(ostream& os)
     "code distribution for details.",
     NULL
   };
+
   const char **string_ptr=credit_strings;
+
   while(*string_ptr!=NULL)
-    {
-      os << *string_ptr << endl;
-      string_ptr++;
-    }
+  {
+    os << *string_ptr << endl;
+    string_ptr++;
+  }
 }
 
 void Main::DescribeOutput()
 {
   if(files_parsed>0)
   {
-      // make sure the user knows where the real output went
-      // make sure the user knows where the real output went
-      cerr << endl
-           << "Primary HTML output is in " << html_outfile << endl;
-      if(report_mask & rtSEPARATE_MODULES)
-      {
-         cerr << "Detailed HTML reports on modules and source are in " << outdir << endl;
-      }
-      cerr << "Primary XML output is in " << xml_outfile << endl ;
-      if(report_mask & rtSEPARATE_MODULES)
-      {
-         cerr << "Detailed XML reports on modules are in " << outdir << endl;
-      }
-      cerr << "Database dump is in " << db_outfile << endl << endl;
+    // make sure the user knows where the real output went
+    // make sure the user knows where the real output went
+    cerr << endl
+         << "Primary HTML output is in " << html_outfile << endl;
+    if(report_mask & rtSEPARATE_MODULES)
+    {
+      cerr << "Detailed HTML reports on modules and source are in " << outdir << endl;
+    }
+    cerr << "Primary XML output is in " << xml_outfile << endl ;
+    if(report_mask & rtSEPARATE_MODULES)
+    {
+      cerr << "Detailed XML reports on modules are in " << outdir << endl;
+    }
+    cerr << "Database dump is in " << db_outfile << endl << endl;
   }
   else
   {
-      cerr << endl << "No files parsed on this run" << endl << endl;
+    cerr << endl << "No files parsed on this run" << endl << endl;
   }
 }
 
@@ -652,12 +645,14 @@ void Main::PrintUsage(ostream& os)
     "extension/language mapping and metric treatment thresholds.",
     NULL
   };
+
   const char **string_ptr=usage_strings;
+
   while(*string_ptr!=NULL)
-    {
-      os << *string_ptr << endl;
-      string_ptr++;
-    }
+  {
+    os << *string_ptr << endl;
+    string_ptr++;
+  }
 }
 
 int Main::filesParsed()
@@ -683,13 +678,13 @@ int main(int argc, char **argv)
 
   if(app->filesParsed()>0)
   {
-      prj->reindex();
-      mkdir(app->outdir.c_str(),0777);
-      app->DumpDatabase();
+    prj->reindex();
+    mkdir(app->outdir.c_str(),0777);
+    app->DumpDatabase();
 
-      // generate html output
-      app->GenerateHtml();
-      app->GenerateXml();
+    // generate html output
+    app->GenerateHtml();
+    app->GenerateXml();
   }
 
   app->DescribeOutput();

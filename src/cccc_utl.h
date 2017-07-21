@@ -70,7 +70,9 @@ enum Visibility {
   vPUBLIC='0',vPROTECTED='1',vPRIVATE='2',vIMPLEMENTATION='3',
   vDONTKNOW='?',vDONTCARE='X',vINVALID='*'
 };
+
 ostream& operator << (ostream&, Visibility);
+
 istream& operator >> (istream&, Visibility&);
 
 enum AugmentedBool {
@@ -168,7 +170,7 @@ class ParseUtility {
   void tracein(const char *rulename, int guessing, ANTLRAbstractToken *tok);
   void traceout(const char *rulename, int guessing, ANTLRAbstractToken *tok);
   void syn(_ANTLRTokenPtr tok, ANTLRChar *egroup, SetWordType *eset,
-	   ANTLRTokenType etok, int k);
+     ANTLRTokenType etok, int k);
 
   // this method consolidates the text of the next n tokens of lookahead
   string lookahead_text(int n);
@@ -177,8 +179,8 @@ class ParseUtility {
   // depth from the specified token class, and uses them as a marker to
   // resynchronise the parser
   void resynchronize(
-		     int initial_nesting, SetWordType *resync_token_class,
-		     ANTLRTokenPtr& resync_token);
+         int initial_nesting, SetWordType *resync_token_class,
+         ANTLRTokenPtr& resync_token);
 
   // This utility function is used to create
   // a composite scope name from a qualifier scope
@@ -219,6 +221,8 @@ enum LexicalCount { tcCOMLINES, tcCODELINES, tcMCCABES_VG, tcLAST };
 
 
 /**
+ * This class is used by the lexer.
+ *
  * The ParseStore class encapsulates all information storage
  * requirements related to the parser, and also manages
  * the process of feeding that information to the database
@@ -243,35 +247,40 @@ class ParseStore
 
   // each of the functions below writes one or more records into
   // the database of code
+
   void record_module_extent(int startLine, int endLine,
-			    const string& moduleName,
-			    const string& moduleType,
-			    const string& description,
-			    UseType ut);
+          const string& moduleName,
+          const string& moduleType,
+          const string& description,
+          UseType ut);
+
   void record_function_extent(int startLine, int endLine,
-			      const string& returnType,
-			      const string& moduleName,
-			      const string& memberName,
-			      const string& paramList,
-			      const string& description,
-			      Visibility visibility,
-			      UseType ut);
+            const string& returnType,
+            const string& moduleName,
+            const string& memberName,
+            const string& paramList,
+            const string& description,
+            Visibility visibility,
+            UseType ut);
+
   void record_userel_extent(int startLine, int endLine,
-			    const string& clientName,
-			    const string& memberName,
-			    const string& serverName,
-			    const string& description,
-			    Visibility visibility,
-			    UseType ut);
+          const string& clientName,
+          const string& memberName,
+          const string& serverName,
+          const string& description,
+          Visibility visibility,
+          UseType ut);
+
   void record_other_extent(int startLine, int endLine,
-			      const string& description);
+            const string& description);
+
   void record_file_balance_extent(string);
 
   // Each of the record_XXX methods above uses this function to
   // add an extent record.
   void insert_extent(CCCC_Item&, int, int,
-		     const string&, const string&,
-		     UseType, bool allocate_lexcounts);
+         const string&, const string&,
+         UseType, bool allocate_lexcounts);
 
   // the class maintains a number of strings and flags which reflect
   // the most recently recognized module, member, type (with and without
@@ -289,9 +298,12 @@ class ParseStore
   // and assignment operator to allow us to save state in the
   // parser.
 
-  // Only one instance of this class should exist at any time.
-  // This method allows the parsers and lexers to access the instance.
+  /**
+   * Only one instance of this class should exist at any time.
+   * This method allows the parsers and lexers to access the instance.
+   */
   static ParseStore *currentInstance() { return theCurrentInstance; }
+
  private:
   static ParseStore *theCurrentInstance;
 
