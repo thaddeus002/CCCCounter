@@ -273,6 +273,7 @@ void CCCC_Project::reindex()
           break;
         default:
           // nothing to do
+          ;
         }
 
         switch(extent_ptr->get_usetype())
@@ -291,6 +292,7 @@ void CCCC_Project::reindex()
           break;
         default:
           // nothing to do
+          ;
         }
 
         extent_ptr=userel_ptr->extent_table.next_item();
