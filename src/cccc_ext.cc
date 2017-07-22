@@ -47,7 +47,7 @@ CCCC_Extent::CCCC_Extent(CCCC_Item& is)
      is.Extract(count_buffer) &&
      is.Extract(v_as_char) &&
      is.Extract(ut_as_char)
-     ) 
+     )
     {
       v=(Visibility) v_as_char;
       ut=(UseType) ut_as_char;
@@ -65,7 +65,7 @@ CCCC_Extent::CCCC_Extent(CCCC_Item& is)
 int CCCC_Extent::AddToItem(CCCC_Item& item)
 {
   int retval=FALSE;
-  
+
   if(
      item.Insert(filename) &&
      item.Insert(linenumber) &&
@@ -105,7 +105,7 @@ int CCCC_Extent::GetFromItem(CCCC_Item &item)
 }
 
 
-string CCCC_Extent::name(int level) const
+string CCCC_Extent::name(ExtentNameLevel_t level) const
 {
   string rtnbuf;
 
@@ -122,8 +122,7 @@ string CCCC_Extent::name(int level) const
     case nlDESCRIPTION:
       rtnbuf=description;
       break;
-    case nlSEARCH:
-    case nlRANK:
+    case nlKEY:
       // Extents have no meaningful internal primary key.
       // We never want two extents to have the same
       // key, so we use the running number extkey
@@ -140,11 +139,12 @@ string CCCC_Extent::name(int level) const
       rtnbuf+=":";
       rtnbuf+=linenumber;
     }
+
   return rtnbuf.c_str();
 }
 
 string CCCC_Extent::key() const {
-    return name(nlRANK);
+    return name(nlKEY);
 }
 
 int CCCC_Extent::get_count(const char* count_tag) {
@@ -156,9 +156,9 @@ int CCCC_Extent::get_count(const char* count_tag) {
     {
       count_value_ptr=strtok(NULL," ");
       if(strcmp(count_tag_ptr, count_tag) ==0)
-	{
-	  retval+=atoi(count_value_ptr);
-	}
+      {
+        retval+=atoi(count_value_ptr);
+      }
       count_tag_ptr=strtok(NULL,":");
     }
   return retval;

@@ -19,6 +19,7 @@
 
 /**
  * \file cccc_ext.h
+ * \brief declaration of class CCCC_Extent
  */
 
 #ifndef CCCC_EXT_H
@@ -35,7 +36,7 @@ using std::string;
  * Identifie a parametre of the objet.
  * To use with CCCC_Extent::name()
  */
-enum ExtentNameLevel { nlFILENAME=-1, nlLINENUMBER=-2, nlDESCRIPTION=-3};
+typedef enum ExtentNameLevel { nlFILENAME=-1, nlLINENUMBER=-2, nlDESCRIPTION=-3, nlKEY=0} ExtentNameLevel_t;
 
 
 /**
@@ -54,6 +55,7 @@ class CCCC_Extent
   Visibility v;
 
   // internal data
+
   /** this is for initialyse extkey */
   static unsigned int nextkey;
   /** instance index */
@@ -68,7 +70,7 @@ class CCCC_Extent
    * Get an element of the objet
    * \param level which element to return : ExtentNameLevel, nlRANK, nlSEARCH (enum NameLevel)
    */
-  string name(int level) const;
+  string name(ExtentNameLevel_t level) const;
 
   /**
    * \return an unique key for this object.
@@ -80,7 +82,6 @@ class CCCC_Extent
 
   /** Add the infos of this objet to an item */
   int AddToItem(CCCC_Item& item);
-
 
   int get_count(const char *count_tag);
 
