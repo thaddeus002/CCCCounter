@@ -26,9 +26,10 @@
 // use relationships are being handled.
 #define DEBUG_USEREL 0
 
-#include "cccc.h"
 
+#include "cccc.h"
 #include "cccc_itm.h"
+#include "cccc_tok.h"
 #include "cccc_prj.h"
 #include "cccc_db.h"
 

@@ -37,6 +37,8 @@
 
 #include <map>
 #include <vector>
+
+#include "cccc_extent_utils.h"
 #include "cccc.h"
 #include "cccc_tok.h"
 #include "cccc_itm.h"
@@ -66,60 +68,6 @@ enum Language { lAUTO, lCPLUSPLUS, lANSIC, lJAVA, lADA };
 
 extern Language global_language, file_language;
 
-enum Visibility {
-  vPUBLIC='0',vPROTECTED='1',vPRIVATE='2',vIMPLEMENTATION='3',
-  vDONTKNOW='?',vDONTCARE='X',vINVALID='*'
-};
-
-ostream& operator << (ostream&, Visibility);
-
-istream& operator >> (istream&, Visibility&);
-
-enum AugmentedBool {
-  abFALSE='F', abTRUE='T', abDONTKNOW='?', abDONTCARE='X', abINVALID='*'
-};
-ostream& operator << (ostream& os, AugmentedBool ab);
-istream& operator >> (istream& is, AugmentedBool& ab);
-
-enum UseType {
-  utDECLARATION='D', utDEFINITION='d',  // of methods and classes
-  utINHERITS='I',                       // inheritance, including Java
-  // extends and implements relations
-  utHASBYVAL='H', utHASBYREF='h',       // class data member
-  utPARBYVAL='P', utPARBYREF='p',       // method parameter or return value
-  utVARBYVAL='V', utVARBYREF='v',       // local variable within a method
-  utTEMPLATE_NAME='T',                  // typedef alias for a template
-  utTEMPLATE_TYPE='t',                  // type over which a template is
-  // instantiated
-  utINVOKES='i',                        // C function invocation
-  utREJECTED='r',                       // for extents rejected by the parser
-  utWITH='w',                           // Ada 'with' keyword context
-  utDONTKNOW='?', utDONTCARE='X', utINVALID='*'
-};
-
-// the parse state object consists of a number of strings representing
-// knowledge about the identification of the source code object currently
-// being processed, a number of flags of type AugmentedBool, and
-// items representing knowledge about the
-// concerning the object's nature, and also its visibility
-
-enum PSString {
-  pssFILE, pssRULE, pssFLAGS, // the context of the parse
-  pssMODTYPE, pssMODULE,      // the syntactic class and name of the module
-  pssUTYPE,                    // unqualified type of the current member
-  pssINDIR,                   // indirection associated with the type above
-  pssITYPE,                   // type qualified with indirection
-  pssMEMBER, pssPARAMS,       // name, parameter list of a member
-  pssDESCRIPTION,             // textual description of the relationship type
-  pssLAST                     // used to dimension the array
-};
-
-enum PSFlag {
-  psfCONST, psfSTATIC, psfEXTERN, psfVIRTUAL, // AugmentedBool
-  psfVISIBILITY,                              // Visibility
-  psfLAST                                     // used to dimension the array
-};
-enum PSVerbosity { psvSILENT, psvQUIET, psvLOUD };
 
 #define MAX_STACK_DEPTH 1000
 

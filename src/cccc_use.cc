@@ -24,7 +24,7 @@
  */
 
 #include "cccc.h"
-
+#include "cccc_tok.h"
 #include "cccc_itm.h"
 #include "cccc_use.h"
 #include "cccc_db.h"
@@ -133,14 +133,14 @@ int CCCC_UseRelationship::get_count(const char* count_tag)
       {
         case 0:
           retval=1;
-	  break;
+    break;
 
         case 'v':
           if(visible!=abFALSE)
           {
             retval=1;
           }
-	  break;
+    break;
 
         case 'c':
           if(concrete!=abFALSE)
@@ -149,7 +149,7 @@ int CCCC_UseRelationship::get_count(const char* count_tag)
           }
           break;
 
-	default:
+  default:
           cerr << "Unexpected count tag suffix" << count_tag << endl;
       }
     }

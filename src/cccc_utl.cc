@@ -16,11 +16,15 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-// cccc_utl.cc
 
-// implementation of enumerations and utility classes for CCCC
-// includes the Parse_Utility class which is a helper to centralise
-// error recovery and recording facilities across the three parsers
+/**
+ * \file cccc_utl.cc
+ *
+ * implementation of enumerations and utility classes for CCCC
+ * includes the Parse_Utility class which is a helper to centralise
+ * error recovery and recording facilities across the three parsers
+ */
+
 #include "cccc.h"
 
 #include "cccc_itm.h"
@@ -45,9 +49,9 @@ using std::resetiosflags;
 #define RS "\n"
 
 string ParseUtility::stack_rules[MAX_STACK_DEPTH];
-int         ParseUtility::stack_tokenline[MAX_STACK_DEPTH];
+int    ParseUtility::stack_tokenline[MAX_STACK_DEPTH];
 string ParseUtility::stack_tokentext[MAX_STACK_DEPTH];
-int         ParseUtility::stack_depth;
+int    ParseUtility::stack_depth;
 
 ParseUtility* ParseUtility::theCurrentInstance=NULL;
 ParseStore* ParseStore::theCurrentInstance=NULL;
@@ -136,7 +140,7 @@ void ParseUtility::resynchronize(int initial_nesting,
   {
     parser->consumeUntil(resync_token_class);
     if(
-	(MY_TOK(parser->LT(1))->getNestingLevel() > initial_nesting) &&
+  (MY_TOK(parser->LT(1))->getNestingLevel() > initial_nesting) &&
         (parser->LT(2) != NULL)
         )
     {
@@ -516,8 +520,7 @@ void ParseUtility::tracein(
   rectrace(rulename,"-> ",guessing,tok);
 }
 
-void ParseUtility::traceout(const char *rulename,
-          int guessing,
+void ParseUtility::traceout(const char *rulename, int guessing,
           ANTLRAbstractToken *tok)
 {
   if(guessing == 0)
@@ -536,7 +539,7 @@ void ParseUtility::traceout(const char *rulename,
       cerr << "ParseStore::traceout rule name mismatch - "
          << rulename << "!=" << stack_rules[stack_depth] << endl;
     }
-    
+
     stack_tokentext[stack_depth]="";
     stack_tokenline[stack_depth]=0;
     stack_rules[stack_depth]="";

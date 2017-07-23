@@ -25,6 +25,8 @@
 #ifndef __CCCC_TOK_H
 #define __CCCC_TOK_H
 
+#include <ostream>
+using std::ostream;
 
 // before we go into the token header file, the compiler must have seen
 // a definition for enum ANTLRTokenType
@@ -71,8 +73,8 @@ class ANTLRToken : public ANTLRCommonToken {
   virtual ~ANTLRToken();
 
   virtual ANTLRAbstractToken *makeToken(ANTLRTokenType tt,
-					ANTLRChar *txt,
-					int line);
+          ANTLRChar *txt,
+          int line);
 
   static void IncrementNesting() { RunningNesting++; }
   static void DecrementNesting() { RunningNesting--; }
