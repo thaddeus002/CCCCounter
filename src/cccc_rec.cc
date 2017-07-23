@@ -42,30 +42,30 @@ void CCCC_Record::merge_flags(string& new_flags)
   const char *flag_array=flags.c_str();
   unsigned int len=strlen(flag_array);
   if(strlen(new_flag_array)==len)
+  {
+    char buf[100];
+    unsigned int i;
+    for(i=0; i<len;i++)
     {
-      char buf[100];
-      unsigned int i;
-      for(i=0; i<len;i++)
-	{
-	  if(flag_array[i]=='?')
-	    {
-	      buf[i]=new_flag_array[i];
-	    }
-	  else
-	    {
-	      buf[i]=flag_array[i];
-	    }
-	}
-      buf[len]='\0';
-      flags=buf;
+      if(flag_array[i]=='?')
+      {
+        buf[i]=new_flag_array[i];
+      }
+      else
+      {
+        buf[i]=flag_array[i];
+      }
     }
+    buf[len]='\0';
+    flags=buf;
+  }
   else
-    {
-      // if the parent record has just been created it may have
-      // an empty flags member, so we use Resolve_Fields to copy
-      // the flags from the first extent
-      Resolve_Fields(flags,new_flags);
-    }
+  {
+    // if the parent record has just been created it may have
+    // an empty flags member, so we use Resolve_Fields to copy
+    // the flags from the first extent
+    Resolve_Fields(flags,new_flags);
+  }
 }
 
 void CCCC_Record::add_extent(CCCC_Item& is)
@@ -78,12 +78,6 @@ void CCCC_Record::add_extent(CCCC_Item& is)
       delete new_extent;
     }
 }
-
-
-string CCCC_Record::name(int level) const {
-    return "";
-}
-
 
 string CCCC_Record::key() const {
     return name(nlRANK);

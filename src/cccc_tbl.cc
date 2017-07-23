@@ -138,7 +138,7 @@ template <class T> T* CCCC_Table<T>::first_item()
 }
 
 /**
- * \return the next item of the table.
+ * \return the next item of the table or NULL if there are no more.
  */
 template <class T> T* CCCC_Table<T>::next_item()
 {

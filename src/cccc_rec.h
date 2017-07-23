@@ -37,23 +37,25 @@
  * Subclasses may also have particular other names, which should be defined
  * using negative indexes.
  */
-enum NameLevel { nlRANK, nlSEARCH, nlSIMPLE, nlLOCAL, nlGLOBAL };
+typedef enum NameLevel { nlRANK, nlSEARCH, nlSIMPLE, nlLOCAL, nlGLOBAL } NameLevel_t;
 
 class CCCC_Record
 {
   friend class CCCC_Html_Stream;
   friend class CCCC_Xml_Stream;
   static CCCC_Project *active_project;
+
  protected:
   typedef CCCC_Table<CCCC_Extent> Extent_Table;
   Extent_Table extent_table;
   string flags;
   virtual void merge_flags(string& new_flags);
+
  public:
 
   virtual ~CCCC_Record() {}
 
-  virtual string name(int level) const;
+  virtual string name(int level) const = 0;
 
   virtual string key() const;
 

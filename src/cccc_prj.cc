@@ -411,3 +411,6 @@ int CCCC_Project::FromFile(ifstream& ifstr)
 }
 
 
+string CCCC_Project::name(int level) const {
+    return "";
+}

@@ -134,6 +134,7 @@ string CCCC_Extent::name(ExtentNameLevel_t level) const
       break;
 
     default:
+      // This can not happen
       rtnbuf+=filename;
       rtnbuf+=":";
       rtnbuf+=linenumber;
@@ -162,6 +163,3 @@ int CCCC_Extent::get_count(const char* count_tag) {
     }
   return retval;
 }
-
-
-

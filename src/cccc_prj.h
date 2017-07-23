@@ -102,6 +102,9 @@ class CCCC_Project : public CCCC_Record
 
   void set_option(string key, CCCC_Item& option_data_line);
   int get_option(string key, CCCC_Item& option_data_line);
+
+  // declared in CCCC_Record
+  virtual string name(int level) const;
 };
 
 #endif // CCCC_PRJ_H
