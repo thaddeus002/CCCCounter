@@ -68,7 +68,7 @@ class CCCC_Extent
 
   /**
    * Get an element of the objet
-   * \param level which element to return : ExtentNameLevel, nlRANK, nlSEARCH (enum NameLevel)
+   * \param level which element to return
    */
   string name(ExtentNameLevel_t level) const;
 

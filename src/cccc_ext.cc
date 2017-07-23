@@ -21,10 +21,9 @@
  * \file cccc_ext.cc
  */
 
-#include "cccc_itm.h"
+
 #include "cccc_ext.h"
-#include "cccc_db.h"
-#include "cccc_utl.h"
+
 
 unsigned int CCCC_Extent::nextkey=0;
 

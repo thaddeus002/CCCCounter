@@ -28,6 +28,15 @@
 using std::ostream;
 using std::istream;
 
+
+#ifndef TRUE
+#define TRUE 1
+#endif
+#ifndef FALSE
+#define FALSE 0
+#endif
+
+
 enum Visibility {
   vPUBLIC='0',vPROTECTED='1',vPRIVATE='2',vIMPLEMENTATION='3',
   vDONTKNOW='?',vDONTCARE='X',vINVALID='*'
