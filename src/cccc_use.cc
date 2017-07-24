@@ -205,9 +205,9 @@ int CCCC_UseRelationship::ToFile(ofstream& ofstr)
   return retval;
 }
 
-int CCCC_UseRelationship::FromFile(ifstream& ifstr)
+GeneralFromFileStatuses_t CCCC_UseRelationship::FromFile(ifstream& ifstr)
 {
-  int retval;
+  GeneralFromFileStatuses_t retval;
   CCCC_Item next_line;
   next_line.FromFile(ifstr);
   ifstr_line++;

@@ -39,6 +39,31 @@
  */
 typedef enum NameLevel { nlRANK, nlSEARCH, nlSIMPLE, nlLOCAL, nlGLOBAL } NameLevel_t;
 
+/**
+ * The various FromFile functions need to indicate to their
+ * caller their status, particularly because the caller will have
+ * allocated an instance of the incoming class on the heap, and needs
+ * to know whether it has to delete it.  There are two 'normal' outcomes
+ * plus a potentially infinite range of possible application error
+ * conditions.  The normal conditions are where the new instance is
+ * the first encountered of this module/member/relationship/whatever
+ * and the allocated item has been added to the database and must not
+ * be deleted, and when the new instance is of a previously encountered
+ * entity, and the information from the new record has been transcribed
+ * and merged into the instance in the database, and the locally allocated
+ * instance must be deleted.
+ */
+typedef enum GeneralFromFileStatuses
+{
+  RECORD_TRANSCRIBED = 0,
+  RECORD_ADDED       = 1,
+  RECORD_ERROR       = 2,
+  // error conditions may return RECORD_ERROR, or may use a distinctive
+  // value defined as a literal
+  /** Status specific to CCCC_Member objects */
+  MEMBER_RECORD_NO_PARENT_FOUND=3
+} GeneralFromFileStatuses_t;
+
 class CCCC_Record
 {
   friend class CCCC_Html_Stream;
@@ -48,6 +73,7 @@ class CCCC_Record
  protected:
   typedef CCCC_Table<CCCC_Extent> Extent_Table;
   Extent_Table extent_table;
+  /** PSFlags as AugmentedBool : a char by flags */
   string flags;
   virtual void merge_flags(string& new_flags);
 
@@ -69,7 +95,6 @@ class CCCC_Record
 
   virtual int get_count(const char *count_tag)=0;
 
-  friend int rank_by_string(const void *p1, const void *p2);
 
   // getters et setters
 

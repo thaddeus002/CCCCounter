@@ -61,7 +61,7 @@ public:
 
   string name(int name_level) const;
 
-  int FromFile(ifstream& infile);
+  GeneralFromFileStatuses_t FromFile(ifstream& infile);
   int ToFile(ofstream& outfile);
 
   virtual int get_count(const char *count_tag);

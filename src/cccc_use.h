@@ -47,7 +47,7 @@ class CCCC_UseRelationship : public CCCC_Record
    * \param is item @client@member@supplier
    */
   CCCC_UseRelationship(CCCC_Item& is);
-  int FromFile(ifstream& infile);
+  GeneralFromFileStatuses_t FromFile(ifstream& infile);
   int ToFile(ofstream& outfile);
   void add_extent(CCCC_Item&);
   int get_count(const char *count_tag);

@@ -30,26 +30,7 @@
 #include "cccc_mem.h"
 #include "cccc_use.h"
 
-// The various FromFile functions need to indicate to their
-// caller their status, particularly because the caller will have
-// allocated an instance of the incoming class on the heap, and needs
-// to know whether it has to delete it.  There are two 'normal' outcomes
-// plus a potentially infinite range of possible application error
-// conditions.  The normal conditions are where the new instance is
-// the first encountered of this module/member/relationship/whatever
-// and the allocated item has been added to the database and must not
-// be deleted, and when the new instance is of a previously encountered
-// entity, and the information from the new record has been transcribed
-// and merged into the instance in the database, and the locally allocated
-// instance must be deleted.
-typedef enum GeneralFromFileStatuses
-{
-  RECORD_TRANSCRIBED = 0,
-  RECORD_ADDED       = 1,
-  RECORD_ERROR       = 2
-  // error conditions may return RECORD_ERROR, or may use a distinctive
-  // value defined as a literal
-} GeneralFromFileStatuses_t;
+
 
 /**
  * This function provides the ability for the persistence functions

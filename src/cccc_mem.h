@@ -47,7 +47,7 @@ class CCCC_Member : public CCCC_Record
  public:
   string name( int index ) const;
   CCCC_Member(CCCC_Item& member_data_line, CCCC_Module* parent_ptr=NULL);
-  int FromFile(ifstream& infile);
+  GeneralFromFileStatuses_t FromFile(ifstream& infile);
   int ToFile(ofstream& outfile);
   void generate_report(ostream&);
   int get_count(const char *count_tag);

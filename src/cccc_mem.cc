@@ -147,10 +147,9 @@ string CCCC_Member::name(int name_level) const
   return namestr.c_str();
 }
 
-int CCCC_Member::FromFile(ifstream& ifstr)
+GeneralFromFileStatuses_t CCCC_Member::FromFile(ifstream& ifstr)
 {
-  int retval=RECORD_ERROR;
-  enum MemberFromFileStatuses { MEMBER_RECORD_NO_PARENT_FOUND=3 };
+  GeneralFromFileStatuses_t retval=RECORD_ERROR;
 
   CCCC_Item next_line;
   next_line.FromFile(ifstr);

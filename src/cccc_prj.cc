@@ -371,22 +371,19 @@ int CCCC_Project::FromFile(ifstream& ifstr)
   while(PeekAtNextLinePrefix(ifstr,MODULE_PREFIX))
     {
       CCCC_Module *new_module=new CCCC_Module;
-      int fromfile_status=new_module->FromFile(ifstr);
-      DisposeOfImportRecord(new_module, (GeneralFromFileStatuses_t) fromfile_status);
+      DisposeOfImportRecord(new_module, new_module->FromFile(ifstr));
     }
 
   while(PeekAtNextLinePrefix(ifstr,MEMBER_PREFIX))
     {
       CCCC_Member *new_member=new CCCC_Member;
-      int fromfile_status=new_member->FromFile(ifstr);
-      DisposeOfImportRecord(new_member, (GeneralFromFileStatuses_t) fromfile_status);
+      DisposeOfImportRecord(new_member, new_member->FromFile(ifstr));
     }
 
   while(PeekAtNextLinePrefix(ifstr,USEREL_PREFIX))
     {
       CCCC_UseRelationship *new_userel=new CCCC_UseRelationship;
-      int fromfile_status=new_userel->FromFile(ifstr);
-      DisposeOfImportRecord(new_userel, (GeneralFromFileStatuses_t) fromfile_status);
+      DisposeOfImportRecord(new_userel, new_userel->FromFile(ifstr));
     }
 
   while(PeekAtNextLinePrefix(ifstr,REJEXT_PREFIX))

@@ -227,9 +227,9 @@ int CCCC_Module::ToFile(ofstream& ofstr)
   return retval;
 }
 
-int CCCC_Module::FromFile(ifstream& ifstr)
+GeneralFromFileStatuses_t CCCC_Module::FromFile(ifstream& ifstr)
 {
-  int retval=RECORD_ERROR;
+  GeneralFromFileStatuses_t retval=RECORD_ERROR;
 
   CCCC_Item next_line;
   next_line.FromFile(ifstr);
