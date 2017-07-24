@@ -16,10 +16,10 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
-#include "cccc.h"
+
+
 #include <fstream>
 
-#include "cccc_itm.h"
 #include "cccc_db.h"
 
 CCCC_Project *current_loading_project=NULL;
@@ -31,7 +31,6 @@ CCCC_UseRelationship *current_loading_userel=NULL;
 
 int ifstr_line;
 
-extern CCCC_Project *prj;
 
 // the file scope variable last_supplier is used to supress repeated
 // output of the supplier name in the use relationship section where
@@ -45,8 +44,8 @@ static string last_supplier="";
 
 // This function provides the ability for the persistence functions
 // defined below to do a quick peek at the first token on the stream
-// leaving the get pointer at the start of that token. 
-// This should be static, but on MSVC++ this gives me an unresolved 
+// leaving the get pointer at the start of that token.
+// This should be static, but on MSVC++ this gives me an unresolved
 // symbol at link.
 bool PeekAtNextLinePrefix(ifstream& ifstr, string pfx)
 {
@@ -63,7 +62,7 @@ bool PeekAtNextLinePrefix(ifstream& ifstr, string pfx)
 }
 
 // this is a sort of abstract junkyard function (cf Abstract Factory)
-template <class T> void DisposeOfImportRecord(T *record_ptr, int fromfile_status)
+template <class T> void DisposeOfImportRecord(T *record_ptr, GeneralFromFileStatuses_t fromfile_status)
 {
   switch(fromfile_status)
     {
@@ -82,10 +81,10 @@ template <class T> void DisposeOfImportRecord(T *record_ptr, int fromfile_status
 
     default:
       // something went wrong, so we mention it
-      cerr << "Import error " << fromfile_status 
-	   << " at line " << ifstr_line 
-	   << " for " << record_ptr->key()
-	   << endl;
+      cerr << "Import error " << fromfile_status
+     << " at line " << ifstr_line
+     << " for " << record_ptr->key()
+     << endl;
       delete record_ptr;
     }
 }
@@ -94,13 +93,13 @@ template <class T> void DisposeOfImportRecord(T *record_ptr, int fromfile_status
 // a module, we need to merge the information in the new extent
 // with what is already known
 // there are two kinds of merge:
-// 1. ordinary fields like module_type should either be consistent or 
-// blank for all extents relating to the same module, so where the old 
+// 1. ordinary fields like module_type should either be consistent or
+// blank for all extents relating to the same module, so where the old
 // field is blank, we overwrite with the new field
 // 2. the flags field in CCCC_Member contains a variety of single character
 // flags giving the visibility, constness, etc. of the member, with '?' being
 // used to reflect a state of lack of knowledge: in these cases, any other
-// value can overwrite '?', all other values do not change. 
+// value can overwrite '?', all other values do not change.
 
 void Resolve_Fields(string& field1, string& field2)
 {
@@ -110,20 +109,20 @@ void Resolve_Fields(string& field1, string& field2)
     }
 }
 
-template 
-void 
-DisposeOfImportRecord(CCCC_Module *record_ptr, int fromfile_status); 
+template
+void
+DisposeOfImportRecord(CCCC_Module *record_ptr, GeneralFromFileStatuses_t fromfile_status);
 
-template 
-void 
-DisposeOfImportRecord(CCCC_Member *record_ptr, int fromfile_status);
+template
+void
+DisposeOfImportRecord(CCCC_Member *record_ptr, GeneralFromFileStatuses_t fromfile_status);
 
-template 
-void 
-DisposeOfImportRecord(CCCC_UseRelationship *record_ptr, int fromfile_status);
+template
+void
+DisposeOfImportRecord(CCCC_UseRelationship *record_ptr, GeneralFromFileStatuses_t fromfile_status);
 
-template 
-void 
-DisposeOfImportRecord(CCCC_Extent *record_ptr, int fromfile_status);
+template
+void
+DisposeOfImportRecord(CCCC_Extent *record_ptr, GeneralFromFileStatuses_t fromfile_status);
 
 

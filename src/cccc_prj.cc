@@ -372,21 +372,21 @@ int CCCC_Project::FromFile(ifstream& ifstr)
     {
       CCCC_Module *new_module=new CCCC_Module;
       int fromfile_status=new_module->FromFile(ifstr);
-      DisposeOfImportRecord(new_module,fromfile_status);
+      DisposeOfImportRecord(new_module, (GeneralFromFileStatuses_t) fromfile_status);
     }
 
   while(PeekAtNextLinePrefix(ifstr,MEMBER_PREFIX))
     {
       CCCC_Member *new_member=new CCCC_Member;
       int fromfile_status=new_member->FromFile(ifstr);
-      DisposeOfImportRecord(new_member,fromfile_status);
+      DisposeOfImportRecord(new_member, (GeneralFromFileStatuses_t) fromfile_status);
     }
 
   while(PeekAtNextLinePrefix(ifstr,USEREL_PREFIX))
     {
       CCCC_UseRelationship *new_userel=new CCCC_UseRelationship;
       int fromfile_status=new_userel->FromFile(ifstr);
-      DisposeOfImportRecord(new_userel,fromfile_status);
+      DisposeOfImportRecord(new_userel, (GeneralFromFileStatuses_t) fromfile_status);
     }
 
   while(PeekAtNextLinePrefix(ifstr,REJEXT_PREFIX))
@@ -394,7 +394,7 @@ int CCCC_Project::FromFile(ifstream& ifstr)
       CCCC_Extent *new_rejext=new CCCC_Extent;
       CCCC_Item next_line;
       next_line.FromFile(ifstr);
-      int fromfile_status=RECORD_ERROR;
+      GeneralFromFileStatuses_t fromfile_status=RECORD_ERROR;
       if(
    new_rejext->GetFromItem(next_line) &&
    new_rejext==rejected_extent_table.find_or_insert(new_rejext)

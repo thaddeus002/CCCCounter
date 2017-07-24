@@ -24,10 +24,8 @@
 #ifndef CCCC_DB_H
 #define CCCC_DB_H
 
-#include "cccc.h"
-#include "cccc_ext.h"
+
 #include "cccc_rec.h"
-#include "cccc_prj.h"
 #include "cccc_mod.h"
 #include "cccc_mem.h"
 #include "cccc_use.h"
@@ -44,14 +42,14 @@
 // entity, and the information from the new record has been transcribed
 // and merged into the instance in the database, and the locally allocated
 // instance must be deleted.
-enum GeneralFromFileStatuses 
+typedef enum GeneralFromFileStatuses
 {
   RECORD_TRANSCRIBED = 0,
   RECORD_ADDED       = 1,
   RECORD_ERROR       = 2
   // error conditions may return RECORD_ERROR, or may use a distinctive
   // value defined as a literal
-};
+} GeneralFromFileStatuses_t;
 
 /**
  * This function provides the ability for the persistence functions
@@ -63,7 +61,7 @@ bool PeekAtNextLinePrefix(ifstream& ifstr, string pfx);
 
 
 // These are global variables because I don't want to have
-// to pass the project, module, member, relationship down into all of the 
+// to pass the project, module, member, relationship down into all of the
 // FromFile methods.
 // There is probably a better way for a less lazy programmer than me.
 extern CCCC_Project *current_loading_project;
@@ -74,7 +72,7 @@ extern CCCC_UseRelationship *current_loading_userel;
 /** this one tracks the line number in the input file */
 extern int ifstr_line;
 
-template <class T> void DisposeOfImportRecord(T *record_ptr, int fromfile_status);
+template <class T> void DisposeOfImportRecord(T *record_ptr, GeneralFromFileStatuses_t fromfile_status);
 
 void Resolve_Fields(string& field1, string& field2);
 
