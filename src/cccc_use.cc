@@ -208,8 +208,7 @@ int CCCC_UseRelationship::ToFile(ofstream& ofstr)
 GeneralFromFileStatuses_t CCCC_UseRelationship::FromFile(ifstream& ifstr)
 {
   GeneralFromFileStatuses_t retval;
-  CCCC_Item next_line;
-  next_line.FromFile(ifstr);
+  CCCC_Item next_line(ifstr);
   ifstr_line++;
 
   string line_keyword_dummy;
@@ -239,7 +238,7 @@ GeneralFromFileStatuses_t CCCC_UseRelationship::FromFile(ifstream& ifstr)
     while(PeekAtNextLinePrefix(ifstr,USEEXT_PREFIX))
     {
       CCCC_Extent *new_extent=new CCCC_Extent;
-      next_line.FromFile(ifstr);
+      CCCC_Item next_line(ifstr);
       ifstr_line++;
       string supplier_dummy, client_dummy;
 
@@ -275,8 +274,7 @@ GeneralFromFileStatuses_t CCCC_UseRelationship::FromFile(ifstream& ifstr)
   // If not, we must skip them.
   while(PeekAtNextLinePrefix(ifstr,USEEXT_PREFIX))
     {
-      CCCC_Item next_line;
-      next_line.FromFile(ifstr);
+      CCCC_Item next_line(ifstr);
       ifstr_line++;
       cerr << "Ignoring userel extent on line " << ifstr_line << endl;
     }

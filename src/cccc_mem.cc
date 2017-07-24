@@ -151,8 +151,7 @@ GeneralFromFileStatuses_t CCCC_Member::FromFile(ifstream& ifstr)
 {
   GeneralFromFileStatuses_t retval=RECORD_ERROR;
 
-  CCCC_Item next_line;
-  next_line.FromFile(ifstr);
+  CCCC_Item next_line(ifstr);
   ifstr_line++;
 
   string line_keyword_dummy;
@@ -189,7 +188,7 @@ GeneralFromFileStatuses_t CCCC_Member::FromFile(ifstream& ifstr)
     while(PeekAtNextLinePrefix(ifstr,MEMEXT_PREFIX))
       {
         CCCC_Extent *new_extent=new CCCC_Extent;
-        next_line.FromFile(ifstr);
+        CCCC_Item next_line(ifstr);
         ifstr_line++;
         string parent_key_dummy, member_name_dummy,
     member_type_dummy, param_list_dummy;
@@ -234,8 +233,7 @@ GeneralFromFileStatuses_t CCCC_Member::FromFile(ifstream& ifstr)
   // If not, we must skip them.
   while(PeekAtNextLinePrefix(ifstr,MEMEXT_PREFIX))
     {
-      CCCC_Item next_line;
-      next_line.FromFile(ifstr);
+      CCCC_Item next_line(ifstr);
       ifstr_line++;
       cerr << "Ignoring member extent on line " << ifstr_line << endl;
     }

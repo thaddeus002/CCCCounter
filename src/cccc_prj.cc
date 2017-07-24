@@ -389,16 +389,15 @@ int CCCC_Project::FromFile(ifstream& ifstr)
   while(PeekAtNextLinePrefix(ifstr,REJEXT_PREFIX))
     {
       CCCC_Extent *new_rejext=new CCCC_Extent;
-      CCCC_Item next_line;
-      next_line.FromFile(ifstr);
+      CCCC_Item next_line(ifstr);
       GeneralFromFileStatuses_t fromfile_status=RECORD_ERROR;
       if(
-   new_rejext->GetFromItem(next_line) &&
-   new_rejext==rejected_extent_table.find_or_insert(new_rejext)
-   )
-  {
-    fromfile_status=RECORD_ADDED;
-  }
+        new_rejext->GetFromItem(next_line) &&
+        new_rejext==rejected_extent_table.find_or_insert(new_rejext)
+      )
+      {
+        fromfile_status=RECORD_ADDED;
+      }
       DisposeOfImportRecord(new_rejext,fromfile_status);
     }
 

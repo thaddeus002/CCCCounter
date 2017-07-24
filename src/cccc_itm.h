@@ -25,6 +25,7 @@ private:
   bool good;
 
 public:
+  CCCC_Item(ifstream& ifstr);
   CCCC_Item(const string& s, char c);
   CCCC_Item(const string& s);
   CCCC_Item();
@@ -62,7 +63,12 @@ public:
    * Read the buffer from the stream.
    * The delimiter is the last character.
    */
-  bool FromFile(ifstream& ifstr);
+  //bool FromFile(ifstream& ifstr);
+
+  /**
+   * \return true if the item has been initialize
+   */
+  bool isGood() { return good; }
 };
 
 #endif

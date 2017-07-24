@@ -8,6 +8,19 @@
 
 #include "cccc_itm.h"
 
+CCCC_Item::CCCC_Item(ifstream& ifstr)
+{
+  good=false;
+  char line_buffer[1024];
+  ifstr.getline(line_buffer,1023);
+  buffer=line_buffer;
+  if(ifstr.good() && buffer.size()>0 && buffer.size()<1023)
+    {
+      delimiter=buffer[buffer.size()-1];
+      good=true;
+    }
+}
+
 CCCC_Item::CCCC_Item(const string& s, char c)
 {
   buffer=s;
@@ -121,20 +134,6 @@ bool CCCC_Item::ToFile(ofstream& ofstr)
 {
   ofstr << buffer << endl;
   good=ofstr.good();
-  return good;
-}
-
-bool CCCC_Item::FromFile(ifstream& ifstr)
-{
-  good=false;
-  char line_buffer[1024];
-  ifstr.getline(line_buffer,1023);
-  buffer=line_buffer;
-  if(ifstr.good() && buffer.size()>0 && buffer.size()<1023)
-    {
-      delimiter=buffer[buffer.size()-1];
-      good=true;
-    }
   return good;
 }
 
