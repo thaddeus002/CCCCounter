@@ -156,38 +156,8 @@ void CCCC_Project::reindex()
   CCCC_Member *member_ptr=member_table.first_item();
   while(member_ptr!=NULL)
   {
-    if(member_ptr->parent!=NULL)
-    {
-      CCCC_Module::member_map_t::value_type
-        new_pair(member_ptr->key(),member_ptr);
-      member_ptr->parent->member_map.insert(new_pair);
-    }
-    else
-    {
-      cerr << "Member " << member_ptr->key() << " has no parent"
-         << endl;
-    }
-
-    CCCC_Extent *extent_ptr=member_ptr->extent_table.first_item();
-    while(extent_ptr!=NULL)
-    {
-      Visibility extent_visibility=extent_ptr->get_visibility();
-      Visibility member_visibility=member_ptr->get_visibility();
-
-      if(member_ptr->visibility==vDONTKNOW)
-      {
-        member_ptr->visibility=extent_visibility;
-      }
-      else if(
-        (extent_visibility!=vDONTKNOW) &&
-        (member_visibility!=extent_visibility)
-        )
-      {
-        member_ptr->visibility=vINVALID;
-      }
-
-      extent_ptr=member_ptr->extent_table.next_item();
-    }
+    member_ptr->reindexParent();
+    member_ptr->reindexVisibility();
 
     member_ptr=member_table.next_item();
   }

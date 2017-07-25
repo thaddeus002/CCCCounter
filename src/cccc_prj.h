@@ -48,7 +48,6 @@ class CCCC_Project : public CCCC_Record
 {
   friend class CCCC_Html_Stream;
   friend class CCCC_Xml_Stream;
-  //friend class CCCC_UseRelationship;
 
 
   CCCC_Table<CCCC_Module>          module_table;

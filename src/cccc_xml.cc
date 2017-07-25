@@ -135,9 +135,9 @@ static string ltrim(string value)
 }
 
 void CCCC_Xml_Stream::GenerateReports(CCCC_Project* prj,
-				       int report_mask,
-				       const string& file,
-				       const string& dir)
+               int report_mask,
+               const string& file,
+               const string& dir)
 {
   prjptr=prj;
   outdir=dir;
@@ -201,7 +201,7 @@ CCCC_Xml_Stream::CCCC_Xml_Stream(const string& fname, const string& info)
   if(fstr.good() != TRUE)
     {
       cerr << "failed to open " << fname.c_str()
-	   << " for output in directory " << outdir.c_str() << endl;
+     << " for output in directory " << outdir.c_str() << endl;
       exit(1);
     }
 
@@ -267,25 +267,25 @@ void CCCC_Xml_Stream::OO_Design()
     {
       i++;
       if( mod_ptr->is_trivial() == FALSE)
-	{
-	  fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
-	  Put_Label_Node(NAME_NODE_NAME,mod_ptr->name(nlSIMPLE).c_str(),0,"","");
+  {
+    fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
+    Put_Label_Node(NAME_NODE_NAME,mod_ptr->name(nlSIMPLE).c_str(),0,"","");
 
-	  CCCC_Metric wmc1(mod_ptr->get_count("WMC1"),"WMC1");
-	  CCCC_Metric wmcv(mod_ptr->get_count("WMCv"),"WMCv");
-	  CCCC_Metric dit(mod_ptr->get_count("DIT"),"DIT");
-	  CCCC_Metric noc(mod_ptr->get_count("NOC"),"NOC");
-	  CCCC_Metric cbo(mod_ptr->get_count("CBO"),"CBO");
+    CCCC_Metric wmc1(mod_ptr->get_count("WMC1"),"WMC1");
+    CCCC_Metric wmcv(mod_ptr->get_count("WMCv"),"WMCv");
+    CCCC_Metric dit(mod_ptr->get_count("DIT"),"DIT");
+    CCCC_Metric noc(mod_ptr->get_count("NOC"),"NOC");
+    CCCC_Metric cbo(mod_ptr->get_count("CBO"),"CBO");
 
-	  Put_Metric_Node(WMC1_NODE_NAME,wmc1);
-	  Put_Metric_Node(WMCV_NODE_NAME,wmcv);
-	  Put_Metric_Node(DIT_NODE_NAME,dit);
-	  Put_Metric_Node(NOC_NODE_NAME,noc);
-	  Put_Metric_Node(CBO_NODE_NAME,cbo);
+    Put_Metric_Node(WMC1_NODE_NAME,wmc1);
+    Put_Metric_Node(WMCV_NODE_NAME,wmcv);
+    Put_Metric_Node(DIT_NODE_NAME,dit);
+    Put_Metric_Node(NOC_NODE_NAME,noc);
+    Put_Metric_Node(CBO_NODE_NAME,cbo);
 
-	  fstr << XML_TAG_CLOSE_BEGIN << MODULE_NODE_NAME << XML_TAG_CLOSE_END << endl;
+    fstr << XML_TAG_CLOSE_BEGIN << MODULE_NODE_NAME << XML_TAG_CLOSE_END << endl;
 
-	}
+  }
       mod_ptr=prjptr->module_table.next_item();
     }
   fstr << XML_TAG_CLOSE_BEGIN << OODESIGN_NODE_NAME << XML_TAG_CLOSE_END << endl;
@@ -302,25 +302,25 @@ void CCCC_Xml_Stream::Procedural_Summary()
     {
       i++;
       if( mod_ptr->is_trivial() == FALSE)
-	{
-	  fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
-	  Put_Label_Node(NAME_NODE_NAME,mod_ptr->name(nlSIMPLE).c_str(),0,"","");
+  {
+    fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
+    Put_Label_Node(NAME_NODE_NAME,mod_ptr->name(nlSIMPLE).c_str(),0,"","");
 
-	  int loc=mod_ptr->get_count("LOC");
-	  int mvg=mod_ptr->get_count("MVG");
-	  int com=mod_ptr->get_count("COM");
-	  CCCC_Metric mloc(loc,"LOCm");
-	  CCCC_Metric mmvg(mvg,"MVGm");
-	  CCCC_Metric ml_c(loc,com,"L_C");
-	  CCCC_Metric mm_c(mvg,com,"M_C");
+    int loc=mod_ptr->get_count("LOC");
+    int mvg=mod_ptr->get_count("MVG");
+    int com=mod_ptr->get_count("COM");
+    CCCC_Metric mloc(loc,"LOCm");
+    CCCC_Metric mmvg(mvg,"MVGm");
+    CCCC_Metric ml_c(loc,com,"L_C");
+    CCCC_Metric mm_c(mvg,com,"M_C");
 
-	  Put_Metric_Node(LOC_NODE_NAME,mloc);
-	  Put_Metric_Node(MVG_NODE_NAME,mmvg);
-	  Put_Metric_Node(COM_NODE_NAME,com);
-	  Put_Metric_Node(LOCPERCOM_NODE_NAME,ml_c);
-	  Put_Metric_Node(MVGPERCOM_NODE_NAME,mm_c);
-	  fstr << XML_TAG_CLOSE_BEGIN << MODULE_NODE_NAME << XML_TAG_CLOSE_END << endl;
-	}
+    Put_Metric_Node(LOC_NODE_NAME,mloc);
+    Put_Metric_Node(MVG_NODE_NAME,mmvg);
+    Put_Metric_Node(COM_NODE_NAME,com);
+    Put_Metric_Node(LOCPERCOM_NODE_NAME,ml_c);
+    Put_Metric_Node(MVGPERCOM_NODE_NAME,mm_c);
+    fstr << XML_TAG_CLOSE_BEGIN << MODULE_NODE_NAME << XML_TAG_CLOSE_END << endl;
+  }
       mod_ptr=prjptr->module_table.next_item();
     }
 
@@ -335,36 +335,36 @@ void CCCC_Xml_Stream::Structural_Summary()
   while(module_ptr!=NULL)
     {
       if(module_ptr->is_trivial()==FALSE)
-	{
-	  fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
-	  Put_Label_Node(NAME_NODE_NAME,module_ptr->name(nlSIMPLE).c_str(),0,"","");
+  {
+    fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
+    Put_Label_Node(NAME_NODE_NAME,module_ptr->name(nlSIMPLE).c_str(),0,"","");
 
-	  int fov=module_ptr->get_count("FOv");
-	  int foc=module_ptr->get_count("FOc");
-	  int fo=module_ptr->get_count("FO");
+    int fov=module_ptr->get_count("FOv");
+    int foc=module_ptr->get_count("FOc");
+    int fo=module_ptr->get_count("FO");
 
-	  int fiv=module_ptr->get_count("FIv");
-	  int fic=module_ptr->get_count("FIc");
-	  int fi=module_ptr->get_count("FI");
+    int fiv=module_ptr->get_count("FIv");
+    int fic=module_ptr->get_count("FIc");
+    int fi=module_ptr->get_count("FI");
 
-	  int if4v=module_ptr->get_count("IF4v");
-	  int if4c=module_ptr->get_count("IF4c");
-	  int if4=module_ptr->get_count("IF4");
+    int if4v=module_ptr->get_count("IF4v");
+    int if4c=module_ptr->get_count("IF4c");
+    int if4=module_ptr->get_count("IF4");
 
-	  // the last two arguments here turn on links to enable jumping between
-	  // the summary and detail cells for the same module
-	  Put_Metric_Node(FOV_NODE_NAME,CCCC_Metric(fov,"FOv"));
-	  Put_Metric_Node(FOC_NODE_NAME,CCCC_Metric(foc,"FOc"));
-	  Put_Metric_Node(FO_NODE_NAME,CCCC_Metric(fo,"FO"));
-	  Put_Metric_Node(FIV_NODE_NAME,CCCC_Metric(fiv,"FIv"));
-	  Put_Metric_Node(FIC_NODE_NAME,CCCC_Metric(fic,"FIc"));
-	  Put_Metric_Node(FI_NODE_NAME,CCCC_Metric(fi,"FI"));
-	  Put_Metric_Node(IF4VIS_NODE_NAME,CCCC_Metric(if4v,"IF4v"));
-	  Put_Metric_Node(IF4CON_NODE_NAME,CCCC_Metric(if4c,"IF4c"));
-	  Put_Metric_Node(IF4_NODE_NAME,CCCC_Metric(if4,"IF4"));
+    // the last two arguments here turn on links to enable jumping between
+    // the summary and detail cells for the same module
+    Put_Metric_Node(FOV_NODE_NAME,CCCC_Metric(fov,"FOv"));
+    Put_Metric_Node(FOC_NODE_NAME,CCCC_Metric(foc,"FOc"));
+    Put_Metric_Node(FO_NODE_NAME,CCCC_Metric(fo,"FO"));
+    Put_Metric_Node(FIV_NODE_NAME,CCCC_Metric(fiv,"FIv"));
+    Put_Metric_Node(FIC_NODE_NAME,CCCC_Metric(fic,"FIc"));
+    Put_Metric_Node(FI_NODE_NAME,CCCC_Metric(fi,"FI"));
+    Put_Metric_Node(IF4VIS_NODE_NAME,CCCC_Metric(if4v,"IF4v"));
+    Put_Metric_Node(IF4CON_NODE_NAME,CCCC_Metric(if4c,"IF4c"));
+    Put_Metric_Node(IF4_NODE_NAME,CCCC_Metric(if4,"IF4"));
 
-	  fstr << XML_TAG_CLOSE_BEGIN << MODULE_NODE_NAME << XML_TAG_CLOSE_END << endl;
-	}
+    fstr << XML_TAG_CLOSE_BEGIN << MODULE_NODE_NAME << XML_TAG_CLOSE_END << endl;
+  }
       module_ptr=prjptr->module_table.next_item();
     }
     fstr << XML_TAG_CLOSE_BEGIN << STRUCTSUM_NODE_NAME << XML_TAG_CLOSE_END << endl;
@@ -376,7 +376,7 @@ void CCCC_Xml_Stream::Put_Structural_Details_Node(
 
 #ifdef DEBUG
   std::cerr << "Relationships for " << mod->name(nlMODULE_NAME)
-	    << " (" << mod << ")" << std::endl;
+      << " (" << mod << ")" << std::endl;
 #endif
 
 
@@ -405,32 +405,32 @@ void CCCC_Xml_Stream::Put_Structural_Details_Node(
     {
       fstr << XML_TAG_OPEN_BEGIN << nodeTag << XML_TAG_OPEN_END << endl;
       for(
-	  iter=relationship_map->begin();
-	  iter!=relationship_map->end();
-	  iter++
-	  )
-	{
-	  CCCC_UseRelationship *ur_ptr=(*iter).second;
-	  Put_Label_Node(NAME_NODE_NAME, ur_ptr->name(nl).c_str(),0,"","");
+    iter=relationship_map->begin();
+    iter!=relationship_map->end();
+    iter++
+    )
+  {
+    CCCC_UseRelationship *ur_ptr=(*iter).second;
+    Put_Label_Node(NAME_NODE_NAME, ur_ptr->name(nl).c_str(),0,"","");
 
-	  AugmentedBool vis=ur_ptr->is_visible();
-	  AugmentedBool con=ur_ptr->is_concrete();
+    AugmentedBool vis=ur_ptr->is_visible();
+    AugmentedBool con=ur_ptr->is_concrete();
 
           string visvalue = BOOL_FALSE;
           string convalue = BOOL_FALSE;
-	  if(vis!=abFALSE)
-	  {
+    if(vis!=abFALSE)
+    {
              visvalue = BOOL_TRUE;
           }
           if(con!=abFALSE)
           {
              convalue = BOOL_TRUE;
           }
-	  Put_Label_Node(VISIBLE_ATTR,visvalue,0,"","");
-	  Put_Label_Node(CONCRETE_ATTR,convalue,0,"","");
+    Put_Label_Node(VISIBLE_ATTR,visvalue,0,"","");
+    Put_Label_Node(CONCRETE_ATTR,convalue,0,"","");
 
-	  Put_Extent_List(*ur_ptr,true);
-	}
+    Put_Extent_List(*ur_ptr,true);
+  }
       fstr << XML_TAG_CLOSE_BEGIN << nodeTag << XML_TAG_CLOSE_END << endl;
     }
 }
@@ -442,9 +442,9 @@ void CCCC_Xml_Stream::Structural_Detail()
   while(module_ptr!=NULL)
     {
       if(module_ptr->is_trivial()==FALSE)
-	{
-	  Structural_Detail(module_ptr);
-	}
+  {
+    Structural_Detail(module_ptr);
+  }
       module_ptr=prjptr->module_table.next_item();
     }
   fstr << XML_TAG_CLOSE_BEGIN << STRUCTDET_NODE_NAME << XML_TAG_CLOSE_END << endl;
@@ -458,17 +458,17 @@ void CCCC_Xml_Stream::Procedural_Detail() {
   while(mod_ptr!=NULL)
     {
       if(
-	 (mod_ptr->name(nlMODULE_TYPE)!="builtin") &&
-	 (mod_ptr->name(nlMODULE_TYPE)!="enum") &&
-	 (mod_ptr->name(nlMODULE_TYPE)!="union")
-	 )
-	{
+   (mod_ptr->name(nlMODULE_TYPE)!="builtin") &&
+   (mod_ptr->name(nlMODULE_TYPE)!="enum") &&
+   (mod_ptr->name(nlMODULE_TYPE)!="union")
+   )
+  {
           fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
-	  Put_Label_Node(NAME_NODE_NAME,mod_ptr->name(nlSIMPLE).c_str(),50,
-			 "procdet","procsum",mod_ptr);
-	  Procedural_Detail(mod_ptr);
+    Put_Label_Node(NAME_NODE_NAME,mod_ptr->name(nlSIMPLE).c_str(),50,
+       "procdet","procsum",mod_ptr);
+    Procedural_Detail(mod_ptr);
           fstr << XML_TAG_CLOSE_BEGIN << MODULE_NODE_NAME << XML_TAG_CLOSE_END << endl;
-	}
+  }
       mod_ptr=prjptr->module_table.next_item();
     }
   fstr << XML_TAG_CLOSE_BEGIN << PROCDET_NODE_NAME << XML_TAG_CLOSE_END << endl;
@@ -495,8 +495,8 @@ void CCCC_Xml_Stream::Other_Extents()
 }
 
 void CCCC_Xml_Stream::Put_Label_Node(string nodeTag, string label, int width,
-				     string ref_name, string ref_href,
-				     CCCC_Record *rec_ptr)
+             string ref_name, string ref_href,
+             CCCC_Record *rec_ptr)
 {
   if(label.size()>0)
     {
@@ -507,7 +507,7 @@ void CCCC_Xml_Stream::Put_Label_Node(string nodeTag, string label, int width,
     }
   else
     {
-	// Do nothing
+  // Do nothing
     }
 
   if(rec_ptr != 0)
@@ -518,14 +518,14 @@ void CCCC_Xml_Stream::Put_Label_Node(string nodeTag, string label, int width,
 
 
 void CCCC_Xml_Stream::Put_Metric_Node(string nodeTag,
-				       int count, string tag)
+               int count, string tag)
 {
   CCCC_Metric m(count, tag.c_str());
   Put_Metric_Node(nodeTag,m);
 }
 
 void CCCC_Xml_Stream::Put_Metric_Node(string nodeTag,
-				       int num, int denom, string tag)
+               int num, int denom, string tag)
 {
   CCCC_Metric m(num,denom, tag.c_str());
   Put_Metric_Node(nodeTag,m);
@@ -630,59 +630,60 @@ CCCC_Xml_Stream& operator <<(CCCC_Xml_Stream& os, const CCCC_Metric& mtc)
   return os;
 }
 
+/**
+ * this function generates a separate HTML report for each non-trivial
+ * module in the database
+ */
 void CCCC_Xml_Stream::Separate_Modules()
 {
-  // this function generates a separate HTML report for each non-trivial
-  // module in the database
-
   CCCC_Module* mod_ptr=prjptr->module_table.first_item();
   while(mod_ptr!=NULL)
+  {
+    int trivial_module=mod_ptr->is_trivial();
+    if(trivial_module==FALSE)
     {
-      int trivial_module=mod_ptr->is_trivial();
-      if(trivial_module==FALSE)
-	{
-	  string info="Detailed report on module " + mod_ptr->key();
-	  string filename=outdir;
-	  filename+="/";
-	  filename+=mod_ptr->key()+".xml";
-	  CCCC_Xml_Stream module_xml_str(filename,info.c_str());
+      string info="Detailed report on module " + mod_ptr->key();
+      string filename=outdir;
+      filename+="/";
+      filename+=mod_ptr->key()+".xml";
+      CCCC_Xml_Stream module_xml_str(filename,info.c_str());
 
-	  module_xml_str.Module_Summary(mod_ptr);
+      module_xml_str.Module_Summary(mod_ptr);
 
-          module_xml_str.fstr
+      module_xml_str.fstr
              << XML_TAG_OPEN_BEGIN << MODDET_NODE_NAME << XML_TAG_OPEN_END
              << endl;
-	  module_xml_str.Module_Detail(mod_ptr);
-          module_xml_str.fstr
+      module_xml_str.Module_Detail(mod_ptr);
+      module_xml_str.fstr
              << XML_TAG_CLOSE_BEGIN << MODDET_NODE_NAME << XML_TAG_CLOSE_END
              << endl;
 
-          module_xml_str.fstr
+      module_xml_str.fstr
              << XML_TAG_OPEN_BEGIN << PROCDET_NODE_NAME << XML_TAG_OPEN_END
              << endl;
-	  module_xml_str.Procedural_Detail(mod_ptr);
-          module_xml_str.fstr
+      module_xml_str.Procedural_Detail(mod_ptr);
+      module_xml_str.fstr
              << XML_TAG_CLOSE_BEGIN << PROCDET_NODE_NAME << XML_TAG_CLOSE_END
              << endl;
 
-          module_xml_str.fstr
+      module_xml_str.fstr
              << XML_TAG_OPEN_BEGIN << STRUCTDET_NODE_NAME << XML_TAG_OPEN_END
              << endl;
-	  module_xml_str.Structural_Detail(mod_ptr);
+      module_xml_str.Structural_Detail(mod_ptr);
           module_xml_str.fstr
              << XML_TAG_CLOSE_BEGIN << STRUCTDET_NODE_NAME << XML_TAG_CLOSE_END
              << endl;
 
-	}
-      else
-	{
-#ifdef DEBUG
-	  cerr << mod_ptr->module_type << " " << mod_ptr->key()
-	       << " is trivial" << endl;
-#endif
-	}
-      mod_ptr=prjptr->module_table.next_item();
     }
+    else
+    {
+#ifdef DEBUG
+      cerr << mod_ptr->module_type << " " << mod_ptr->key()
+           << " is trivial" << endl;
+#endif
+    }
+    mod_ptr=prjptr->module_table.next_item();
+  }
 }
 
 void CCCC_Xml_Stream::Module_Detail(CCCC_Module *module_ptr)
@@ -737,18 +738,18 @@ void CCCC_Xml_Stream::Procedural_Detail(CCCC_Module *module_ptr)
   CCCC_Module::member_map_t::iterator iter = module_ptr->member_map.begin();
 
       while(iter!=module_ptr->member_map.end())
-	{
+  {
           fstr << XML_TAG_OPEN_BEGIN << MEMBER_NODE_NAME << XML_TAG_OPEN_END << endl;
 
-	  CCCC_Member *mem_ptr=(*iter).second;
-	  Put_Label_Node(NAME_NODE_NAME,mem_ptr->name(nlLOCAL).c_str(),0,"","",mem_ptr);
-	  int loc=mem_ptr->get_count("LOC");
-	  int mvg=mem_ptr->get_count("MVG");
-	  int com=mem_ptr->get_count("COM");
-	  CCCC_Metric mloc(loc,"LOCf");
-	  CCCC_Metric mmvg(mvg,"MVGf");
-	  CCCC_Metric ml_c(loc,com,"L_C");
-	  CCCC_Metric mm_c(mvg,com,"M_C");
+    CCCC_Member *mem_ptr=(*iter).second;
+    Put_Label_Node(NAME_NODE_NAME,mem_ptr->name(nlLOCAL).c_str(),0,"","",mem_ptr);
+    int loc=mem_ptr->get_count("LOC");
+    int mvg=mem_ptr->get_count("MVG");
+    int com=mem_ptr->get_count("COM");
+    CCCC_Metric mloc(loc,"LOCf");
+    CCCC_Metric mmvg(mvg,"MVGf");
+    CCCC_Metric ml_c(loc,com,"L_C");
+    CCCC_Metric mm_c(mvg,com,"M_C");
 
       Put_Metric_Node(LOC_NODE_NAME,mloc);
       Put_Metric_Node(MVG_NODE_NAME,mmvg);
@@ -756,10 +757,10 @@ void CCCC_Xml_Stream::Procedural_Detail(CCCC_Module *module_ptr)
       Put_Metric_Node(LOCPERCOM_NODE_NAME,ml_c);
       Put_Metric_Node(MVGPERCOM_NODE_NAME,mm_c);
 
-	  iter++;
+    iter++;
 
       fstr << XML_TAG_CLOSE_BEGIN << MEMBER_NODE_NAME << XML_TAG_CLOSE_END << endl;
-	}
+  }
 }
 
 void CCCC_Xml_Stream::Structural_Detail(CCCC_Module *module_ptr)

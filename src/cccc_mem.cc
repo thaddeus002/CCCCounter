@@ -247,4 +247,37 @@ Visibility CCCC_Member::get_visibility()
 }
 
 
+void CCCC_Member::reindexVisibility() {
 
+  CCCC_Extent *extent_ptr=extent_table.first_item();
+
+  while(extent_ptr!=NULL)
+  {
+    Visibility extent_visibility=extent_ptr->get_visibility();
+
+    if(visibility==vDONTKNOW)
+    {
+      visibility=extent_visibility;
+    }
+    else if(
+      (extent_visibility!=vDONTKNOW) &&
+      (visibility!=extent_visibility)
+      )
+    {
+      visibility=vINVALID;
+    }
+
+    extent_ptr=extent_table.next_item();
+  }
+}
+
+void CCCC_Member::reindexParent() {
+  if(parent!=NULL)
+  {
+    parent->putInMemberMap(this);
+  }
+  else
+  {
+    cerr << "Member " << key() << " has no parent" << endl;
+  }
+}

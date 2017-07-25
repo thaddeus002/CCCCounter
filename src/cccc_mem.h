@@ -55,6 +55,18 @@ class CCCC_Member : public CCCC_Record
   void generate_report(ostream&);
   int get_count(const char *count_tag);
   Visibility get_visibility();
+
+  /**
+   * Put the visibility in conformity with those of the extent_table.
+   * Used in CCCC_Project::reindex().
+   */
+  void reindexVisibility();
+
+  /**
+   * Put this objet in parent->member_map.
+   * Used in CCCC_Project::reindex().
+   */
+  void reindexParent();
 };
 
 #endif // CCCC_MEM_H

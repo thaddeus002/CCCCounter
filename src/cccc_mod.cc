@@ -307,3 +307,7 @@ GeneralFromFileStatuses_t CCCC_Module::FromFile(ifstream& ifstr)
 }
 
 
+void CCCC_Module::putInMemberMap(CCCC_Member *member){
+  member_map_t::value_type new_pair(member->key(),member);
+  member_map.insert(new_pair);
+}

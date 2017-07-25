@@ -66,6 +66,11 @@ public:
 
   virtual int get_count(const char *count_tag);
   int is_trivial();
+
+  /**
+   * Add an objet in member_map, indexed by its key.
+   */
+  void putInMemberMap(CCCC_Member *member);
 };
 
 #endif // CCCC_MOD_H
