@@ -131,7 +131,7 @@ GENSRC	= CLexer.cpp \
           JLexer.cpp \
           JLexer.h \
           JParser.cpp \
-          Parser.h \
+          JParser.h \
           Jtokens.h \
           cccc.cpp \
           java.cpp \
