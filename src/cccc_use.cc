@@ -165,12 +165,12 @@ int CCCC_UseRelationship::get_count(const char* count_tag)
 
 CCCC_Module* CCCC_UseRelationship::supplier_module_ptr(CCCC_Project *prj)
 {
-  return prj->module_table.find(supplier.c_str());
+  return prj->find_module(supplier.c_str());
 }
 
 CCCC_Module* CCCC_UseRelationship::client_module_ptr(CCCC_Project *prj)
 {
-  return prj->module_table.find(client.c_str());
+  return prj->find_module(client.c_str());
 }
 
 
@@ -221,7 +221,7 @@ GeneralFromFileStatuses_t CCCC_UseRelationship::FromFile(ifstream& ifstr)
     next_line.Extract(this->client)
   )
     {
-    found_uptr=current_loading_project->userel_table.find_or_insert(this);
+    found_uptr=current_loading_project->find_or_insert_userel(this);
     if(found_uptr==this)
     {
       // the newly created instance of the module is the first

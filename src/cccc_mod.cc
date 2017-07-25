@@ -51,9 +51,9 @@ string CCCC_Module::name(int name_level) const
     case nlMODULE_TYPE_AND_NAME:
       retval=module_type;
       if(retval.size()>0)
-  {
-    retval=retval+" ";
-  }
+      {
+        retval=retval+" ";
+      }
       retval=retval+module_name;
       break;
 
@@ -69,9 +69,9 @@ int CCCC_Module::get_count(const char* count_tag)
   if(strcmp(count_tag,"NOM")==0)
     {
       if(is_trivial()==FALSE)
-  {
-    retval=1;
-  }
+      {
+        retval=1;
+      }
     }
   else if(strcmp(count_tag,"CBO")==0)
     {
@@ -84,13 +84,13 @@ int CCCC_Module::get_count(const char* count_tag)
       relationship_map_t::iterator iter;
       iter=client_map.begin();
       while(iter!=client_map.end())
-  {
-    if((*iter).second->get_usetype()==utINHERITS)
       {
-        retval++;
+        if((*iter).second->get_usetype()==utINHERITS)
+        {
+          retval++;
+        }
+        iter++;
       }
-    iter++;
-  }
     }
   else if(strcmp(count_tag,"DIT")==0)
     {
@@ -208,21 +208,21 @@ int CCCC_Module::ToFile(ofstream& ofstr)
 
   CCCC_Extent *extent_ptr=extent_table.first_item();
   while(extent_ptr!=NULL)
-    {
-      CCCC_Item extent_line;
-      extent_line.Insert(MODEXT_PREFIX);
-      extent_line.Insert(module_name);
-      extent_line.Insert(module_type);
-      extent_ptr->AddToItem(extent_line);
-      extent_line.ToFile(ofstr);
+  {
+    CCCC_Item extent_line;
+    extent_line.Insert(MODEXT_PREFIX);
+    extent_line.Insert(module_name);
+    extent_line.Insert(module_type);
+    extent_ptr->AddToItem(extent_line);
+    extent_line.ToFile(ofstr);
 
-      extent_ptr=extent_table.next_item();
-    }
+    extent_ptr=extent_table.next_item();
+  }
 
   if(ofstr.good())
-    {
-      retval=TRUE;
-    }
+  {
+    retval=TRUE;
+  }
 
   return retval;
 }
@@ -243,65 +243,67 @@ GeneralFromFileStatuses_t CCCC_Module::FromFile(ifstream& ifstr)
      next_line.Extract(this->module_name) &&
      next_line.Extract(this->module_type)
      )
+  {
+    found_mptr=
+      current_loading_project->find_or_insert_module(this);
+    if(found_mptr==this)
     {
-      found_mptr=
-  current_loading_project->module_table.find_or_insert(this);
-      if(found_mptr==this)
-  {
-    // the newly created instance of the module is the first
-    // and has taken its place in the database, so we protect
-    // it from deletion
-    retval=RECORD_ADDED;
-  }
-      else
-  {
-    retval=RECORD_TRANSCRIBED;
-  }
+      // the newly created instance of the module is the first
+      // and has taken its place in the database, so we protect
+      // it from deletion
+      retval=RECORD_ADDED;
+    }
+    else
+    {
+      retval=RECORD_TRANSCRIBED;
+    }
 
-      // process extent records
-      while(PeekAtNextLinePrefix(ifstr,MODEXT_PREFIX))
-  {
-    CCCC_Extent *new_extent=new CCCC_Extent;
-    CCCC_Item next_line(ifstr);
-    ifstr_line++;
-    string module_name_dummy, module_type_dummy;
+    // process extent records
+    while(PeekAtNextLinePrefix(ifstr,MODEXT_PREFIX))
+    {
+      CCCC_Extent *new_extent=new CCCC_Extent;
+      CCCC_Item next_line(ifstr);
+      ifstr_line++;
+      string module_name_dummy, module_type_dummy;
 
-    if(
-       next_line.Extract(line_keyword_dummy) &&
-       next_line.Extract(module_name_dummy) &&
-       next_line.Extract(module_type_dummy) &&
-       new_extent->GetFromItem(next_line)
-       )
+      if(
+        next_line.Extract(line_keyword_dummy) &&
+        next_line.Extract(module_name_dummy) &&
+        next_line.Extract(module_type_dummy) &&
+        new_extent->GetFromItem(next_line)
+        )
       {
         // We don't ever expect to find duplicated extent records
         // but just in case...
         CCCC_Extent *found_eptr=
-    found_mptr->extent_table.find_or_insert(new_extent);
+          found_mptr->extent_table.find_or_insert(new_extent);
         if(found_eptr!=new_extent)
-          {
-      cerr << "Failed to add extent for module "
-           << found_mptr->key() << " at line " << ifstr_line
-           << endl;
-      delete new_extent;
-    }
+        {
+          cerr << "Failed to add extent for module "
+               << found_mptr->key() << " at line " << ifstr_line
+               << endl;
+          delete new_extent;
+        }
       }
+    }
   }
-    }
   else
-    {
-      // unexpected problem with the input
-      retval=RECORD_ERROR;
-    }
+  {
+    // unexpected problem with the input
+    retval=RECORD_ERROR;
+  }
 
   // If the import was successful, we will also have imported all dependent
   // extent records following the main record.
   // If not, we must skip them.
   while(PeekAtNextLinePrefix(ifstr,MODEXT_PREFIX))
-    {
-      CCCC_Item next_line(ifstr);
-      ifstr_line++;
-      cerr << "Ignoring member extent on line " << ifstr_line << endl;
-    }
+  {
+    CCCC_Item next_line(ifstr);
+    ifstr_line++;
+    cerr << "Ignoring member extent on line " << ifstr_line << endl;
+  }
 
   return retval;
 }
+
+

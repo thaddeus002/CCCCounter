@@ -40,11 +40,14 @@ class CCCC_Member : public CCCC_Record
 {
   friend class CCCC_Project;
   friend class CCCC_Module;
+
   string member_type, member_name, param_list;
   Visibility visibility;
   CCCC_Module *parent;
   CCCC_Member();
+
  public:
+
   string name( int index ) const;
   CCCC_Member(CCCC_Item& member_data_line, CCCC_Module* parent_ptr=NULL);
   GeneralFromFileStatuses_t FromFile(ifstream& infile);

@@ -167,11 +167,11 @@ GeneralFromFileStatuses_t CCCC_Member::FromFile(ifstream& ifstr)
      next_line.Extract(this->param_list)
      )
     {
-      parent=current_loading_project->module_table.find(parent_name);
+      parent=current_loading_project->find_module(parent_name);
       if(parent!=NULL)
   {
     found_mptr=
-      current_loading_project->member_table.find_or_insert(this);
+      current_loading_project->find_or_insert_member(this);
     if(found_mptr==this)
       {
         // the newly created instance of the module is the first

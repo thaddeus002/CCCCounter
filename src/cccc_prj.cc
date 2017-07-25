@@ -410,3 +410,19 @@ int CCCC_Project::FromFile(ifstream& ifstr)
 string CCCC_Project::name(int level) const {
     return "";
 }
+
+CCCC_Module *CCCC_Project::find_or_insert_module(CCCC_Module *module){
+  return module_table.find_or_insert(module);
+}
+
+CCCC_Module *CCCC_Project::find_module(string module_name){
+  return module_table.find(module_name);
+}
+
+CCCC_Member *CCCC_Project::find_or_insert_member(CCCC_Member *member){
+  return member_table.find_or_insert(member);
+}
+
+CCCC_UseRelationship *CCCC_Project::find_or_insert_userel(CCCC_UseRelationship *relationship){
+  return userel_table.find_or_insert(relationship);
+}

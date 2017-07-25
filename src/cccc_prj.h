@@ -48,10 +48,8 @@ class CCCC_Project : public CCCC_Record
 {
   friend class CCCC_Html_Stream;
   friend class CCCC_Xml_Stream;
-  friend class CCCC_Module;
-  friend class CCCC_Member;
-  friend class CCCC_UseRelationship;
-  friend class CCCC_Extent;
+  //friend class CCCC_UseRelationship;
+
 
   CCCC_Table<CCCC_Module>          module_table;
   CCCC_Table<CCCC_Member>          member_table;
@@ -105,6 +103,26 @@ class CCCC_Project : public CCCC_Record
 
   // declared in CCCC_Record
   virtual string name(int level) const;
+
+  /**
+   * Add a new module in module_table if is not already in.
+   */
+  CCCC_Module *find_or_insert_module(CCCC_Module *module);
+
+  /**
+   * Find a module in module_table by his name.
+   */
+  CCCC_Module *find_module(string module_name);
+
+  /**
+   * Add a new member in member_table if is not already in.
+   */
+  CCCC_Member *find_or_insert_member(CCCC_Member *member);
+
+  /**
+   * Add a new relationship in userel_table if is not already in.
+   */
+  CCCC_UseRelationship *find_or_insert_userel(CCCC_UseRelationship *relationship);
 };
 
 #endif // CCCC_PRJ_H
