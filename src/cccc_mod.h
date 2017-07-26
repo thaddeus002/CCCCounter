@@ -65,6 +65,11 @@ public:
   int ToFile(ofstream& outfile);
 
   virtual int get_count(const char *count_tag);
+
+  /**
+   * \return true if this module is a simple type like
+   * native(int, char, ...), enum, struct, ...
+   */
   int is_trivial();
 
   /**

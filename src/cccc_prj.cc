@@ -220,55 +220,8 @@ void CCCC_Project::reindex()
       client_ptr->supplier_map.insert(new_supplier_pair);
       supplier_ptr->client_map.insert(new_client_pair);
 
-      // calculate the visibility and concreteness of the
-      // relationship
-      AugmentedBool visible=abDONTKNOW;
-      AugmentedBool concrete=abDONTKNOW;
-
-      CCCC_Extent *extent_ptr=userel_ptr->extent_table.first_item();
-      while(extent_ptr!=NULL)
-      {
-        switch(extent_ptr->get_visibility())
-        {
-        case vPRIVATE:
-        case vIMPLEMENTATION:
-          if(visible!=abTRUE)
-          {
-            visible=abFALSE;
-          }
-          break;
-        case vPROTECTED:
-        case vPUBLIC:
-          visible=abTRUE;
-          break;
-        default:
-          // nothing to do
-          ;
-        }
-
-        switch(extent_ptr->get_usetype())
-        {
-        case utPARBYREF:
-        case utHASBYREF:
-          if(concrete!=abTRUE)
-          {
-            concrete=abFALSE;
-          }
-          break;
-        case utINHERITS:
-        case utPARBYVAL:
-        case utHASBYVAL:
-          concrete=abTRUE;
-          break;
-        default:
-          // nothing to do
-          ;
-        }
-
-        extent_ptr=userel_ptr->extent_table.next_item();
-      }
-      userel_ptr->visible=visible;
-      userel_ptr->concrete=concrete;
+      // Calculate the visibility and concreteness of the relationship
+      userel_ptr->calculateProperties();
     }
 
     userel_ptr=userel_table.next_item();

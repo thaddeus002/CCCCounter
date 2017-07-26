@@ -57,6 +57,12 @@ class CCCC_UseRelationship : public CCCC_Record
   void generate_report(ostream& os);
   CCCC_Module* supplier_module_ptr(CCCC_Project *prj);
   CCCC_Module* client_module_ptr(CCCC_Project *prj);
+
+  /**
+   * Calculate the visibility and concreteness of the
+   * relationship.
+   */
+  void calculateProperties();
 };
 
 

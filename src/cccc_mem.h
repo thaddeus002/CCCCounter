@@ -39,7 +39,6 @@ class CCCC_Module;
 class CCCC_Member : public CCCC_Record
 {
   friend class CCCC_Project;
-  friend class CCCC_Module;
 
   string member_type, member_name, param_list;
   Visibility visibility;

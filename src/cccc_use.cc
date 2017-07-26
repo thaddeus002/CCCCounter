@@ -283,3 +283,55 @@ GeneralFromFileStatuses_t CCCC_UseRelationship::FromFile(ifstream& ifstr)
 }
 
 
+/**
+ * Calculate the visibility and concreteness of the
+ * relationship.
+ */
+void CCCC_UseRelationship::calculateProperties() {
+
+  visible=abDONTKNOW;
+  concrete=abDONTKNOW;
+
+  CCCC_Extent *extent_ptr=extent_table.first_item();
+  while(extent_ptr!=NULL)
+  {
+    switch(extent_ptr->get_visibility())
+    {
+    case vPRIVATE:
+    case vIMPLEMENTATION:
+      if(visible!=abTRUE)
+      {
+        visible=abFALSE;
+      }
+      break;
+    case vPROTECTED:
+    case vPUBLIC:
+      visible=abTRUE;
+      break;
+    default:
+      // nothing to do
+      ;
+    }
+
+    switch(extent_ptr->get_usetype())
+    {
+    case utPARBYREF:
+    case utHASBYREF:
+      if(concrete!=abTRUE)
+      {
+        concrete=abFALSE;
+      }
+      break;
+    case utINHERITS:
+    case utPARBYVAL:
+    case utHASBYVAL:
+      concrete=abTRUE;
+      break;
+    default:
+      // nothing to do
+      ;
+    }
+
+    extent_ptr=extent_table.next_item();
+  }
+}
