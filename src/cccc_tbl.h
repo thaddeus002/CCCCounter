@@ -64,7 +64,12 @@ template <class T> class CCCC_Table : public std::map<string,T*>
   T* find(string name);
 
   /**
-   * \return the objet in table with the same key of the paramètre. If there is not, insert
+   * Insert a new object in the table.
+   */
+  T* insert(T* new_item_ptr);
+
+  /**
+   * \return the objet in table with the same key of the parameter. If there is not, insert
    *  and return the parameter
    */
   T* find_or_insert(T* new_item_ptr);

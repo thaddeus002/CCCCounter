@@ -33,6 +33,11 @@ CCCC_Module::CCCC_Module()
   project=get_active_project();
 }
 
+CCCC_Module::CCCC_Module(string name)
+{
+  project=get_active_project();
+  module_name = name;
+}
 
 string CCCC_Module::name(int name_level) const
 {

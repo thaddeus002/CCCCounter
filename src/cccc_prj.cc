@@ -165,23 +165,16 @@ void CCCC_Project::reindex()
   CCCC_UseRelationship *userel_ptr=userel_table.first_item();
   while(userel_ptr!=NULL)
   {
-    CCCC_Module *supplier_ptr=new CCCC_Module;
-    supplier_ptr->module_name=userel_ptr->supplier;
-    CCCC_Module *found_supplier_ptr=
-      module_table.find_or_insert(supplier_ptr);
-    if(found_supplier_ptr!=supplier_ptr)
-    {
-      delete supplier_ptr;
-      supplier_ptr=found_supplier_ptr;
+    CCCC_Module *supplier_ptr = module_table.find(userel_ptr->supplier);
+    if(supplier_ptr == NULL) {
+      supplier_ptr = new CCCC_Module(userel_ptr->supplier);
+      module_table.insert(supplier_ptr);
     }
 
-    CCCC_Module *client_ptr=new CCCC_Module;
-    client_ptr->module_name=userel_ptr->client;
-    CCCC_Module *found_client_ptr=module_table.find_or_insert(client_ptr);
-    if(found_client_ptr!=client_ptr)
-    {
-      delete client_ptr;
-      client_ptr=found_client_ptr;
+    CCCC_Module *client_ptr = module_table.find(userel_ptr->client);
+    if(client_ptr == NULL) {
+      client_ptr = new CCCC_Module(userel_ptr->client);
+      module_table.insert(client_ptr);
     }
 
     if(

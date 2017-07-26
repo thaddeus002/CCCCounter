@@ -80,11 +80,23 @@ template<class T> T* CCCC_Table<T>::find(string name)
   T *retval=NULL;
   typename map_t::iterator value_iterator=map_t::find(name);
   if(value_iterator!=map_t::end())
-    {
-      retval=(*value_iterator).second;
-    }
+  {
+    retval=(*value_iterator).second;
+  }
   return retval;
 }
+
+
+template<class T> T* CCCC_Table<T>::insert(T* new_item_ptr)
+{
+  if(new_item_ptr!=NULL)
+  {
+    typename map_t::value_type new_pair(new_item_ptr->key(), new_item_ptr);
+    map_t::insert(new_pair);
+  }
+  return new_item_ptr;
+}
+
 
 /**
  * \return the objet in table with the same key of the paramètre. If there is not, insert
@@ -95,11 +107,11 @@ template<class T> T* CCCC_Table<T>::find_or_insert(T* new_item_ptr)
   string new_key=new_item_ptr->key();
   T *retval=find(new_key);
   if(retval==NULL)
-    {
-      typename map_t::value_type new_pair(new_key,new_item_ptr);
-      map_t::insert(new_pair);
-      retval=new_item_ptr;
-    }
+  {
+    typename map_t::value_type new_pair(new_key,new_item_ptr);
+    map_t::insert(new_pair);
+    retval=new_item_ptr;
+  }
   return retval;
 }
 

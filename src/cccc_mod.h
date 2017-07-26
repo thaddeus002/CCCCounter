@@ -59,6 +59,11 @@ class CCCC_Module : public CCCC_Record
 
 public:
 
+  /**
+   * Create a new module with a given name.
+   */
+  CCCC_Module(string name);
+
   string name(int name_level) const;
 
   GeneralFromFileStatuses_t FromFile(ifstream& infile);
