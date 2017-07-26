@@ -316,3 +316,20 @@ void CCCC_Module::putInMemberMap(CCCC_Member *member){
   member_map_t::value_type new_pair(member->key(),member);
   member_map.insert(new_pair);
 }
+
+
+void CCCC_Module::addSupplier(string key, CCCC_UseRelationship *userel_ptr) {
+
+  relationship_map_t::value_type
+      new_pair(key, userel_ptr);
+
+  supplier_map.insert(new_pair);
+}
+
+void CCCC_Module::addClient(string key, CCCC_UseRelationship *userel_ptr) {
+
+  relationship_map_t::value_type
+      new_pair(key, userel_ptr);
+
+  client_map.insert(new_pair);
+}

@@ -207,11 +207,8 @@ void CCCC_Project::reindex()
         << " (" << supplier_ptr << ")" << std::endl;
 #endif
 
-      CCCC_Module::relationship_map_t::value_type
-        new_supplier_pair(supplier_ptr->key(), userel_ptr),
-        new_client_pair(client_ptr->key(), userel_ptr);
-      client_ptr->supplier_map.insert(new_supplier_pair);
-      supplier_ptr->client_map.insert(new_client_pair);
+      client_ptr->addSupplier(supplier_ptr->key(), userel_ptr);
+      supplier_ptr->addClient(client_ptr->key(), userel_ptr);
 
       // Calculate the visibility and concreteness of the relationship
       userel_ptr->calculateProperties();

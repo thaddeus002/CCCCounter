@@ -81,6 +81,16 @@ public:
    * Add an objet in member_map, indexed by its key.
    */
   void putInMemberMap(CCCC_Member *member);
+
+  /**
+   * Define a relationship with a supplier.
+   */
+  void addSupplier(string key, CCCC_UseRelationship *userel_ptr);
+
+  /**
+   * Define a relationshi with a client.
+   */
+  void addClient(string key, CCCC_UseRelationship *userel_ptr);
 };
 
 #endif // CCCC_MOD_H
