@@ -23,9 +23,6 @@
 #include "cccc_db.h"
 
 CCCC_Project *current_loading_project=NULL;
-CCCC_Module  *current_loading_module=NULL;
-CCCC_Member  *current_loading_extent=NULL;
-CCCC_UseRelationship *current_loading_userel=NULL;
 
 #define LINE_BUFFER_SIZE  1000
 

@@ -27,7 +27,6 @@
 #define DEBUG_USEREL 0
 
 
-#include "cccc.h"
 #include "cccc_itm.h"
 #include "cccc_prj.h"
 #include "cccc_db.h"
@@ -126,8 +125,10 @@ void CCCC_Project::add_member(CCCC_Item& member_data_line)
 }
 
 void CCCC_Project::add_userel(CCCC_Item& userel_data_line) {
+
   CCCC_UseRelationship *new_userel_ptr =
     new CCCC_UseRelationship(userel_data_line);
+
   CCCC_UseRelationship *lookup_userel_ptr =
     userel_table.find_or_insert(new_userel_ptr);
 
@@ -236,40 +237,40 @@ int CCCC_Project::ToFile(ofstream& ofstr)
   int retval=FALSE;
   CCCC_Module *module_ptr=module_table.first_item();
   while(module_ptr!=NULL)
-    {
-      module_ptr->ToFile(ofstr);
-      module_ptr=module_table.next_item();
-    }
+  {
+    module_ptr->ToFile(ofstr);
+    module_ptr=module_table.next_item();
+  }
 
   CCCC_Member *member_ptr=member_table.first_item();
   while(member_ptr!=NULL)
-    {
-      member_ptr->ToFile(ofstr);
-      member_ptr=member_table.next_item();
-    }
+  {
+    member_ptr->ToFile(ofstr);
+    member_ptr=member_table.next_item();
+  }
 
   CCCC_UseRelationship *userel_ptr=userel_table.first_item();
   while(userel_ptr!=NULL)
-    {
-      userel_ptr->ToFile(ofstr);
-      userel_ptr=userel_table.next_item();
-    }
+  {
+    userel_ptr->ToFile(ofstr);
+    userel_ptr=userel_table.next_item();
+  }
 
   CCCC_Extent *rejext_ptr=rejected_extent_table.first_item();
   while(rejext_ptr!=NULL)
-    {
-      CCCC_Item extent_line;
-      extent_line.Insert(REJEXT_PREFIX);
-      rejext_ptr->AddToItem(extent_line);
-      extent_line.ToFile(ofstr);
+  {
+    CCCC_Item extent_line;
+    extent_line.Insert(REJEXT_PREFIX);
+    rejext_ptr->AddToItem(extent_line);
+    extent_line.ToFile(ofstr);
 
-      rejext_ptr=rejected_extent_table.next_item();
-    }
+    rejext_ptr=rejected_extent_table.next_item();
+  }
 
   if(ofstr.good())
-    {
-      retval=TRUE;
-    }
+  {
+    retval=TRUE;
+  }
 
   return retval;
 }
@@ -282,37 +283,37 @@ int CCCC_Project::FromFile(ifstream& ifstr)
   set_active_project(this);
 
   while(PeekAtNextLinePrefix(ifstr,MODULE_PREFIX))
-    {
-      CCCC_Module *new_module=new CCCC_Module;
-      DisposeOfImportRecord(new_module, new_module->FromFile(ifstr));
-    }
+  {
+    CCCC_Module *new_module=new CCCC_Module;
+    DisposeOfImportRecord(new_module, new_module->FromFile(ifstr));
+  }
 
   while(PeekAtNextLinePrefix(ifstr,MEMBER_PREFIX))
-    {
-      CCCC_Member *new_member=new CCCC_Member;
-      DisposeOfImportRecord(new_member, new_member->FromFile(ifstr));
-    }
+  {
+    CCCC_Member *new_member=new CCCC_Member;
+    DisposeOfImportRecord(new_member, new_member->FromFile(ifstr));
+  }
 
   while(PeekAtNextLinePrefix(ifstr,USEREL_PREFIX))
-    {
-      CCCC_UseRelationship *new_userel=new CCCC_UseRelationship;
-      DisposeOfImportRecord(new_userel, new_userel->FromFile(ifstr));
-    }
+  {
+    CCCC_UseRelationship *new_userel=new CCCC_UseRelationship;
+    DisposeOfImportRecord(new_userel, new_userel->FromFile(ifstr));
+  }
 
   while(PeekAtNextLinePrefix(ifstr,REJEXT_PREFIX))
+  {
+    CCCC_Extent *new_rejext=new CCCC_Extent;
+    CCCC_Item next_line(ifstr);
+    GeneralFromFileStatuses_t fromfile_status=RECORD_ERROR;
+    if(
+      new_rejext->GetFromItem(next_line) &&
+      new_rejext==rejected_extent_table.find_or_insert(new_rejext)
+    )
     {
-      CCCC_Extent *new_rejext=new CCCC_Extent;
-      CCCC_Item next_line(ifstr);
-      GeneralFromFileStatuses_t fromfile_status=RECORD_ERROR;
-      if(
-        new_rejext->GetFromItem(next_line) &&
-        new_rejext==rejected_extent_table.find_or_insert(new_rejext)
-      )
-      {
-        fromfile_status=RECORD_ADDED;
-      }
-      DisposeOfImportRecord(new_rejext,fromfile_status);
+      fromfile_status=RECORD_ADDED;
     }
+    DisposeOfImportRecord(new_rejext,fromfile_status);
+  }
 
   set_active_project(NULL);
 
@@ -321,7 +322,7 @@ int CCCC_Project::FromFile(ifstream& ifstr)
 
 
 string CCCC_Project::name(int level) const {
-    return "";
+  return "";
 }
 
 CCCC_Module *CCCC_Project::find_or_insert_module(CCCC_Module *module){

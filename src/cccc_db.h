@@ -26,10 +26,7 @@
 
 
 #include "cccc_rec.h"
-#include "cccc_mod.h"
-#include "cccc_mem.h"
-#include "cccc_use.h"
-
+#include "cccc_prj.h"
 
 
 /**
@@ -46,9 +43,6 @@ bool PeekAtNextLinePrefix(ifstream& ifstr, string pfx);
 // FromFile methods.
 // There is probably a better way for a less lazy programmer than me.
 extern CCCC_Project *current_loading_project;
-extern CCCC_Module  *current_loading_module;
-extern CCCC_Member  *current_loading_extent;
-extern CCCC_UseRelationship *current_loading_userel;
 
 /** this one tracks the line number in the input file */
 extern int ifstr_line;
