@@ -22,8 +22,6 @@
  * \brief this file defines XML output facilities for the CCCC project
  */
 
-#include "cccc.h"
-#include "cccc_itm.h"
 #include "cccc_xml.h"
 
 #include <unistd.h>
@@ -31,7 +29,6 @@
 #include <string.h>
 #include <time.h>
 #include <sys/stat.h>
-#include "cccc_utl.h"
 
 
 // class static data members

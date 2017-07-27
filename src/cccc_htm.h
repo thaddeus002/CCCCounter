@@ -29,8 +29,11 @@
 #include <fstream>
 #include <time.h>
 
-#include "cccc.h"
-#include "cccc_db.h"
+
+#include "cccc_mod.h"
+#include "cccc_rec.h"
+#include "cccc_ext.h"
+#include "cccc_use.h"
 #include "cccc_met.h"
 
 /**
@@ -54,9 +57,9 @@ enum ReportType {
  */
 class CCCC_Html_Stream {
   friend CCCC_Html_Stream& operator <<(CCCC_Html_Stream& os,
-				       const string& stg);
+               const string& stg);
   friend CCCC_Html_Stream& operator <<(CCCC_Html_Stream& os,
-				       const CCCC_Metric& mtc);
+               const CCCC_Metric& mtc);
 
   ofstream fstr;
   static string libdir;
@@ -90,14 +93,14 @@ class CCCC_Html_Stream {
    * \param heading_level level of the H tag : H1, H2, ...
    */
   void Put_Section_Heading(string section_name,string section_tag,
-			   int section_level);
+         int section_level);
   void Put_Section_TOC_Entry(string section_name, string section_href,
-			     string section_description);
+           string section_description);
 
   void Put_Header_Cell(string label, int width=0);
   void Put_Label_Cell(string label, int width=0,
-		      string ref_name="", string ref_href="",
-		      CCCC_Record *rec_ptr=0);
+          string ref_name="", string ref_href="",
+          CCCC_Record *rec_ptr=0);
   void Put_Metric_Cell(const CCCC_Metric& metric, int width=0);
   void Put_Metric_Cell(int count, string tag, int width=0);
   void Put_Metric_Cell(int num, int denom, string tag, int width=0);
@@ -105,17 +108,17 @@ class CCCC_Html_Stream {
   void Put_Extent_Cell(const CCCC_Extent& extent, int width=0, bool withDescription=false);
   void Put_Extent_List(CCCC_Record& record,bool withDescription=false);
   void Put_Structural_Details_Cell(CCCC_Module *mod,
-				   CCCC_Project *prj,
-				   int mask,
-				   UserelNameLevel nl);
+           CCCC_Project *prj,
+           int mask,
+           UserelNameLevel nl);
 
   void Metric_Description(string abbreviation,
-			  string name,
-			  string description);
+        string name,
+        string description);
 
  public:
   static void GenerateReports(CCCC_Project* project, int report_mask,
-			      const string& outfile, const string& outdir);
+            const string& outfile, const string& outdir);
 
   /** general-purpose constructor with standard preamble */
   CCCC_Html_Stream(const string& fname, const string& info);
