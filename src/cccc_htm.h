@@ -40,14 +40,26 @@
  * Kind of report to insert in the HTML file.
  */
 enum ReportType {
-  rtCONTENTS=0x0001, rtSUMMARY=0x0002,
+  /** show the table of contents */
+  rtCONTENTS=0x0001,
+  /** show project summary */
+  rtSUMMARY=0x0002,
   rtOODESIGN=0x0004,
-  rtPROC1=0x0010, rtPROC2=0x0020,
-  rtSTRUCT1=0x0040, rtSTRUCT2=0x0080,
+  /** show procedureal summary */
+  rtPROC1=0x0010,
+  /** show procedural report */
+  rtPROC2=0x0020,
+  /** show structural summary */
+  rtSTRUCT1=0x0040,
+  /** show structural details */
+  rtSTRUCT2=0x0080,
+  /** show other extents */
   rtOTHER=0x0100,
   rtSEPARATE_MODULES=0x0200,
   rtSOURCE=0x0400,
+  /** To show the report's generation time */
   rtSHOW_GEN_TIME=0x800,
+  /** show CCCC about */
   rtCCCC=0x8000
 };
 
@@ -66,7 +78,17 @@ class CCCC_Html_Stream {
   static string outdir;
   static CCCC_Project* prjptr;
 
-  void Table_Of_Contents(int report_mask, bool showGenTime);
+  /**
+   * Create the table of contents.
+   *
+   * \param report_mask what is in the report
+   * report_mask may content rtSHOW_GEN_TIME for testing purposes :
+   * we want to be able to disable the inclusion
+   * of the current time in the report. This enables us to store a
+   * reference version of the report in RCS and expect the program
+   * to generate an identical one at regression testing time.
+   */
+  void Table_Of_Contents(int report_mask);
   void Project_Summary();
   void Procedural_Summary();
   void Procedural_Detail();

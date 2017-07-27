@@ -51,18 +51,7 @@ void CCCC_Html_Stream::GenerateReports(CCCC_Project* prj,
 
   if(report_mask & rtCONTENTS)
   {
-    // For testing purposes, we want to be able to disable the inclusion
-    // of the current time in the report.  This enables us to store a
-    // reference version of the report in RCS and expect the program
-    // to generate an identical one at regression testing time.
-    if(report_mask & rtSHOW_GEN_TIME)
-    {
-      main_html_stream.Table_Of_Contents(report_mask,true);
-    }
-    else
-    {
-      main_html_stream.Table_Of_Contents(report_mask,false);
-    }
+    main_html_stream.Table_Of_Contents(report_mask);
   }
 
   if(report_mask & rtSUMMARY)
@@ -138,7 +127,18 @@ CCCC_Html_Stream::~CCCC_Html_Stream()
   fstr.close();
 }
 
-void CCCC_Html_Stream::Table_Of_Contents(int report_mask, bool showGenTime)
+
+/**
+ * Create the table of contents.
+ *
+ * \param report_mask what is in the report
+ * report_mask may content rtSHOW_GEN_TIME for testing purposes :
+ * we want to be able to disable the inclusion
+ * of the current time in the report. This enables us to store a
+ * reference version of the report in RCS and expect the program
+ * to generate an identical one at regression testing time.
+ */
+void CCCC_Html_Stream::Table_Of_Contents(int report_mask)
 {
   // record the number of report parts in the table, and the
   // stream put pointer
@@ -158,7 +158,7 @@ void CCCC_Html_Stream::Table_Of_Contents(int report_mask, bool showGenTime)
 
   // we have the option to disable the display of the generation time
   // so that we can generate identical reports for regression testing
-  if(showGenTime==true)
+  if(report_mask & rtSHOW_GEN_TIME)
   {
     time_t generationTime=time(NULL);
     fstr << "<BR> generated " << ctime(&generationTime) << endl;
@@ -1435,6 +1435,14 @@ void CCCC_Html_Stream::Source_Listing()
   source_html_str.fstr << style_close << " </BODY></HTML>" << endl;
 }
 
+/**
+ * Pad a string.
+ *
+ * \param target_width the width wanted for the string
+ * \param the_string string to pad
+ * \param padding char to use for padding
+ * \return a string of size 'target_width' ending by 'the_string'
+ */
 static string pad_string(int target_width, string the_string, string padding)
 {
   int spaces_required=target_width-the_string.size();
