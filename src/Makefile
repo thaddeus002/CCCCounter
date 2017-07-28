@@ -111,7 +111,7 @@ LANG_DEFINES = $(CC_LANG_DEFINE) $(JAVA_LANG_DEFINE) $(ADA_LANG_DEFINE)
 
 # object files compiled from .cc files which are part of the cccc source
 USR_OBJ = \
-	ccccmain.$(OBJEXT) cccc_utl.$(OBJEXT) cccc_opt.$(OBJEXT) \
+	ccccmain.$(OBJEXT) cccc_utl.$(OBJEXT) cccc_parseStore.$(OBJEXT) cccc_opt.$(OBJEXT) \
 	cccc_db.$(OBJEXT)  cccc_rec.$(OBJEXT) cccc_ext.$(OBJEXT) \
 	cccc_prj.$(OBJEXT) cccc_mod.$(OBJEXT) cccc_mem.$(OBJEXT) \
 	cccc_use.$(OBJEXT) cccc_met.$(OBJEXT) cccc_htm.$(OBJEXT) cccc_xml.$(OBJEXT) \
