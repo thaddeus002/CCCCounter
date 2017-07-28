@@ -37,9 +37,10 @@
 
 #include <map>
 #include <vector>
+#include <string>
+using std::string;
 
-#include "cccc_extent_utils.h"
-#include "cccc.h"
+
 #include "cccc_tok.h"
 
 // The -gd option generates uncompilable code with a missing

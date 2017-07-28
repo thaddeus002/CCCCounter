@@ -25,13 +25,9 @@
  * error recovery and recording facilities across the three parsers
  */
 
-#include "cccc.h"
 
-#include "cccc_itm.h"
-#include "cccc_utl.h"
 #include "cccc_parseStore.h"
-#include "cccc_db.h"
-#include "cccc_tok.h"
+#include "cccc.h"
 #include "AParser.h"
 #include "ATokPtr.h"
 
