@@ -37,7 +37,8 @@
  * Subclasses may also have particular other names, which should be defined
  * using negative indexes.
  */
-typedef enum NameLevel { nlRANK, nlSEARCH, nlSIMPLE, nlLOCAL, nlGLOBAL } NameLevel_t;
+enum NameLevel { nlRANK, nlSEARCH, nlSIMPLE, nlLOCAL, nlGLOBAL };
+typedef  enum NameLevel NameLevel_t;
 
 /**
  * The various FromFile functions need to indicate to their
@@ -53,7 +54,7 @@ typedef enum NameLevel { nlRANK, nlSEARCH, nlSIMPLE, nlLOCAL, nlGLOBAL } NameLev
  * and merged into the instance in the database, and the locally allocated
  * instance must be deleted.
  */
-typedef enum GeneralFromFileStatuses
+enum GeneralFromFileStatuses
 {
   RECORD_TRANSCRIBED = 0,
   RECORD_ADDED       = 1,
@@ -62,7 +63,8 @@ typedef enum GeneralFromFileStatuses
   // value defined as a literal
   /** Status specific to CCCC_Member objects */
   MEMBER_RECORD_NO_PARENT_FOUND=3
-} GeneralFromFileStatuses_t;
+};
+typedef enum GeneralFromFileStatuses GeneralFromFileStatuses_t;
 
 class CCCC_Record
 {

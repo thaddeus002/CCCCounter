@@ -36,8 +36,8 @@ using std::string;
  * Identifie a parametre of the objet.
  * To use with CCCC_Extent::name()
  */
-typedef enum ExtentNameLevel { nlFILENAME=-1, nlLINENUMBER=-2, nlDESCRIPTION=-3, nlKEY=0} ExtentNameLevel_t;
-
+enum ExtentNameLevel { nlFILENAME=-1, nlLINENUMBER=-2, nlDESCRIPTION=-3, nlKEY=0};
+typedef enum ExtentNameLevel ExtentNameLevel_t;
 
 /**
  * This may be an object representation of an code Item.
