@@ -38,9 +38,8 @@ bool PeekAtNextLinePrefix(ifstream& ifstr, string pfx);
 
 
 
-// These are global variables because I don't want to have
-// to pass the project, module, member, relationship down into all of the
-// FromFile methods.
+// This is global variable because I don't want to have
+// to pass the project down into all of the FromFile methods.
 // There is probably a better way for a less lazy programmer than me.
 extern CCCC_Project *current_loading_project;
 
