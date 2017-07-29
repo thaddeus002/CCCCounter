@@ -32,6 +32,9 @@
 #include <string>
 using std::string;
 
+/** File that contains the sources listings */
+#define SRC_FILE "cccc_src.html"
+
 typedef std::map<string,Source_Anchor> source_anchor_map_t;
 source_anchor_map_t source_anchor_map;
 
@@ -1423,7 +1426,7 @@ void CCCC_Html_Stream::Source_Listing()
   const char *style_open="<TT>", *style_close="</TT>";
 
   string filename=outdir;
-  filename+="/cccc_src.html";
+  filename = filename + "/" + SRC_FILE;
   CCCC_Html_Stream source_html_str(filename.c_str(),"source file");
 
   source_html_str.fstr << style_open << endl;
@@ -1521,7 +1524,7 @@ void Source_Anchor::Emit_HREF(ofstream& fstr)
 {
   string anchor_key=key();
 
-  fstr << "<CODE><A HREF=\"cccc_src.html#" << anchor_key.c_str() << "\">"
+  fstr << "<CODE><A HREF=\"" << SRC_FILE << "#" << anchor_key.c_str() << "\">"
        << file_.c_str() << ":" << line_
        << "</A></CODE>";
 }
