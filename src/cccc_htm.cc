@@ -177,7 +177,7 @@ void CCCC_Html_Stream::GenerateReports(CCCC_Project* prj,
 
 CCCC_Html_Stream::~CCCC_Html_Stream()
 {
-  fstr << "</BODY></HTML>" << endl;
+  fstr << "</body></html>" << endl;
   fstr.close();
 }
 
@@ -201,8 +201,8 @@ void CCCC_Html_Stream::Table_Of_Contents(int report_mask)
   int number_of_report_parts=0;
   int saved_stream_offset=fstr.tellp();
 
-  fstr << "<TABLE BORDER WIDTH=100%>" << endl
-       << "<TR><TH COLSPAN=2>" << endl
+  fstr << "<table border width=100%>" << endl
+       << "<tr><th colspan=2>" << endl
        << "CCCC Software Metrics Report";
   if( prjptr->name(nlSIMPLE)!="" )
   {
@@ -215,10 +215,10 @@ void CCCC_Html_Stream::Table_Of_Contents(int report_mask)
   if(report_mask & rtSHOW_GEN_TIME)
   {
     time_t generationTime=time(NULL);
-    fstr << "<BR> generated " << ctime(&generationTime) << endl;
+    fstr << "<br> generated " << ctime(&generationTime) << endl;
   }
 
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
   if(report_mask & rtSUMMARY)
   {
@@ -307,7 +307,7 @@ void CCCC_Html_Stream::Table_Of_Contents(int report_mask)
     number_of_report_parts++;
   }
 
-  fstr << "</TR></TABLE>" << endl;
+  fstr << "</tr></table>" << endl;
   if(number_of_report_parts<2)
   {
     fstr.seekp(saved_stream_offset);
@@ -319,10 +319,10 @@ void CCCC_Html_Stream::Put_Section_Heading(
              string heading_tag,
              int heading_level)
 {
-  fstr << "<H" << heading_level << ">"
-       << "<A NAME=\"" << heading_tag << "\">"
+  fstr << "<h" << heading_level << ">"
+       << "<a name=\"" << heading_tag << "\">"
        << heading_title
-       << "</A></H" << heading_level
+       << "</a></h" << heading_level
        << ">" << endl;
 }
 
@@ -331,7 +331,7 @@ void  CCCC_Html_Stream::Project_Summary() {
 
   fstr << "This table shows measures over the project as a whole." << endl;
 
-  fstr << "<UL>" << endl;
+  fstr << "<ul>" << endl;
   Metric_Description("NOM","Number of modules",
          "Number of non-trivial modules identified by the "
          "analyser.  Non-trivial modules include all classes, "
@@ -364,7 +364,7 @@ void  CCCC_Html_Stream::Project_Summary() {
          "count of this by counting inter-module couplings "
          "identified in the module interfaces.");
 
-  fstr << "</UL>" << endl
+  fstr << "</ul>" << endl
        << "Two variants on the information flow measure IF4 are also "
        << "presented, one (IF4v) calculated using only relationships in the "
        << "visible part of the module interface, and the other (IF4c) "
@@ -383,91 +383,91 @@ void  CCCC_Html_Stream::Project_Summary() {
   int if4c=prjptr->get_count("IF4c");  // intermodule complexity (concrete only)
   int rej=prjptr->rejected_extent_table.get_count("LOC");
 
-  fstr << "<TABLE BORDER WIDTH=100%>" << endl
-       << "<TR>" << endl;
+  fstr << "<table border width=100%>" << endl
+       << "<tr>" << endl;
   Put_Header_Cell("Metric",70);
   Put_Header_Cell("Tag",10);
   Put_Header_Cell("Overall",10);
   Put_Header_Cell("Per Module",10);
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Number of modules");
   Put_Label_Cell("NOM");
   Put_Metric_Cell(nom);
   Put_Label_Cell("");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Lines of Code",700);
   Put_Label_Cell("LOC",120);
   Put_Metric_Cell(loc,"LOCp");
   Put_Metric_Cell(loc,nom,"LOCper");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("McCabe's Cyclomatic Number");
   Put_Label_Cell("MVG");
   Put_Metric_Cell(mvg,"MVGp");
   Put_Metric_Cell(mvg,nom,"MVGper");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Lines of Comment");
   Put_Label_Cell("COM");
   Put_Metric_Cell(com,"COM");
   Put_Metric_Cell(com,nom,"COMper");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("LOC/COM");
   Put_Label_Cell("L_C");
   Put_Metric_Cell(loc,com,"L_C");
   Put_Label_Cell("");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("MVG/COM");
   Put_Label_Cell("M_C");
   Put_Metric_Cell(mvg,com,"M_C");
   Put_Label_Cell("");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Information Flow measure (inclusive)");
   Put_Label_Cell("IF4");
   Put_Metric_Cell(if4);
   Put_Metric_Cell(if4,nom,"8.3");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Information Flow measure (visible)");
   Put_Label_Cell("IF4v");
   Put_Metric_Cell(if4v);
   Put_Metric_Cell(if4v,nom,"8.3");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Information Flow measure (concrete)");
   Put_Label_Cell("IF4c");
   Put_Metric_Cell(if4c);
   Put_Metric_Cell(if4c,nom,"8.3");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Lines of Code rejected by parser");
   Put_Label_Cell("REJ");
   Put_Metric_Cell(rej,"REJ");
   Put_Label_Cell("");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "</TABLE>" << endl;
+  fstr << "</table>" << endl;
 }
 
 void CCCC_Html_Stream::OO_Design() {
   Put_Section_Heading("Object Oriented Design","oodesign",1);
 
-  fstr << "<UL>" << endl;
+  fstr << "<ul>" << endl;
   Metric_Description("WMC","Weighted methods per class",
          "The sum of a weighting function over the functions of "
          "the module.  Two different weighting functions are "
@@ -492,15 +492,15 @@ void CCCC_Html_Stream::OO_Design() {
          "current module either as a client or a supplier. "
          "Excessive coupling indicates weakness of module "
          "encapsulation and may inhibit reuse.");
-  fstr << "</UL>" << endl << endl;
+  fstr << "</ul>" << endl << endl;
 
   fstr << "The label cell for each row in this table provides a link to "
        << "the module summary table in the detailed report for the "
        << "module in question" << endl;
 
 
-  fstr << "<TABLE BORDER WIDTH=100%>" << endl
-       << "<TR>" << endl;
+  fstr << "<table border width=100%>" << endl
+       << "<tr>" << endl;
   Put_Header_Cell("Module Name",50);
   Put_Header_Cell("WMC1",10);
   Put_Header_Cell("WMCv",10);
@@ -508,7 +508,7 @@ void CCCC_Html_Stream::OO_Design() {
   Put_Header_Cell("NOC",10);
   Put_Header_Cell("CBO",10);
 
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
   CCCC_Module* mod_ptr=prjptr->module_table.first_item();
   int i=0;
@@ -518,7 +518,7 @@ void CCCC_Html_Stream::OO_Design() {
     if( mod_ptr->is_trivial() == FALSE)
     {
       const char *metric_tags[5]={"WMC1","WMCv","DIT","NOC","CBO"};
-      fstr << "<TR>" << endl;
+      fstr << "<tr>" << endl;
 
       string href=mod_ptr->key()+".html#summary";
 
@@ -533,12 +533,12 @@ void CCCC_Html_Stream::OO_Design() {
                );
         Put_Metric_Cell(metric_value);
       }
-      fstr << "</TR>" << endl;
+      fstr << "</tr>" << endl;
     }
     mod_ptr=prjptr->module_table.next_item();
   }
 
-  fstr << "</TABLE>" << endl;
+  fstr << "</table>" << endl;
 }
 
 void CCCC_Html_Stream::Procedural_Summary() {
@@ -552,8 +552,8 @@ void CCCC_Html_Stream::Procedural_Summary() {
        << "the functions table in the detailed report for the "
        << "module in question" << endl;
 
-  fstr << "<TABLE BORDER WIDTH=100%>" << endl
-       << "<TR>" << endl;
+  fstr << "<table border width=100%>" << endl
+       << "<tr>" << endl;
   Put_Header_Cell("Module Name");
   Put_Header_Cell("LOC",8);
   Put_Header_Cell("MVG",8);
@@ -561,7 +561,7 @@ void CCCC_Html_Stream::Procedural_Summary() {
   Put_Header_Cell("L_C",8);
   Put_Header_Cell("M_C",8);
 
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
   CCCC_Module* mod_ptr=prjptr->module_table.first_item();
   int i=0;
@@ -570,7 +570,7 @@ void CCCC_Html_Stream::Procedural_Summary() {
     i++;
     if( mod_ptr->is_trivial() == FALSE)
     {
-      fstr << "<TR>" << endl;
+      fstr << "<tr>" << endl;
       string href=mod_ptr->key()+".html#procdet";
 
       Put_Label_Cell(mod_ptr->name(nlSIMPLE).c_str(),0,"",href.c_str());
@@ -588,19 +588,19 @@ void CCCC_Html_Stream::Procedural_Summary() {
       Put_Metric_Cell(ml_c);
       Put_Metric_Cell(mm_c);
 
-      fstr << "</TR>" << endl;
+      fstr << "</tr>" << endl;
     }
     mod_ptr=prjptr->module_table.next_item();
   }
 
-  fstr << "</TABLE>" << endl;
+  fstr << "</table>" << endl;
 }
 
 void CCCC_Html_Stream::Structural_Summary()
 {
   Put_Section_Heading("Structural Metrics Summary","structsum",1);
 
-  fstr << "<UL>" << endl;
+  fstr << "<ul>" << endl;
   Metric_Description("FI","Fan-in",
          "The number of other modules which pass information "
          "into the current module.");
@@ -612,7 +612,7 @@ void CCCC_Html_Stream::Structural_Summary()
          "calculated as the square of the product of the fan-in "
          "and fan-out of a single module.  Proposed by Henry and "
          "Kafura.");
-  fstr << "</UL>" << endl;
+  fstr << "</ul>" << endl;
 
   fstr << "Note that the fan-in and fan-out are calculated by examining the "
        << "interface of each module.  As noted above, three variants of each "
@@ -627,13 +627,13 @@ void CCCC_Html_Stream::Structural_Summary()
        << "the relationships table in the detailed report for the "
        << "module in question" << endl << endl;
 
-  fstr << "<TABLE BORDER WIDTH=100%>" << endl;
-  fstr  << "<TR>" << endl
-  << "<TH BGCOLOR=AQUA ROWSPAN=2>Module Name</TH>" << endl
-  << "<TH BGCOLOR=AQUA COLSPAN=3>Fan-out</TH>" << endl
-  << "<TH BGCOLOR=AQUA COLSPAN=3>Fan-in</TH>" << endl
-  << "<TH BGCOLOR=AQUA COLSPAN=3>IF4</TH>" << endl
-  << "</TR>" << endl;
+  fstr << "<table border width=100%>" << endl;
+  fstr  << "<tr>" << endl
+  << "<th bgcolor=AQUA rowspan=2>Module Name</th>" << endl
+  << "<th bgcolor=AQUA colspan=3>Fan-out</th>" << endl
+  << "<th bgcolor=AQUA colspan=3>Fan-in</th>" << endl
+  << "<th bgcolor=AQUA colspan=3>IF4</th>" << endl
+  << "</tr>" << endl;
   Put_Header_Cell("vis",7);
   Put_Header_Cell("con",7);
   Put_Header_Cell("inc",7);
@@ -644,14 +644,14 @@ void CCCC_Html_Stream::Structural_Summary()
   Put_Header_Cell("con",7);
   Put_Header_Cell("inc",7);
 
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
   CCCC_Module* module_ptr=prjptr->module_table.first_item();
   while(module_ptr!=NULL)
   {
     if(module_ptr->is_trivial()==FALSE)
     {
-      fstr << "<TR>" << endl;
+      fstr << "<tr>" << endl;
 
       int fov=module_ptr->get_count("FOv");
       int foc=module_ptr->get_count("FOc");
@@ -679,17 +679,17 @@ void CCCC_Html_Stream::Structural_Summary()
       Put_Metric_Cell(CCCC_Metric(if4c,"IF4c"));
       Put_Metric_Cell(CCCC_Metric(if4,"IF4"));
 
-      fstr << "</TR>" << endl;
+      fstr << "</tr>" << endl;
     }
     module_ptr=prjptr->module_table.next_item();
   }
-  fstr << "</TABLE>" << endl;
+  fstr << "</table>" << endl;
 }
 
 void CCCC_Html_Stream::Put_Structural_Details_Cell(
                CCCC_Module *mod, CCCC_Project *prj, int mask, UserelNameLevel nl)
 {
-  fstr << "<TD WIDTH=50%>" << endl;
+  fstr << "<td width=50%>" << endl;
 
 #ifdef DEBUG
   std::cerr << "Relationships for " << mod->name(nlMODULE_NAME)
@@ -743,47 +743,47 @@ void CCCC_Html_Stream::Put_Structural_Details_Cell(
       {
         fstr << "[C] ";
       }
-      fstr << "<BR>" << endl;
+      fstr << "<br>" << endl;
       Put_Extent_List(*ur_ptr,true);
-      fstr << "<BR>" << endl;
+      fstr << "<br>" << endl;
     }
   }
   // put a non-breaking space in to avoid the unpleasantness which
   // goes with completely empty cells
   fstr << "&nbsp;" << endl;
 
-  fstr << "</TD>" << endl;
+  fstr << "</td>" << endl;
 }
 
 void CCCC_Html_Stream::Structural_Detail()
 {
   Put_Section_Heading("Structural Metrics Detail","structdet",1);
-  fstr << "<TABLE BORDER WIDTH=100%>" << endl;
-  fstr  << "<TR>" << endl;
+  fstr << "<table border width=100%>" << endl;
+  fstr  << "<tr>" << endl;
   Put_Header_Cell("Module Name",20);
   Put_Header_Cell("Clients",40);
   Put_Header_Cell("Suppliers",40);
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
   CCCC_Module* module_ptr=prjptr->module_table.first_item();
   while(module_ptr!=NULL)
   {
     if(module_ptr->is_trivial()==FALSE)
     {
-      fstr << "<TR>" << endl;
+      fstr << "<tr>" << endl;
       Put_Label_Cell(module_ptr->name(nlSIMPLE).c_str(), 0, "structdet","structsum");
       Structural_Detail(module_ptr);
-      fstr << "</TR>" << endl;
+      fstr << "</tr>" << endl;
     }
     module_ptr=prjptr->module_table.next_item();
   }
-  fstr << "</TABLE>" << endl;
+  fstr << "</table>" << endl;
 }
 
 void CCCC_Html_Stream::Procedural_Detail() {
   Put_Section_Heading("Procedural Metrics Detail","procdet",1);
 
-  fstr << "<TABLE BORDER WIDTH=100%>" << endl;
+  fstr << "<table border width=100%>" << endl;
 
   CCCC_Module* mod_ptr=prjptr->module_table.first_item();
   while(mod_ptr!=NULL)
@@ -794,7 +794,7 @@ void CCCC_Html_Stream::Procedural_Detail() {
      (mod_ptr->name(nlMODULE_TYPE)!="union")
      )
     {
-      fstr  << "<TR>" << endl;
+      fstr  << "<tr>" << endl;
       Put_Label_Cell(mod_ptr->name(nlSIMPLE).c_str(),50,
          "procdet","procsum",mod_ptr);
       Put_Header_Cell("LOC",10);
@@ -803,68 +803,68 @@ void CCCC_Html_Stream::Procedural_Detail() {
       Put_Header_Cell("L_C",10);
       Put_Header_Cell("M_C",10);
 
-      fstr << "</TR>" << endl;
+      fstr << "</tr>" << endl;
       Procedural_Detail(mod_ptr);
     }
     mod_ptr=prjptr->module_table.next_item();
   }
-  fstr << "</TABLE>" << endl;
+  fstr << "</table>" << endl;
 }
 
 void CCCC_Html_Stream::Other_Extents()
 {
   Put_Section_Heading("Other Extents","other",1);
-  fstr << "<TABLE BORDER WIDTH=100%>" << endl;
-  fstr << "<TR>" << endl;
+  fstr << "<table border width=100%>" << endl;
+  fstr << "<tr>" << endl;
   Put_Header_Cell("Location",25);
   Put_Header_Cell("Text",45);
   Put_Header_Cell("LOC",10);
   Put_Header_Cell("COM",10);
   Put_Header_Cell("MVG",10);
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
   if(prjptr->rejected_extent_table.records() == 0)
   {
-    fstr << "<TR><TD COLSPAN=5>"
+    fstr << "<tr><td colspan=5>"
      << "&nbsp;"
-     << "</TD></TR>" << endl;
+     << "</td></tr>" << endl;
   }
   else
   {
     CCCC_Extent *extent_ptr=prjptr->rejected_extent_table.first_item();
     while(extent_ptr!=NULL)
     {
-      fstr << "<TR>";
+      fstr << "<tr>";
       Put_Extent_Cell(*extent_ptr,0);
       Put_Label_Cell(extent_ptr->name(nlDESCRIPTION).c_str());
       Put_Metric_Cell(extent_ptr->get_count("LOC"),"");
       Put_Metric_Cell(extent_ptr->get_count("COM"),"");
       Put_Metric_Cell(extent_ptr->get_count("MVG"),"");
-      fstr << "</TR>" << endl;
+      fstr << "</tr>" << endl;
       extent_ptr=prjptr->rejected_extent_table.next_item();
     }
   }
-  fstr << "</TABLE>" << endl;
+  fstr << "</table>" << endl;
 }
 
 void CCCC_Html_Stream::Put_Section_TOC_Entry(
                string section_name, string section_href,
                string section_description)
 {
-  fstr << "<TR>" << endl
-       << "<TH><H4><A HREF=\"#" << section_href << "\">"
-       << section_name << "</A></H4></TH>" << endl
-       << "<TD>" << endl
+  fstr << "<tr>" << endl
+       << "<th><h4><a href=\"#" << section_href << "\">"
+       << section_name << "</a></h4></th>" << endl
+       << "<td>" << endl
        << section_description << endl
-       << "</TR>" << endl;
+       << "</tr>" << endl;
 }
 
 void CCCC_Html_Stream::Put_Header_Cell(string label, int width)
 {
-  fstr << "<TH BGCOLOR=\"AQUA\"";
+  fstr << "<th bgcolor=\"AQUA\"";
   if(width>0)
   {
-    fstr << " WIDTH=" << width << "%" ;
+    fstr << " width=" << width << "%" ;
   }
   fstr << ">" ;
   if(label.size()>0)
@@ -877,7 +877,7 @@ void CCCC_Html_Stream::Put_Header_Cell(string label, int width)
     // bevelling associated with empty cells
     fstr << "&nbsp;";
   }
-  fstr << "</TH>";
+  fstr << "</th>";
 }
 
 void CCCC_Html_Stream::Put_Label_Cell(
@@ -885,10 +885,10 @@ void CCCC_Html_Stream::Put_Label_Cell(
               string ref_name, string ref_href,
               CCCC_Record *rec_ptr)
 {
-  fstr << "<TD";
+  fstr << "<td";
   if(width>0)
   {
-    fstr << " WIDTH=" << width <<"%";
+    fstr << " width=" << width <<"%";
   }
   fstr << ">" ;
 
@@ -896,14 +896,14 @@ void CCCC_Html_Stream::Put_Label_Cell(
   {
     // we need to insert an HTML "<A NAME=...> tag for the current cell
     // this enables other locations to jump in
-    fstr << "<A NAME=\"" << ref_name << "\"></A>" << endl;
+    fstr << "<a name=\"" << ref_name << "\"></a>" << endl;
   }
 
   if(ref_href.size() > 0)
   {
     // we need to insert an HTML <A HREF=...> tag for the current cell
     // this enables this cell to be a link to jump out
-    fstr << "<A HREF=\"" << ref_href << "\">" << endl;
+    fstr << "<a href=\"" << ref_href << "\">" << endl;
     // this anchor will need to be closed after the label has been displayed
   }
 
@@ -921,16 +921,16 @@ void CCCC_Html_Stream::Put_Label_Cell(
   if(ref_href.size() > 0)
   {
     // closing the anchor we opened above
-    fstr << "</A>" << endl;
+    fstr << "</a>" << endl;
   }
 
   if(rec_ptr != 0)
   {
-    fstr << "<BR>" << endl;
+    fstr << "<br>" << endl;
     Put_Extent_List(*rec_ptr,true);
   }
 
-  fstr << "</TD>";
+  fstr << "</td>";
 }
 
 
@@ -950,20 +950,20 @@ void CCCC_Html_Stream::Put_Metric_Cell(
 
 void  CCCC_Html_Stream::Put_Metric_Cell(const CCCC_Metric& metric, int width)
 {
-  fstr << "<TD ALIGN=RIGHT";
+  fstr << "<td align=RIGHT";
 
   if(width>0)
   {
-    fstr << " WIDTH=" << width << "%" ;
+    fstr << " width=" << width << "%" ;
   }
 
   switch(metric.emphasis_level())
   {
     case elMEDIUM:
-      fstr << " BGCOLOR=\"YELLOW\"";
+      fstr << " bgcolor=\"YELLOW\"";
       break;
     case elHIGH:
-      fstr << " BGCOLOR=\"RED\"";
+      fstr << " bgcolor=\"RED\"";
       break;
     default:
       // no background colour
@@ -972,7 +972,7 @@ void  CCCC_Html_Stream::Put_Metric_Cell(const CCCC_Metric& metric, int width)
   fstr << ">";
 
   *this << metric;
-  fstr << "</TD>";
+  fstr << "</td>";
 }
 
 void CCCC_Html_Stream::Put_Extent_URL(const CCCC_Extent& extent)
@@ -988,14 +988,14 @@ void CCCC_Html_Stream::Put_Extent_URL(const CCCC_Extent& extent)
   anchor.Emit_HREF(fstr);
   fstr
   // << extent.name(nlDESCRIPTION)
-  << "<BR>" << endl;
+  << "<br>" << endl;
 }
 
 void CCCC_Html_Stream::Put_Extent_Cell(const CCCC_Extent& extent, int width, bool withDescription) {
-  fstr << "<TD";
+  fstr << "<td";
   if(width>0)
   {
-    fstr << " WIDTH=" << width << "%>";
+    fstr << " width=" << width << "%>";
   }
   else
   {
@@ -1006,7 +1006,7 @@ void CCCC_Html_Stream::Put_Extent_Cell(const CCCC_Extent& extent, int width, boo
     fstr << extent.name(nlDESCRIPTION) << " &nbsp;" << endl;
   }
   Put_Extent_URL(extent);
-  fstr << "</TD>" << endl;
+  fstr << "</td>" << endl;
 }
 
 void CCCC_Html_Stream::Put_Extent_List(CCCC_Record& record, bool withDescription)
@@ -1021,7 +1021,7 @@ void CCCC_Html_Stream::Put_Extent_List(CCCC_Record& record, bool withDescription
       Put_Extent_URL(*ext_ptr);
       ext_ptr=record.extent_table.next_item();
   }
-  fstr << "<BR>" << endl;
+  fstr << "<br>" << endl;
 }
 
 // the next two methods define the two basic output operations through which
@@ -1057,8 +1057,8 @@ CCCC_Html_Stream& operator <<(CCCC_Html_Stream& os, const string& stg)
 
 CCCC_Html_Stream& operator <<(CCCC_Html_Stream& os, const CCCC_Metric& mtc)
 {
-  const char *emphasis_prefix[]={"","<EM>","<STRONG>"};
-  const char *emphasis_suffix[]={"","</EM>","</STRONG>"};
+  const char *emphasis_prefix[]={"","<em>","<strong>"};
+  const char *emphasis_suffix[]={"","</em>","</strong>"};
 
   // by writing to the underlying ostream object, we avoid the escape
   // functionality
@@ -1091,7 +1091,7 @@ void CCCC_Html_Stream::Separate_Modules()
 
       module_html_str.Put_Section_Heading("Definitions and Declarations",
                       "modext",2);
-      module_html_str.fstr  << "<TABLE BORDER WIDTH=100%><TR>" << endl;
+      module_html_str.fstr  << "<table border width=100%><tr>" << endl;
       module_html_str.Put_Label_Cell("Description",50);
       module_html_str.Put_Header_Cell("LOC",10);
       module_html_str.Put_Header_Cell("MVG",10);
@@ -1099,10 +1099,10 @@ void CCCC_Html_Stream::Separate_Modules()
       module_html_str.Put_Header_Cell("L_C",10);
       module_html_str.Put_Header_Cell("M_C",10);
       module_html_str.Module_Detail(mod_ptr);
-      module_html_str.fstr << "</TR></TABLE>" << endl;
+      module_html_str.fstr << "</tr></table>" << endl;
 
       module_html_str.Put_Section_Heading("Functions","proc",2);
-      module_html_str.fstr  << "<TABLE BORDER WIDTH=100%><TR>" << endl;
+      module_html_str.fstr  << "<table border width=100%><tr>" << endl;
       module_html_str.Put_Label_Cell("Function prototype",50);
       module_html_str.Put_Header_Cell("LOC",10);
       module_html_str.Put_Header_Cell("MVG",10);
@@ -1110,16 +1110,16 @@ void CCCC_Html_Stream::Separate_Modules()
       module_html_str.Put_Header_Cell("L_C",10);
       module_html_str.Put_Header_Cell("M_C",10);
       module_html_str.Procedural_Detail(mod_ptr);
-      module_html_str.fstr << "</TR></TABLE>" << endl;
+      module_html_str.fstr << "</tr></table>" << endl;
 
       module_html_str.Put_Section_Heading("Relationships","structdet",2);
       module_html_str.fstr
-        << "<TABLE BORDER WIDTH=100%>" << endl
-        << "<TR><TH WIDTH=50%>Clients</TH><TH WIDTH=50%>Suppliers</TH></TR>"
+        << "<table border width=100%>" << endl
+        << "<tr><th width=50%>Clients</th><th width=50%>Suppliers</th></tr>"
         << endl
-        << "<TR>" << endl;
+        << "<tr>" << endl;
       module_html_str.Structural_Detail(mod_ptr);
-      module_html_str.fstr << "</TR></TABLE>" << endl;
+      module_html_str.fstr << "</tr></table>" << endl;
     }
     else
     {
@@ -1148,16 +1148,16 @@ void CCCC_Html_Stream::Module_Detail(CCCC_Module *module_ptr)
   CCCC_Record::Extent_Table::iterator eIter = module_ptr->extent_table.begin();
   if(eIter==module_ptr->extent_table.end())
   {
-    fstr << "<TR><TD COLSPAN=6>"
+    fstr << "<tr><td colspan=6>"
        << "No module extents have been identified for this module"
-       << "</TD></TR>" << endl;
+       << "</td></tr>" << endl;
   }
   else
   {
     while(eIter!=module_ptr->extent_table.end())
     {
       CCCC_Extent *ext_ptr=(*eIter).second;
-      fstr << "<TR>" << endl;
+      fstr << "<tr>" << endl;
       Put_Extent_Cell(*ext_ptr,0,true);
       int loc=ext_ptr->get_count("LOC");
       int mvg=ext_ptr->get_count("MVG");
@@ -1172,13 +1172,13 @@ void CCCC_Html_Stream::Module_Detail(CCCC_Module *module_ptr)
       Put_Metric_Cell(com);
       Put_Metric_Cell(ml_c);
       Put_Metric_Cell(mm_c);
-      fstr << "</TR>" << endl;
+      fstr << "</tr>" << endl;
 
       eIter++;
     }
   }
 
-  fstr << "<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>" << endl;
+  fstr << "<tr><td height=12 colspan=6></td></tr>" << endl;
 }
 
 void CCCC_Html_Stream::Procedural_Detail(CCCC_Module *module_ptr)
@@ -1198,16 +1198,16 @@ void CCCC_Html_Stream::Procedural_Detail(CCCC_Module *module_ptr)
 
   if(iter==module_ptr->member_map.end())
   {
-    fstr << "<TR><TD COLSPAN=6>"
+    fstr << "<tr><td colspan=6>"
        << "No member functions have been identified for this module"
-       << "</TD></TR>" << endl;
+       << "</td></tr>" << endl;
   }
   else
   {
     while(iter!=module_ptr->member_map.end())
     {
       CCCC_Member *mem_ptr=(*iter).second;
-      fstr << "<TR>" << endl;
+      fstr << "<tr>" << endl;
       Put_Label_Cell(mem_ptr->name(nlLOCAL).c_str(),0,"","",mem_ptr);
       int loc=mem_ptr->get_count("LOC");
       int mvg=mem_ptr->get_count("MVG");
@@ -1222,12 +1222,12 @@ void CCCC_Html_Stream::Procedural_Detail(CCCC_Module *module_ptr)
       Put_Metric_Cell(com);
       Put_Metric_Cell(ml_c);
       Put_Metric_Cell(mm_c);
-      fstr << "</TR>" << endl;
+      fstr << "</tr>" << endl;
 
       iter++;
     }
   }
-  fstr << "<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>" << endl;
+  fstr << "<tr><td height=12 colspan=6></td></tr>" << endl;
 }
 
 void CCCC_Html_Stream::Metric_Description(
@@ -1236,7 +1236,7 @@ void CCCC_Html_Stream::Metric_Description(
             string description)
 {
   // this is intended to be called in the context of an unnumbered list
-  fstr << "<LI>" << abbreviation << " = " << name << "<BR>" << endl
+  fstr << "<li>" << abbreviation << " = " << name << "<br>" << endl
        << description << endl;
 }
 
@@ -1269,106 +1269,106 @@ void CCCC_Html_Stream::Module_Summary(CCCC_Module *module_ptr)
   // number of functions is set to the weighted methods
   int nof=wmc1;
 
-  fstr << "<TABLE BORDER WIDTH=100%>" << endl
-       << "<TR>" << endl;
+  fstr << "<table border width=100%>" << endl
+       << "<tr>" << endl;
   Put_Header_Cell("Metric",70);
   Put_Header_Cell("Tag",10);
   Put_Header_Cell("Overall",10);
   Put_Header_Cell("Per Function",10);
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Lines of Code");
   Put_Label_Cell("LOC");
   Put_Metric_Cell(loc,"LOCm");
   Put_Metric_Cell(loc,nof,"LOCf");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("McCabe's Cyclomatic Number");
   Put_Label_Cell("MVG");
   Put_Metric_Cell(mvg,"MVGm");
   Put_Metric_Cell(mvg,nof,"MVGf");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Lines of Comment");
   Put_Label_Cell("COM");
   Put_Metric_Cell(com,"COMm");
   Put_Metric_Cell(com,nof,"8.3");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("LOC/COM");
   Put_Label_Cell("L_C");
   Put_Metric_Cell(loc,com,"L_C");
   Put_Label_Cell("");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("MVG/COM");
   Put_Label_Cell("M_C");
   Put_Metric_Cell(mvg,com,"M_C");
   Put_Label_Cell("");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Weighted Methods per Class (weighting = unity)");
   Put_Label_Cell("WMC1");
   Put_Metric_Cell(wmc1);
   Put_Label_Cell(""); // wmc1 should be identical to nof
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Weighted Methods per Class (weighting = visible)");
   Put_Label_Cell("WMCv");
   Put_Metric_Cell(wmcv);
   Put_Label_Cell("");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Depth of Inheritance Tree");
   Put_Label_Cell("DIT");
   Put_Metric_Cell(dit);
   Put_Label_Cell("");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Number of Children");
   Put_Label_Cell("NOC");
   Put_Metric_Cell(noc);
   Put_Label_Cell("");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Coupling between objects");
   Put_Label_Cell("CBO");
   Put_Metric_Cell(cbo);
   Put_Label_Cell("");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Information Flow measure (inclusive)");
   Put_Label_Cell("IF4");
   Put_Metric_Cell(if4,1,"IF4");
   Put_Metric_Cell(if4,nof,"8.3");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Information Flow measure (visible)");
   Put_Label_Cell("IF4v");
   Put_Metric_Cell(if4v,1,"IF4v");
   Put_Metric_Cell(if4v,nof,"8.3");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "<TR>" << endl;
+  fstr << "<tr>" << endl;
   Put_Label_Cell("Information Flow measure (concrete)");
   Put_Label_Cell("IF4c");
   Put_Metric_Cell(if4c,1,"IF4c");
   Put_Metric_Cell(if4c,nof,"8.3");
-  fstr << "</TR>" << endl;
+  fstr << "</tr>" << endl;
 
-  fstr << "</TABLE>" << endl;
+  fstr << "</table>" << endl;
 }
 
 
@@ -1383,11 +1383,11 @@ CCCC_Html_Stream::CCCC_Html_Stream(const string& fname, const string& info)
     exit(1);
   }
 
-  fstr << "<HTML><HEAD><TITLE>" << endl
+  fstr << "<html><head><title>" << endl
        << info << endl
-       << "</TITLE>" << endl
-       << "</HEAD>" << endl
-       << "<BODY>" << endl;
+       << "</title>" << endl
+       << "</head>" << endl
+       << "<body>" << endl;
 }
 
 
@@ -1444,7 +1444,7 @@ void CCCC_Html_Stream::Source_Listing()
         (*iter).second.Emit_SPACE(source_html_str.fstr);
       }
       source_html_str << linebuf;
-      source_html_str.fstr << "<BR>" << endl;
+      source_html_str.fstr << "<br>" << endl;
       src_str->getline(linebuf,1023);
     }
 
@@ -1458,14 +1458,14 @@ void CCCC_Html_Stream::Source_Listing()
     {
       iter->second.Emit_NAME(source_html_str.fstr);
       iter++;
-      source_html_str.fstr << "<BR>" << endl;
+      source_html_str.fstr << "<br>" << endl;
     }
   }
 
   // delete the last input stream created
   delete src_str;
 
-  source_html_str.fstr << style_close << " </BODY></HTML>" << endl;
+  source_html_str.fstr << style_close << " </body></html>" << endl;
 }
 
 /**
@@ -1503,9 +1503,9 @@ void Source_Anchor::Emit_HREF(ofstream& fstr)
 {
   string anchor_key=key();
 
-  fstr << "<CODE><A HREF=\"" << SRC_FILE << "#" << anchor_key.c_str() << "\">"
+  fstr << "<code><a href=\"" << SRC_FILE << "#" << anchor_key.c_str() << "\">"
        << file_.c_str() << ":" << line_
-       << "</A></CODE>";
+       << "</a></code>";
 }
 
 void Source_Anchor::Emit_NAME(ofstream& fstr)
@@ -1515,8 +1515,8 @@ void Source_Anchor::Emit_NAME(ofstream& fstr)
   sprintf(ln_buf,"%d",line_);
   string ln_string=pad_string(8,ln_buf,"&nbsp;");
   string space_string=pad_string(2,"","&nbsp;");
-  fstr << "<A NAME=\"" << anchor_key.c_str() << "\">"
-       << ln_string.c_str() << space_string.c_str() << "</A>";
+  fstr << "<a name=\"" << anchor_key.c_str() << "\">"
+       << ln_string.c_str() << space_string.c_str() << "</a>";
 }
 
 void Source_Anchor::Emit_SPACE(ofstream& fstr)

@@ -1,1161 +1,1161 @@
-<HTML><HEAD><TITLE>
+<html><head><title>
 Report on software metrics
-</TITLE>
-</HEAD>
-<BODY>
-<TABLE BORDER WIDTH=100%>
-<TR><TH COLSPAN=2>
+</title>
+</head>
+<body>
+<table border width=100%>
+<tr><th colspan=2>
 CCCC Software Metrics Report
-</TR>
-<TR>
-<TH><H4><A HREF="#projsum">Project Summary</A></H4></TH>
-<TD>
+</tr>
+<tr>
+<th><h4><a href="#projsum">Project Summary</a></h4></th>
+<td>
 Summary table of high level measures summed over all files processed in the current run.
-</TR>
-<TR>
-<TH><H4><A HREF="#procsum">Procedural Metrics Summary</A></H4></TH>
-<TD>
+</tr>
+<tr>
+<th><h4><a href="#procsum">Procedural Metrics Summary</a></h4></th>
+<td>
 Table of procedural measures (i.e. lines of code, lines of comment, McCabe's cyclomatic complexity summed over each module.
-</TR>
-<TR>
-<TH><H4><A HREF="#procdet">Procedural Metrics Detail</A></H4></TH>
-<TD>
+</tr>
+<tr>
+<th><h4><a href="#procdet">Procedural Metrics Detail</a></h4></th>
+<td>
 The same procedural metrics as in the procedural metrics summary, reported for individual functions, grouped by module.
-</TR>
-<TR>
-<TH><H4><A HREF="#oodesign">Object Oriented Design</A></H4></TH>
-<TD>
+</tr>
+<tr>
+<th><h4><a href="#oodesign">Object Oriented Design</a></h4></th>
+<td>
 Table of four of the 6 metrics proposed by Chidamber and Kemerer in their various papers on 'a metrics suite for object oriented design'.
-</TR>
-<TR>
-<TH><H4><A HREF="#structsum">Structural Metrics Summary</A></H4></TH>
-<TD>
+</tr>
+<tr>
+<th><h4><a href="#structsum">Structural Metrics Summary</a></h4></th>
+<td>
 Structural metrics based on the relationships of each module with others.  Includes fan-out (i.e. number of other modules the current module uses), fan-in (number of other modules which use the current module), and the Information Flow measure suggested by Henry and Kafura, which combines these to give a measure of coupling for the module.
-</TR>
-<TR>
-<TH><H4><A HREF="#structdet">Structural Metrics Detail</A></H4></TH>
-<TD>
+</tr>
+<tr>
+<th><h4><a href="#structdet">Structural Metrics Detail</a></h4></th>
+<td>
 The names of the modules included as clients and suppliers in the counts for the Structural Metrics Summary.
-</TR>
-<TR>
-<TH><H4><A HREF="#other">Other Extents</A></H4></TH>
-<TD>
+</tr>
+<tr>
+<th><h4><a href="#other">Other Extents</a></h4></th>
+<td>
 Lexical counts for parts of submitted source files which the analyser was unable to assign to a module. Each record in this table relates to either a part of the code which triggered a parse failure, or to the residual lexical counts relating to parts of a file not associated with a specific module.
-</TR>
-<TR>
-<TH><H4><A HREF="#infocccc">About CCCC</A></H4></TH>
-<TD>
+</tr>
+<tr>
+<th><h4><a href="#infocccc">About CCCC</a></h4></th>
+<td>
 A description of the CCCC program.
-</TR>
-</TR></TABLE>
-<H1><A NAME="projsum">Project Summary</A></H1>
+</tr>
+</tr></table>
+<h1><a name="projsum">Project Summary</a></h1>
 This table shows measures over the project as a whole.
-<UL>
-<LI>NOM = Number of modules<BR>
+<ul>
+<li>NOM = Number of modules<br>
 Number of non-trivial modules identified by the analyser.  Non-trivial modules include all classes, and any other module for which member functions are identified.
-<LI>LOC = Lines of Code<BR>
+<li>LOC = Lines of Code<br>
 Number of non-blank, non-comment lines of source code counted by the analyser.
-<LI>COM = Lines of Comments<BR>
+<li>COM = Lines of Comments<br>
 Number of lines of comment identified by the analyser
-<LI>MVG = McCabe's Cyclomatic Complexity<BR>
+<li>MVG = McCabe's Cyclomatic Complexity<br>
 A measure of the decision complexity of the functions which make up the program.The strict definition of this measure is that it is the number of linearly independent routes through a directed acyclic graph which maps the flow of control of a subprogram.  The analyser counts this by recording the number of distinct decision outcomes contained within each function, which yields a good approximation to the formally defined version of the measure.
-<LI>L_C = Lines of code per line of comment<BR>
+<li>L_C = Lines of code per line of comment<br>
 Indicates density of comments with respect to textual size of program
-<LI>M_C = Cyclomatic Complexity per line of comment<BR>
+<li>M_C = Cyclomatic Complexity per line of comment<br>
 Indicates density of comments with respect to logical complexity of program
-<LI>IF4 = Information Flow measure<BR>
+<li>IF4 = Information Flow measure<br>
 Measure of information flow between modules suggested by Henry and Kafura. The analyser makes an approximate count of this by counting inter-module couplings identified in the module interfaces.
-</UL>
+</ul>
 Two variants on the information flow measure IF4 are also presented, one (IF4v) calculated using only relationships in the visible part of the module interface, and the other (IF4c) calculated using only those relationships which imply that changes to the client must be recompiled of the supplier's definition changes.
 
-<TABLE BORDER WIDTH=100%>
-<TR>
-<TH BGCOLOR="AQUA" WIDTH=70%>Metric</TH><TH BGCOLOR="AQUA" WIDTH=10%>Tag</TH><TH BGCOLOR="AQUA" WIDTH=10%>Overall</TH><TH BGCOLOR="AQUA" WIDTH=10%>Per Module</TH></TR>
-<TR>
-<TD>Number of modules</TD><TD>NOM</TD><TD ALIGN=RIGHT>    20</TD><TD>&nbsp;</TD></TR>
-<TR>
-<TD WIDTH=700%>Lines of Code</TD><TD WIDTH=120%>LOC</TD><TD ALIGN=RIGHT>   346</TD><TD ALIGN=RIGHT>17.300</TD></TR>
-<TR>
-<TD>McCabe's Cyclomatic Number</TD><TD>MVG</TD><TD ALIGN=RIGHT>    61</TD><TD ALIGN=RIGHT> 3.050</TD></TR>
-<TR>
-<TD>Lines of Comment</TD><TD>COM</TD><TD ALIGN=RIGHT>    37</TD><TD ALIGN=RIGHT> 1.850</TD></TR>
-<TR>
-<TD>LOC/COM</TD><TD>L_C</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 9.351</EM></TD><TD>&nbsp;</TD></TR>
-<TR>
-<TD>MVG/COM</TD><TD>M_C</TD><TD ALIGN=RIGHT> 1.649</TD><TD>&nbsp;</TD></TR>
-<TR>
-<TD>Information Flow measure ( &nbsp;inclusive&nbsp;)</TD><TD>IF4</TD><TD ALIGN=RIGHT>    64</TD><TD ALIGN=RIGHT>   3.200</TD></TR>
-<TR>
-<TD>Information Flow measure ( &nbsp;visible&nbsp;)</TD><TD>IF4v</TD><TD ALIGN=RIGHT>    64</TD><TD ALIGN=RIGHT>   3.200</TD></TR>
-<TR>
-<TD>Information Flow measure ( &nbsp;concrete&nbsp;)</TD><TD>IF4c</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>   0.000</TD></TR>
-<TR>
-<TD>Lines of Code rejected by parser</TD><TD>REJ</TD><TD ALIGN=RIGHT>    11</TD><TD>&nbsp;</TD></TR>
-</TABLE>
-<H1><A NAME="procsum">Procedural Metrics Summary</A></H1>
+<table border width=100%>
+<tr>
+<th bgcolor="AQUA" width=70%>Metric</th><th bgcolor="AQUA" width=10%>Tag</th><th bgcolor="AQUA" width=10%>Overall</th><th bgcolor="AQUA" width=10%>Per Module</th></tr>
+<tr>
+<td>Number of modules</td><td>NOM</td><td align=RIGHT>    20</td><td>&nbsp;</td></tr>
+<tr>
+<td width=700%>Lines of Code</td><td width=120%>LOC</td><td align=RIGHT>   346</td><td align=RIGHT>17.300</td></tr>
+<tr>
+<td>McCabe's Cyclomatic Number</td><td>MVG</td><td align=RIGHT>    61</td><td align=RIGHT> 3.050</td></tr>
+<tr>
+<td>Lines of Comment</td><td>COM</td><td align=RIGHT>    37</td><td align=RIGHT> 1.850</td></tr>
+<tr>
+<td>LOC/COM</td><td>L_C</td><td align=RIGHT bgcolor="YELLOW"><em> 9.351</em></td><td>&nbsp;</td></tr>
+<tr>
+<td>MVG/COM</td><td>M_C</td><td align=RIGHT> 1.649</td><td>&nbsp;</td></tr>
+<tr>
+<td>Information Flow measure ( &nbsp;inclusive&nbsp;)</td><td>IF4</td><td align=RIGHT>    64</td><td align=RIGHT>   3.200</td></tr>
+<tr>
+<td>Information Flow measure ( &nbsp;visible&nbsp;)</td><td>IF4v</td><td align=RIGHT>    64</td><td align=RIGHT>   3.200</td></tr>
+<tr>
+<td>Information Flow measure ( &nbsp;concrete&nbsp;)</td><td>IF4c</td><td align=RIGHT>     0</td><td align=RIGHT>   0.000</td></tr>
+<tr>
+<td>Lines of Code rejected by parser</td><td>REJ</td><td align=RIGHT>    11</td><td>&nbsp;</td></tr>
+</table>
+<h1><a name="procsum">Procedural Metrics Summary</a></h1>
 For descriptions of each of these metrics see the information preceding the project summary table.
 
 The label cell for each row in this table provides a link to the functions table in the detailed report for the module in question
-<TABLE BORDER WIDTH=100%>
-<TR>
-<TH BGCOLOR="AQUA">Module Name</TH><TH BGCOLOR="AQUA" WIDTH=8%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=8%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=8%>COM</TH><TH BGCOLOR="AQUA" WIDTH=8%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=8%>M_C</TH></TR>
-<TR>
-<TD><A HREF="AnimatingControlsSurface.html#procdet">
-AnimatingControlsSurface</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="BasicStroke.html#procdet">
-BasicStroke</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="BufferedImage.html#procdet">
-BufferedImage</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="ChangeEvent.html#procdet">
-ChangeEvent</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="ChangeListener.html#procdet">
-ChangeListener</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="Component.html#procdet">
-Component</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="CustomControls.html#procdet">
-CustomControls</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="DemoControls.html#procdet">
-DemoControls</A>
-</TD><TD ALIGN=RIGHT>    74</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>74.000</STRONG></TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="Dimension.html#procdet">
-Dimension</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="FadeAnim.html#procdet">
-FadeAnim</A>
-</TD><TD ALIGN=RIGHT>   165</TD><TD ALIGN=RIGHT>    36</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>41.250</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 9.000</EM></TD></TR>
-<TR>
-<TD><A HREF="Font.html#procdet">
-Font</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="Graphics2D.html#procdet">
-Graphics2D</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="JSlider.html#procdet">
-JSlider</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="Object.html#procdet">
-Object</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="ObjectData.html#procdet">
-ObjectData</A>
-</TD><TD ALIGN=RIGHT>    84</TD><TD ALIGN=RIGHT>    21</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
-<TR>
-<TD><A HREF="Paint.html#procdet">
-Paint</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="String.html#procdet">
-String</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="TextData.html#procdet">
-TextData</A>
-</TD><TD ALIGN=RIGHT>    12</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="TexturePaint.html#procdet">
-TexturePaint</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD><A HREF="Vector.html#procdet">
-Vector</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-</TABLE>
-<H1><A NAME="procdet">Procedural Metrics Detail</A></H1>
-<TABLE BORDER WIDTH=100%>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-AnimatingControlsSurface</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-BasicStroke</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-BufferedImage</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-ChangeEvent</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-ChangeListener</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-Component</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-CustomControls</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-DemoControls</A>
-<BR>
+<table border width=100%>
+<tr>
+<th bgcolor="AQUA">Module Name</th><th bgcolor="AQUA" width=8%>LOC</th><th bgcolor="AQUA" width=8%>MVG</th><th bgcolor="AQUA" width=8%>COM</th><th bgcolor="AQUA" width=8%>L_C</th><th bgcolor="AQUA" width=8%>M_C</th></tr>
+<tr>
+<td><a href="AnimatingControlsSurface.html#procdet">
+AnimatingControlsSurface</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="BasicStroke.html#procdet">
+BasicStroke</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="BufferedImage.html#procdet">
+BufferedImage</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="ChangeEvent.html#procdet">
+ChangeEvent</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="ChangeListener.html#procdet">
+ChangeListener</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="Component.html#procdet">
+Component</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="CustomControls.html#procdet">
+CustomControls</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="DemoControls.html#procdet">
+DemoControls</a>
+</td><td align=RIGHT>    74</td><td align=RIGHT>     4</td><td align=RIGHT>     1</td><td align=RIGHT bgcolor="RED"><strong>74.000</strong></td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="Dimension.html#procdet">
+Dimension</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="FadeAnim.html#procdet">
+FadeAnim</a>
+</td><td align=RIGHT>   165</td><td align=RIGHT>    36</td><td align=RIGHT>     4</td><td align=RIGHT bgcolor="RED"><strong>41.250</strong></td><td align=RIGHT bgcolor="YELLOW"><em> 9.000</em></td></tr>
+<tr>
+<td><a href="Font.html#procdet">
+Font</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="Graphics2D.html#procdet">
+Graphics2D</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="JSlider.html#procdet">
+JSlider</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="Object.html#procdet">
+Object</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="ObjectData.html#procdet">
+ObjectData</a>
+</td><td align=RIGHT>    84</td><td align=RIGHT>    21</td><td align=RIGHT>     0</td><td align=RIGHT bgcolor="RED"><strong>******</strong></td><td align=RIGHT bgcolor="RED"><strong>******</strong></td></tr>
+<tr>
+<td><a href="Paint.html#procdet">
+Paint</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="String.html#procdet">
+String</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="TextData.html#procdet">
+TextData</a>
+</td><td align=RIGHT>    12</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="TexturePaint.html#procdet">
+TexturePaint</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td><a href="Vector.html#procdet">
+Vector</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+</table>
+<h1><a name="procdet">Procedural Metrics Detail</a></h1>
+<table border width=100%>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+AnimatingControlsSurface</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+BasicStroke</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+BufferedImage</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+ChangeEvent</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+ChangeListener</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+Component</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+CustomControls</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+DemoControls</a>
+<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       350">prn13.java:350</A></CODE><BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR>
-<TD>DemoControls( &nbsp;FadeAnim&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       350">prn13.java:350</a></code><br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr>
+<td>DemoControls( &nbsp;FadeAnim&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       356">prn13.java:356</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    39</EM></TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD>getPreferredSize( &nbsp;&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       356">prn13.java:356</a></code><br>
+<br>
+</td><td align=RIGHT bgcolor="YELLOW"><em>    39</em></td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT bgcolor="RED"><strong>******</strong></td><td align=RIGHT>------</td></tr>
+<tr>
+<td>getPreferredSize( &nbsp;&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       422">prn13.java:422</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD>run( &nbsp;&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       422">prn13.java:422</a></code><br>
+<br>
+</td><td align=RIGHT>     3</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td>run( &nbsp;&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       427">prn13.java:427</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD>stateChanged( &nbsp;ChangeEvent&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       427">prn13.java:427</a></code><br>
+<br>
+</td><td align=RIGHT>     8</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td>stateChanged( &nbsp;ChangeEvent&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       401">prn13.java:401</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>    19</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-Dimension</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-FadeAnim</A>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       401">prn13.java:401</a></code><br>
+<br>
+</td><td align=RIGHT>    19</td><td align=RIGHT>     4</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+Dimension</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+FadeAnim</a>
+<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        54">prn13.java:54</A></CODE><BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR>
-<TD>FadeAnim( &nbsp;&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:        54">prn13.java:54</a></code><br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr>
+<td>FadeAnim( &nbsp;&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        92">prn13.java:92</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD>main( &nbsp;String[]&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:        92">prn13.java:92</a></code><br>
+<br>
+</td><td align=RIGHT>     8</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td>main( &nbsp;String[]&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       236">prn13.java:236</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD>render( &nbsp;int, &nbsp;int, &nbsp;Graphics2D&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       236">prn13.java:236</a></code><br>
+<br>
+</td><td align=RIGHT>     3</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td>render( &nbsp;int, &nbsp;int, &nbsp;Graphics2D&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       209">prn13.java:209</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>    24</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
-<TR>
-<TD>reset( &nbsp;int, &nbsp;int&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       209">prn13.java:209</a></code><br>
+<br>
+</td><td align=RIGHT>    24</td><td align=RIGHT>     6</td><td align=RIGHT>     0</td><td align=RIGHT bgcolor="RED"><strong>******</strong></td><td align=RIGHT bgcolor="RED"><strong>******</strong></td></tr>
+<tr>
+<td>reset( &nbsp;int, &nbsp;int&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       195">prn13.java:195</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD>setImages( &nbsp;int&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       195">prn13.java:195</a></code><br>
+<br>
+</td><td align=RIGHT>     5</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td>setImages( &nbsp;int&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       102">prn13.java:102</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>    29</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT>******</TD></TR>
-<TR>
-<TD>setShapes( &nbsp;int&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       102">prn13.java:102</a></code><br>
+<br>
+</td><td align=RIGHT>    29</td><td align=RIGHT>     5</td><td align=RIGHT>     0</td><td align=RIGHT bgcolor="RED"><strong>******</strong></td><td align=RIGHT>******</td></tr>
+<tr>
+<td>setShapes( &nbsp;int&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       161">prn13.java:161</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    31</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    19</EM></TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
-<TR>
-<TD>setStrings( &nbsp;int&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       161">prn13.java:161</a></code><br>
+<br>
+</td><td align=RIGHT bgcolor="YELLOW"><em>    31</em></td><td align=RIGHT bgcolor="YELLOW"><em>    19</em></td><td align=RIGHT>     0</td><td align=RIGHT bgcolor="RED"><strong>******</strong></td><td align=RIGHT bgcolor="RED"><strong>******</strong></td></tr>
+<tr>
+<td>setStrings( &nbsp;int&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       134">prn13.java:134</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>    24</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD>step( &nbsp;int, &nbsp;int&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       134">prn13.java:134</a></code><br>
+<br>
+</td><td align=RIGHT>    24</td><td align=RIGHT>     4</td><td align=RIGHT>     0</td><td align=RIGHT bgcolor="RED"><strong>******</strong></td><td align=RIGHT>------</td></tr>
+<tr>
+<td>step( &nbsp;int, &nbsp;int&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       202">prn13.java:202</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-Font</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-Graphics2D</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-JSlider</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-Object</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-ObjectData</A>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       202">prn13.java:202</a></code><br>
+<br>
+</td><td align=RIGHT>     5</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+Font</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+Graphics2D</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+JSlider</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+Object</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+ObjectData</a>
+<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       257">prn13.java:257</A></CODE><BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR>
-<TD>ObjectData( &nbsp;Object, &nbsp;Paint&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       257">prn13.java:257</a></code><br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr>
+<td>ObjectData( &nbsp;Object, &nbsp;Paint&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       268">prn13.java:268</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD>getRandomXY( &nbsp;int, &nbsp;int&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       268">prn13.java:268</a></code><br>
+<br>
+</td><td align=RIGHT>    11</td><td align=RIGHT>     2</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td>getRandomXY( &nbsp;int, &nbsp;int&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       281">prn13.java:281</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>    14</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR>
-<TD>reset( &nbsp;int, &nbsp;int&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       281">prn13.java:281</a></code><br>
+<br>
+</td><td align=RIGHT>    14</td><td align=RIGHT>     4</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr>
+<td>reset( &nbsp;int, &nbsp;int&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       297">prn13.java:297</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>    28</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
-<TR>
-<TD>step( &nbsp;int, &nbsp;int&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       297">prn13.java:297</a></code><br>
+<br>
+</td><td align=RIGHT>    28</td><td align=RIGHT>     9</td><td align=RIGHT>     0</td><td align=RIGHT bgcolor="RED"><strong>******</strong></td><td align=RIGHT bgcolor="RED"><strong>******</strong></td></tr>
+<tr>
+<td>step( &nbsp;int, &nbsp;int&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       327">prn13.java:327</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>    20</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>******</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-Paint</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-String</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-TextData</A>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       327">prn13.java:327</a></code><br>
+<br>
+</td><td align=RIGHT>    20</td><td align=RIGHT>     6</td><td align=RIGHT>     0</td><td align=RIGHT>******</td><td align=RIGHT bgcolor="RED"><strong>******</strong></td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+Paint</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+String</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+TextData</a>
+<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       241">prn13.java:241</A></CODE><BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR>
-<TD>TextData( &nbsp;String, &nbsp;Font, &nbsp;Component&nbsp;)<BR>
+<code><a href="cccc_src.html#prn13.java:       241">prn13.java:241</a></code><br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr>
+<td>TextData( &nbsp;String, &nbsp;Font, &nbsp;Component&nbsp;)<br>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       247">prn13.java:247</A></CODE><BR>
-<BR>
-</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-TexturePaint</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-<TR>
-<TD WIDTH=50%><A NAME="procdet"></A>
-<A HREF="procsum">
-Vector</A>
-<BR>
-<BR>
-</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH></TR>
-<TR><TD COLSPAN=6>No member functions have been identified for this module</TD></TR>
-<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
-</TABLE>
-<H1><A NAME="oodesign">Object Oriented Design</A></H1>
-<UL>
-<LI>WMC = Weighted methods per class<BR>
+<code><a href="cccc_src.html#prn13.java:       247">prn13.java:247</a></code><br>
+<br>
+</td><td align=RIGHT>     7</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>------</td><td align=RIGHT>------</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+TexturePaint</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+<tr>
+<td width=50%><a name="procdet"></a>
+<a href="procsum">
+Vector</a>
+<br>
+<br>
+</td><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>MVG</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>L_C</th><th bgcolor="AQUA" width=10%>M_C</th></tr>
+<tr><td colspan=6>No member functions have been identified for this module</td></tr>
+<tr><td height=12 colspan=6></td></tr>
+</table>
+<h1><a name="oodesign">Object Oriented Design</a></h1>
+<ul>
+<li>WMC = Weighted methods per class<br>
 The sum of a weighting function over the functions of the module.  Two different weighting functions are applied: WMC1 uses the nominal weight of 1 for each function, and hence measures the number of functions, WMCv uses a weighting function which is 1 for functions accessible to other modules, 0 for private functions.
-<LI>DIT = Depth of inheritance tree<BR>
+<li>DIT = Depth of inheritance tree<br>
 The length of the longest path of inheritance ending at the current module.  The deeper the inheritance tree for a module, the harder it may be to predict its behaviour.  On the other hand, increasing depth gives the potential of greater reuse by the current module of behaviour defined for ancestor classes.
-<LI>NOC = Number of children<BR>
+<li>NOC = Number of children<br>
 The number of modules which inherit directly from the current module.  Moderate values of this measure indicate scope for reuse, however high values may indicate an inappropriate abstraction in the design.
-<LI>CBO = Coupling between objects<BR>
+<li>CBO = Coupling between objects<br>
 The number of other modules which are coupled to the current module either as a client or a supplier. Excessive coupling indicates weakness of module encapsulation and may inhibit reuse.
-</UL>
+</ul>
 
 The label cell for each row in this table provides a link to the module summary table in the detailed report for the module in question
-<TABLE BORDER WIDTH=100%>
-<TR>
-<TH BGCOLOR="AQUA" WIDTH=50%>Module Name</TH><TH BGCOLOR="AQUA" WIDTH=10%>WMC1</TH><TH BGCOLOR="AQUA" WIDTH=10%>WMCv</TH><TH BGCOLOR="AQUA" WIDTH=10%>DIT</TH><TH BGCOLOR="AQUA" WIDTH=10%>NOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>CBO</TH></TR>
-<TR>
-<TD><A HREF="AnimatingControlsSurface.html#summary">
-AnimatingControlsSurface</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     1</TD></TR>
-<TR>
-<TD><A HREF="BasicStroke.html#summary">
-BasicStroke</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD></TR>
-<TR>
-<TD><A HREF="BufferedImage.html#summary">
-BufferedImage</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD></TR>
-<TR>
-<TD><A HREF="ChangeEvent.html#summary">
-ChangeEvent</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD></TR>
-<TR>
-<TD><A HREF="ChangeListener.html#summary">
-ChangeListener</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     1</TD></TR>
-<TR>
-<TD><A HREF="Component.html#summary">
-Component</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD></TR>
-<TR>
-<TD><A HREF="CustomControls.html#summary">
-CustomControls</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     1</TD></TR>
-<TR>
-<TD><A HREF="DemoControls.html#summary">
-DemoControls</A>
-</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD></TR>
-<TR>
-<TD><A HREF="Dimension.html#summary">
-Dimension</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD></TR>
-<TR>
-<TD><A HREF="FadeAnim.html#summary">
-FadeAnim</A>
-</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     9</TD></TR>
-<TR>
-<TD><A HREF="Font.html#summary">
-Font</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD></TR>
-<TR>
-<TD><A HREF="Graphics2D.html#summary">
-Graphics2D</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD></TR>
-<TR>
-<TD><A HREF="JSlider.html#summary">
-JSlider</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD></TR>
-<TR>
-<TD><A HREF="Object.html#summary">
-Object</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     2</TD></TR>
-<TR>
-<TD><A HREF="ObjectData.html#summary">
-ObjectData</A>
-</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD></TR>
-<TR>
-<TD><A HREF="Paint.html#summary">
-Paint</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     2</TD></TR>
-<TR>
-<TD><A HREF="String.html#summary">
-String</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     2</TD></TR>
-<TR>
-<TD><A HREF="TextData.html#summary">
-TextData</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     4</TD></TR>
-<TR>
-<TD><A HREF="TexturePaint.html#summary">
-TexturePaint</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD></TR>
-<TR>
-<TD><A HREF="Vector.html#summary">
-Vector</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD></TR>
-</TABLE>
-<H1><A NAME="structsum">Structural Metrics Summary</A></H1>
-<UL>
-<LI>FI = Fan-in<BR>
+<table border width=100%>
+<tr>
+<th bgcolor="AQUA" width=50%>Module Name</th><th bgcolor="AQUA" width=10%>WMC1</th><th bgcolor="AQUA" width=10%>WMCv</th><th bgcolor="AQUA" width=10%>DIT</th><th bgcolor="AQUA" width=10%>NOC</th><th bgcolor="AQUA" width=10%>CBO</th></tr>
+<tr>
+<td><a href="AnimatingControlsSurface.html#summary">
+AnimatingControlsSurface</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     1</td></tr>
+<tr>
+<td><a href="BasicStroke.html#summary">
+BasicStroke</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td></tr>
+<tr>
+<td><a href="BufferedImage.html#summary">
+BufferedImage</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td></tr>
+<tr>
+<td><a href="ChangeEvent.html#summary">
+ChangeEvent</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td></tr>
+<tr>
+<td><a href="ChangeListener.html#summary">
+ChangeListener</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     1</td></tr>
+<tr>
+<td><a href="Component.html#summary">
+Component</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td></tr>
+<tr>
+<td><a href="CustomControls.html#summary">
+CustomControls</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     1</td></tr>
+<tr>
+<td><a href="DemoControls.html#summary">
+DemoControls</a>
+</td><td align=RIGHT>     4</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     7</td></tr>
+<tr>
+<td><a href="Dimension.html#summary">
+Dimension</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td></tr>
+<tr>
+<td><a href="FadeAnim.html#summary">
+FadeAnim</a>
+</td><td align=RIGHT>     8</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     9</td></tr>
+<tr>
+<td><a href="Font.html#summary">
+Font</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     3</td></tr>
+<tr>
+<td><a href="Graphics2D.html#summary">
+Graphics2D</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td></tr>
+<tr>
+<td><a href="JSlider.html#summary">
+JSlider</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td></tr>
+<tr>
+<td><a href="Object.html#summary">
+Object</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     2</td><td align=RIGHT>     2</td></tr>
+<tr>
+<td><a href="ObjectData.html#summary">
+ObjectData</a>
+</td><td align=RIGHT>     4</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     3</td></tr>
+<tr>
+<td><a href="Paint.html#summary">
+Paint</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     2</td></tr>
+<tr>
+<td><a href="String.html#summary">
+String</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     2</td></tr>
+<tr>
+<td><a href="TextData.html#summary">
+TextData</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     4</td></tr>
+<tr>
+<td><a href="TexturePaint.html#summary">
+TexturePaint</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td></tr>
+<tr>
+<td><a href="Vector.html#summary">
+Vector</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td></tr>
+</table>
+<h1><a name="structsum">Structural Metrics Summary</a></h1>
+<ul>
+<li>FI = Fan-in<br>
 The number of other modules which pass information into the current module.
-<LI>FO = Fan-out<BR>
+<li>FO = Fan-out<br>
 The number of other modules into which the current module passes information
-<LI>IF4 = Information Flow measure<BR>
+<li>IF4 = Information Flow measure<br>
 A composite measure of structural complexity, calculated as the square of the product of the fan-in and fan-out of a single module.  Proposed by Henry and Kafura.
-</UL>
+</ul>
 Note that the fan-in and fan-out are calculated by examining the interface of each module.  As noted above, three variants of each each of these measures are presented: a count restricted to the part of the interface which is externally visible, a count which only includes relationships which imply the client module needs to be recompiled if the supplier's implementation changes, and an inclusive count
 
 The label cell for each row in this table provides a link to the relationships table in the detailed report for the module in question
 
-<TABLE BORDER WIDTH=100%>
-<TR>
-<TH BGCOLOR=AQUA ROWSPAN=2>Module Name</TH>
-<TH BGCOLOR=AQUA COLSPAN=3>Fan-out</TH>
-<TH BGCOLOR=AQUA COLSPAN=3>Fan-in</TH>
-<TH BGCOLOR=AQUA COLSPAN=3>IF4</TH>
-</TR>
-<TH BGCOLOR="AQUA" WIDTH=7%>vis</TH><TH BGCOLOR="AQUA" WIDTH=7%>con</TH><TH BGCOLOR="AQUA" WIDTH=7%>inc</TH><TH BGCOLOR="AQUA" WIDTH=7%>vis</TH><TH BGCOLOR="AQUA" WIDTH=7%>con</TH><TH BGCOLOR="AQUA" WIDTH=7%>incl</TH><TH BGCOLOR="AQUA" WIDTH=7%>vis</TH><TH BGCOLOR="AQUA" WIDTH=7%>con</TH><TH BGCOLOR="AQUA" WIDTH=7%>inc</TH></TR>
-<TR>
-<TD><A HREF="AnimatingControlsSurface.html#structdet">
-AnimatingControlsSurface</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="BasicStroke.html#structdet">
-BasicStroke</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="BufferedImage.html#structdet">
-BufferedImage</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="ChangeEvent.html#structdet">
-ChangeEvent</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="ChangeListener.html#structdet">
-ChangeListener</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="Component.html#structdet">
-Component</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="CustomControls.html#structdet">
-CustomControls</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="DemoControls.html#structdet">
-DemoControls</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>     7</EM></TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="Dimension.html#structdet">
-Dimension</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="FadeAnim.html#structdet">
-FadeAnim</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>     8</EM></TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    64</EM></TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    64</TD></TR>
-<TR>
-<TD><A HREF="Font.html#structdet">
-Font</A>
-</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="Graphics2D.html#structdet">
-Graphics2D</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="JSlider.html#structdet">
-JSlider</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="Object.html#structdet">
-Object</A>
-</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="ObjectData.html#structdet">
-ObjectData</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="Paint.html#structdet">
-Paint</A>
-</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="String.html#structdet">
-String</A>
-</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="TextData.html#structdet">
-TextData</A>
-</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="TexturePaint.html#structdet">
-TexturePaint</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-<TR>
-<TD><A HREF="Vector.html#structdet">
-Vector</A>
-</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD></TR>
-</TABLE>
-<H1><A NAME="structdet">Structural Metrics Detail</A></H1>
-<TABLE BORDER WIDTH=100%>
-<TR>
-<TH BGCOLOR="AQUA" WIDTH=20%>Module Name</TH><TH BGCOLOR="AQUA" WIDTH=40%>Clients</TH><TH BGCOLOR="AQUA" WIDTH=40%>Suppliers</TH></TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-AnimatingControlsSurface</A>
-</TD><TD WIDTH=50%>
-FadeAnim [CV] <BR>
+<table border width=100%>
+<tr>
+<th bgcolor=AQUA rowspan=2>Module Name</th>
+<th bgcolor=AQUA colspan=3>Fan-out</th>
+<th bgcolor=AQUA colspan=3>Fan-in</th>
+<th bgcolor=AQUA colspan=3>IF4</th>
+</tr>
+<th bgcolor="AQUA" width=7%>vis</th><th bgcolor="AQUA" width=7%>con</th><th bgcolor="AQUA" width=7%>inc</th><th bgcolor="AQUA" width=7%>vis</th><th bgcolor="AQUA" width=7%>con</th><th bgcolor="AQUA" width=7%>incl</th><th bgcolor="AQUA" width=7%>vis</th><th bgcolor="AQUA" width=7%>con</th><th bgcolor="AQUA" width=7%>inc</th></tr>
+<tr>
+<td><a href="AnimatingControlsSurface.html#structdet">
+AnimatingControlsSurface</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     1</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="BasicStroke.html#structdet">
+BasicStroke</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="BufferedImage.html#structdet">
+BufferedImage</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="ChangeEvent.html#structdet">
+ChangeEvent</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="ChangeListener.html#structdet">
+ChangeListener</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     1</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="Component.html#structdet">
+Component</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="CustomControls.html#structdet">
+CustomControls</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     1</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="DemoControls.html#structdet">
+DemoControls</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT bgcolor="YELLOW"><em>     7</em></td><td align=RIGHT>     2</td><td align=RIGHT>     7</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="Dimension.html#structdet">
+Dimension</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="FadeAnim.html#structdet">
+FadeAnim</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT bgcolor="YELLOW"><em>     8</em></td><td align=RIGHT>     1</td><td align=RIGHT>     8</td><td align=RIGHT bgcolor="YELLOW"><em>    64</em></td><td align=RIGHT>     0</td><td align=RIGHT>    64</td></tr>
+<tr>
+<td><a href="Font.html#structdet">
+Font</a>
+</td><td align=RIGHT>     3</td><td align=RIGHT>     0</td><td align=RIGHT>     3</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="Graphics2D.html#structdet">
+Graphics2D</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="JSlider.html#structdet">
+JSlider</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="Object.html#structdet">
+Object</a>
+</td><td align=RIGHT>     2</td><td align=RIGHT>     2</td><td align=RIGHT>     2</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="ObjectData.html#structdet">
+ObjectData</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     3</td><td align=RIGHT>     1</td><td align=RIGHT>     3</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="Paint.html#structdet">
+Paint</a>
+</td><td align=RIGHT>     2</td><td align=RIGHT>     0</td><td align=RIGHT>     2</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="String.html#structdet">
+String</a>
+</td><td align=RIGHT>     2</td><td align=RIGHT>     0</td><td align=RIGHT>     2</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="TextData.html#structdet">
+TextData</a>
+</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     4</td><td align=RIGHT>     1</td><td align=RIGHT>     4</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="TexturePaint.html#structdet">
+TexturePaint</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+<tr>
+<td><a href="Vector.html#structdet">
+Vector</a>
+</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     1</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td><td align=RIGHT>     0</td></tr>
+</table>
+<h1><a name="structdet">Structural Metrics Detail</a></h1>
+<table border width=100%>
+<tr>
+<th bgcolor="AQUA" width=20%>Module Name</th><th bgcolor="AQUA" width=40%>Clients</th><th bgcolor="AQUA" width=40%>Suppliers</th></tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+AnimatingControlsSurface</a>
+</td><td width=50%>
+FadeAnim [CV] <br>
 extends &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        54">prn13.java:54</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:        54">prn13.java:54</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-BasicStroke</A>
-</TD><TD WIDTH=50%>
-FadeAnim [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+BasicStroke</a>
+</td><td width=50%>
+FadeAnim [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        72">prn13.java:72</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:        72">prn13.java:72</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-BufferedImage</A>
-</TD><TD WIDTH=50%>
-ObjectData [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+BufferedImage</a>
+</td><td width=50%>
+ObjectData [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       261">prn13.java:261</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       261">prn13.java:261</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-ChangeEvent</A>
-</TD><TD WIDTH=50%>
-DemoControls [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+ChangeEvent</a>
+</td><td width=50%>
+DemoControls [V] <br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       401">prn13.java:401</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       401">prn13.java:401</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-ChangeListener</A>
-</TD><TD WIDTH=50%>
-DemoControls [CV] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+ChangeListener</a>
+</td><td width=50%>
+DemoControls [CV] <br>
 implements &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       350">prn13.java:350</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       350">prn13.java:350</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-Component</A>
-</TD><TD WIDTH=50%>
-TextData [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+Component</a>
+</td><td width=50%>
+TextData [V] <br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       247">prn13.java:247</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       247">prn13.java:247</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-CustomControls</A>
-</TD><TD WIDTH=50%>
-DemoControls [CV] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+CustomControls</a>
+</td><td width=50%>
+DemoControls [CV] <br>
 extends &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       350">prn13.java:350</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       350">prn13.java:350</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-DemoControls</A>
-</TD><TD WIDTH=50%>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+DemoControls</a>
+</td><td width=50%>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
-ChangeEvent [V] <BR>
+</td>
+<td width=50%>
+ChangeEvent [V] <br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       401">prn13.java:401</A></CODE><BR>
-<BR>
-<BR>
-ChangeListener [CV] <BR>
+<code><a href="cccc_src.html#prn13.java:       401">prn13.java:401</a></code><br>
+<br>
+<br>
+ChangeListener [CV] <br>
 implements &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       350">prn13.java:350</A></CODE><BR>
-<BR>
-<BR>
-CustomControls [CV] <BR>
+<code><a href="cccc_src.html#prn13.java:       350">prn13.java:350</a></code><br>
+<br>
+<br>
+CustomControls [CV] <br>
 extends &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       350">prn13.java:350</A></CODE><BR>
-<BR>
-<BR>
-Dimension [V] <BR>
+<code><a href="cccc_src.html#prn13.java:       350">prn13.java:350</a></code><br>
+<br>
+<br>
+Dimension [V] <br>
 return type &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       422">prn13.java:422</A></CODE><BR>
-<BR>
-<BR>
-FadeAnim [V] <BR>
+<code><a href="cccc_src.html#prn13.java:       422">prn13.java:422</a></code><br>
+<br>
+<br>
+FadeAnim [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       352">prn13.java:352</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       352">prn13.java:352</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       356">prn13.java:356</A></CODE><BR>
-<BR>
-<BR>
-Font [V] <BR>
+<code><a href="cccc_src.html#prn13.java:       356">prn13.java:356</a></code><br>
+<br>
+<br>
+Font [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       354">prn13.java:354</A></CODE><BR>
-<BR>
-<BR>
-JSlider [V] <BR>
+<code><a href="cccc_src.html#prn13.java:       354">prn13.java:354</a></code><br>
+<br>
+<br>
+JSlider [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       353">prn13.java:353</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       353">prn13.java:353</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-Dimension</A>
-</TD><TD WIDTH=50%>
-DemoControls [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+Dimension</a>
+</td><td width=50%>
+DemoControls [V] <br>
 return type &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       422">prn13.java:422</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       422">prn13.java:422</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-FadeAnim</A>
-</TD><TD WIDTH=50%>
-DemoControls [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+FadeAnim</a>
+</td><td width=50%>
+DemoControls [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       352">prn13.java:352</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       352">prn13.java:352</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       356">prn13.java:356</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       356">prn13.java:356</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
-AnimatingControlsSurface [CV] <BR>
+</td>
+<td width=50%>
+AnimatingControlsSurface [CV] <br>
 extends &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        54">prn13.java:54</A></CODE><BR>
-<BR>
-<BR>
-BasicStroke [V] <BR>
+<code><a href="cccc_src.html#prn13.java:        54">prn13.java:54</a></code><br>
+<br>
+<br>
+BasicStroke [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        72">prn13.java:72</A></CODE><BR>
-<BR>
-<BR>
-Font [V] <BR>
+<code><a href="cccc_src.html#prn13.java:        72">prn13.java:72</a></code><br>
+<br>
+<br>
+Font [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        73">prn13.java:73</A></CODE><BR>
-<BR>
-<BR>
-Graphics2D [V] <BR>
+<code><a href="cccc_src.html#prn13.java:        73">prn13.java:73</a></code><br>
+<br>
+<br>
+Graphics2D [V] <br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       209">prn13.java:209</A></CODE><BR>
-<BR>
-<BR>
-Paint [V] <BR>
+<code><a href="cccc_src.html#prn13.java:       209">prn13.java:209</a></code><br>
+<br>
+<br>
+Paint [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        84">prn13.java:84</A></CODE><BR>
-<BR>
-<BR>
-String [V] <BR>
+<code><a href="cccc_src.html#prn13.java:        84">prn13.java:84</a></code><br>
+<br>
+<br>
+String [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        79">prn13.java:79</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:        79">prn13.java:79</a></code><br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        82">prn13.java:82</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:        82">prn13.java:82</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       236">prn13.java:236</A></CODE><BR>
-<BR>
-<BR>
-TexturePaint [V] <BR>
+<code><a href="cccc_src.html#prn13.java:       236">prn13.java:236</a></code><br>
+<br>
+<br>
+TexturePaint [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        56">prn13.java:56</A></CODE><BR>
-<BR>
-<BR>
-Vector [V] <BR>
+<code><a href="cccc_src.html#prn13.java:        56">prn13.java:56</a></code><br>
+<br>
+<br>
+Vector [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        88">prn13.java:88</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:        88">prn13.java:88</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-Font</A>
-</TD><TD WIDTH=50%>
-DemoControls [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+Font</a>
+</td><td width=50%>
+DemoControls [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       354">prn13.java:354</A></CODE><BR>
-<BR>
-<BR>
-FadeAnim [V] <BR>
+<code><a href="cccc_src.html#prn13.java:       354">prn13.java:354</a></code><br>
+<br>
+<br>
+FadeAnim [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        73">prn13.java:73</A></CODE><BR>
-<BR>
-<BR>
-TextData [V] <BR>
+<code><a href="cccc_src.html#prn13.java:        73">prn13.java:73</a></code><br>
+<br>
+<br>
+TextData [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       244">prn13.java:244</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       244">prn13.java:244</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       247">prn13.java:247</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       247">prn13.java:247</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-Graphics2D</A>
-</TD><TD WIDTH=50%>
-FadeAnim [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+Graphics2D</a>
+</td><td width=50%>
+FadeAnim [V] <br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       209">prn13.java:209</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       209">prn13.java:209</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-JSlider</A>
-</TD><TD WIDTH=50%>
-DemoControls [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+JSlider</a>
+</td><td width=50%>
+DemoControls [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       353">prn13.java:353</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       353">prn13.java:353</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-Object</A>
-</TD><TD WIDTH=50%>
-ObjectData [CV] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+Object</a>
+</td><td width=50%>
+ObjectData [CV] <br>
 extends &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       257">prn13.java:257</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       257">prn13.java:257</a></code><br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       260">prn13.java:260</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       260">prn13.java:260</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       268">prn13.java:268</A></CODE><BR>
-<BR>
-<BR>
-TextData [CV] <BR>
+<code><a href="cccc_src.html#prn13.java:       268">prn13.java:268</a></code><br>
+<br>
+<br>
+TextData [CV] <br>
 extends &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       241">prn13.java:241</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       241">prn13.java:241</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-ObjectData</A>
-</TD><TD WIDTH=50%>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+ObjectData</a>
+</td><td width=50%>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
-BufferedImage [V] <BR>
+</td>
+<td width=50%>
+BufferedImage [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       261">prn13.java:261</A></CODE><BR>
-<BR>
-<BR>
-Object [CV] <BR>
+<code><a href="cccc_src.html#prn13.java:       261">prn13.java:261</a></code><br>
+<br>
+<br>
+Object [CV] <br>
 extends &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       257">prn13.java:257</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       257">prn13.java:257</a></code><br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       260">prn13.java:260</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       260">prn13.java:260</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       268">prn13.java:268</A></CODE><BR>
-<BR>
-<BR>
-Paint [V] <BR>
+<code><a href="cccc_src.html#prn13.java:       268">prn13.java:268</a></code><br>
+<br>
+<br>
+Paint [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       262">prn13.java:262</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       262">prn13.java:262</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       268">prn13.java:268</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       268">prn13.java:268</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-Paint</A>
-</TD><TD WIDTH=50%>
-FadeAnim [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+Paint</a>
+</td><td width=50%>
+FadeAnim [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        84">prn13.java:84</A></CODE><BR>
-<BR>
-<BR>
-ObjectData [V] <BR>
+<code><a href="cccc_src.html#prn13.java:        84">prn13.java:84</a></code><br>
+<br>
+<br>
+ObjectData [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       262">prn13.java:262</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       262">prn13.java:262</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       268">prn13.java:268</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       268">prn13.java:268</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-String</A>
-</TD><TD WIDTH=50%>
-FadeAnim [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+String</a>
+</td><td width=50%>
+FadeAnim [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        79">prn13.java:79</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:        79">prn13.java:79</a></code><br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        82">prn13.java:82</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:        82">prn13.java:82</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       236">prn13.java:236</A></CODE><BR>
-<BR>
-<BR>
-TextData [V] <BR>
+<code><a href="cccc_src.html#prn13.java:       236">prn13.java:236</a></code><br>
+<br>
+<br>
+TextData [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       243">prn13.java:243</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       243">prn13.java:243</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       247">prn13.java:247</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       247">prn13.java:247</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-TextData</A>
-</TD><TD WIDTH=50%>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+TextData</a>
+</td><td width=50%>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
-Component [V] <BR>
+</td>
+<td width=50%>
+Component [V] <br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       247">prn13.java:247</A></CODE><BR>
-<BR>
-<BR>
-Font [V] <BR>
+<code><a href="cccc_src.html#prn13.java:       247">prn13.java:247</a></code><br>
+<br>
+<br>
+Font [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       244">prn13.java:244</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       244">prn13.java:244</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       247">prn13.java:247</A></CODE><BR>
-<BR>
-<BR>
-Object [CV] <BR>
+<code><a href="cccc_src.html#prn13.java:       247">prn13.java:247</a></code><br>
+<br>
+<br>
+Object [CV] <br>
 extends &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       241">prn13.java:241</A></CODE><BR>
-<BR>
-<BR>
-String [V] <BR>
+<code><a href="cccc_src.html#prn13.java:       241">prn13.java:241</a></code><br>
+<br>
+<br>
+String [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       243">prn13.java:243</A></CODE><BR>
+<code><a href="cccc_src.html#prn13.java:       243">prn13.java:243</a></code><br>
 normal parameter &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:       247">prn13.java:247</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:       247">prn13.java:247</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-TexturePaint</A>
-</TD><TD WIDTH=50%>
-FadeAnim [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+TexturePaint</a>
+</td><td width=50%>
+FadeAnim [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        56">prn13.java:56</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:        56">prn13.java:56</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-<TR>
-<TD><A NAME="structdet"></A>
-<A HREF="structsum">
-Vector</A>
-</TD><TD WIDTH=50%>
-FadeAnim [V] <BR>
+</td>
+</tr>
+<tr>
+<td><a name="structdet"></a>
+<a href="structsum">
+Vector</a>
+</td><td width=50%>
+FadeAnim [V] <br>
 member variable &nbsp;
-<CODE><A HREF="cccc_src.html#prn13.java:        88">prn13.java:88</A></CODE><BR>
-<BR>
-<BR>
+<code><a href="cccc_src.html#prn13.java:        88">prn13.java:88</a></code><br>
+<br>
+<br>
 &nbsp;
-</TD>
-<TD WIDTH=50%>
+</td>
+<td width=50%>
 &nbsp;
-</TD>
-</TR>
-</TABLE>
-<H1><A NAME="other">Other Extents</A></H1>
-<TABLE BORDER WIDTH=100%>
-<TR>
-<TH BGCOLOR="AQUA" WIDTH=25%>Location</TH><TH BGCOLOR="AQUA" WIDTH=45%>Text</TH><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH></TR>
-<TR><TD><CODE><A HREF="cccc_src.html#prn13.java:         1">prn13.java:1</A></CODE><BR>
-</TD>
-<TD>&lt;file scope items&gt;</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>    32</TD><TD ALIGN=RIGHT>     0</TD></TR>
-</TABLE>
-<H1><A NAME="infocccc">About CCCC</A></H1>
+</td>
+</tr>
+</table>
+<h1><a name="other">Other Extents</a></h1>
+<table border width=100%>
+<tr>
+<th bgcolor="AQUA" width=25%>Location</th><th bgcolor="AQUA" width=45%>Text</th><th bgcolor="AQUA" width=10%>LOC</th><th bgcolor="AQUA" width=10%>COM</th><th bgcolor="AQUA" width=10%>MVG</th></tr>
+<tr><td><code><a href="cccc_src.html#prn13.java:         1">prn13.java:1</a></code><br>
+</td>
+<td>&lt;file scope items&gt;</td><td align=RIGHT>    11</td><td align=RIGHT>    32</td><td align=RIGHT>     0</td></tr>
+</table>
+<h1><a name="infocccc">About CCCC</a></h1>
 <p>This report was generated by the program CCCC, which is FREELY REDISTRIBUTABLE but carries NO WARRANTY.</p>
 <p>CCCC was developed by Tim Littlefair. as part of a PhD research project. This project is now completed and descriptions of the findings can be accessed at <a href=http://www.chs.ecu.edu.au/~tlittlef>http://www.chs.ecu.edu.au/~tlittlef</a>. </p>
 <p>User support for CCCC can be obtained by <a href=mailto:cccc-users@lists.sourceforge.net>mailing the list cccc-users@lists.sourceforge.net</a>.</p>
 <p>Please also visit the new CCCC development website at <a href=http://sarnold.github.io/cccc/>http://thaddeus002.github.io/CCCCounter/</a>.</p>
-</BODY></HTML>
+</body></html>
