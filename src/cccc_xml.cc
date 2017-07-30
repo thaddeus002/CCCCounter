@@ -195,10 +195,10 @@ CCCC_Xml_Stream::CCCC_Xml_Stream(const string& fname, const string& info)
 {
   // cerr << "Attempting to open file in directory " << outdir.c_str() << endl;
   fstr.open(fname.c_str());
-  if(fstr.good() != TRUE)
+  if(!fstr.good())
     {
       cerr << "failed to open " << fname.c_str()
-     << " for output in directory " << outdir.c_str() << endl;
+          << " for output in directory " << outdir.c_str() << endl;
       exit(1);
     }
 
@@ -298,7 +298,7 @@ void CCCC_Xml_Stream::Procedural_Summary()
   while(mod_ptr!=NULL)
     {
       i++;
-      if( mod_ptr->is_trivial() == FALSE)
+      if(!mod_ptr->is_trivial())
   {
     fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
     Put_Label_Node(NAME_NODE_NAME,mod_ptr->name(nlSIMPLE).c_str(),0,"","");
@@ -331,7 +331,7 @@ void CCCC_Xml_Stream::Structural_Summary()
   CCCC_Module* module_ptr=prjptr->module_table.first_item();
   while(module_ptr!=NULL)
     {
-      if(module_ptr->is_trivial()==FALSE)
+      if(!module_ptr->is_trivial())
   {
     fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
     Put_Label_Node(NAME_NODE_NAME,module_ptr->name(nlSIMPLE).c_str(),0,"","");

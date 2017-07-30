@@ -25,10 +25,8 @@
 #ifndef __CCCC_HTM_H
 #define __CCCC_HTM_H
 
-
 #include <fstream>
 #include <time.h>
-
 
 #include "cccc_mod.h"
 #include "cccc_rec.h"
@@ -142,7 +140,11 @@ class CCCC_Html_Stream {
   static void GenerateReports(CCCC_Project* project, int report_mask,
             const string& outfile, const string& outdir);
 
-  /** general-purpose constructor with standard preamble */
+  /**
+   * \brief General-purpose constructor with standard preamble.
+   * \param fname the name of file to create
+   * \param info html page's title
+   */
   CCCC_Html_Stream(const string& fname, const string& info);
 
   /**
@@ -178,7 +180,12 @@ class Source_Anchor
   string key() const;
 
   void Emit_HREF(ofstream& fstr);
+
   void Emit_NAME(ofstream& fstr);
+
+  /**
+   * Add 10 spaces to stream.
+   */
   void Emit_SPACE(ofstream& fstr);
   // the default copy constructor, assignment operator and destructor
   // are OK for this class

@@ -1376,15 +1376,11 @@ CCCC_Html_Stream::CCCC_Html_Stream(const string& fname, const string& info)
 {
   // cerr << "Attempting to open file in directory " << outdir.c_str() << endl;
   fstr.open(fname.c_str());
-  if(fstr.good() != TRUE)
+  if(!fstr.good())
   {
     cerr << "failed to open " << fname.c_str()
         << " for output in directory " << outdir.c_str() << endl;
     exit(1);
-  }
-  else
-  {
-    // cerr << "File: " << fname << " Info: " << info << endl;
   }
 
   fstr << "<HTML><HEAD><TITLE>" << endl
@@ -1392,22 +1388,6 @@ CCCC_Html_Stream::CCCC_Html_Stream(const string& fname, const string& info)
        << "</TITLE>" << endl
        << "</HEAD>" << endl
        << "<BODY>" << endl;
-}
-
-int setup_anchor_data()
-{
-  int i=0;
-  Source_Anchor a1("cccc_use.h",12);
-  Source_Anchor a2("cccc_htm.h",15);
-  i++;
-  string key1=a1.key(), key2=a2.key();
-  i++;
-  source_anchor_map_t::value_type v1(key1,a1);
-  source_anchor_map_t::value_type v2(key2,a2);
-  i++;
-  source_anchor_map.insert(v1);
-  source_anchor_map.insert(v2);
-  return i;
 }
 
 
@@ -1473,10 +1453,10 @@ void CCCC_Html_Stream::Source_Listing()
     // complain and ignore
     while(
       (iter!=source_anchor_map.end()) &&
-      (current_filename==(*iter).second.get_file())
+      (current_filename==iter->second.get_file())
       )
     {
-      (*iter).second.Emit_NAME(source_html_str.fstr);
+      iter->second.Emit_NAME(source_html_str.fstr);
       iter++;
       source_html_str.fstr << "<BR>" << endl;
     }
@@ -1544,5 +1524,4 @@ void Source_Anchor::Emit_SPACE(ofstream& fstr)
   string space_string=pad_string(10,"","&nbsp;");
   fstr << space_string.c_str();
 }
-
 
