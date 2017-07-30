@@ -1423,10 +1423,9 @@ void CCCC_Html_Stream::Source_Listing()
   int current_line=0;
   int next_anchor_required=0;
   ifstream *src_str=NULL;
-  const char *style_open="<TT>", *style_close="</TT>";
+  const char *style_open="<code>", *style_close="</code>";
 
-  string filename=outdir;
-  filename = filename + "/" + SRC_FILE;
+  string filename=outdir + "/" + SRC_FILE;
   CCCC_Html_Stream source_html_str(filename.c_str(),"source file");
 
   source_html_str.fstr << style_open << endl;
