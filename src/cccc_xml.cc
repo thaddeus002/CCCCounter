@@ -263,7 +263,7 @@ void CCCC_Xml_Stream::OO_Design()
   while(mod_ptr!=NULL)
     {
       i++;
-      if( mod_ptr->is_trivial() == FALSE)
+      if( !mod_ptr->is_trivial() )
   {
     fstr << XML_TAG_OPEN_BEGIN << MODULE_NODE_NAME << XML_TAG_OPEN_END << endl;
     Put_Label_Node(NAME_NODE_NAME,mod_ptr->name(nlSIMPLE).c_str(),0,"","");
@@ -437,13 +437,13 @@ void CCCC_Xml_Stream::Structural_Detail()
   fstr << XML_TAG_OPEN_BEGIN << STRUCTDET_NODE_NAME << XML_TAG_OPEN_END << endl;
   CCCC_Module* module_ptr=prjptr->module_table.first_item();
   while(module_ptr!=NULL)
-    {
-      if(module_ptr->is_trivial()==FALSE)
   {
-    Structural_Detail(module_ptr);
-  }
-      module_ptr=prjptr->module_table.next_item();
+    if(!module_ptr->is_trivial())
+    {
+      Structural_Detail(module_ptr);
     }
+    module_ptr=prjptr->module_table.next_item();
+  }
   fstr << XML_TAG_CLOSE_BEGIN << STRUCTDET_NODE_NAME << XML_TAG_CLOSE_END << endl;
 }
 
@@ -637,7 +637,7 @@ void CCCC_Xml_Stream::Separate_Modules()
   while(mod_ptr!=NULL)
   {
     int trivial_module=mod_ptr->is_trivial();
-    if(trivial_module==FALSE)
+    if(!trivial_module)
     {
       string info="Detailed report on module " + mod_ptr->key();
       string filename=outdir;

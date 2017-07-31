@@ -73,7 +73,7 @@ int CCCC_Module::get_count(const char* count_tag)
   int retval=0;
   if(strcmp(count_tag,"NOM")==0)
     {
-      if(is_trivial()==FALSE)
+      if(!is_trivial())
       {
         retval=1;
       }

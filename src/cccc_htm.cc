@@ -515,7 +515,7 @@ void CCCC_Html_Stream::OO_Design() {
   while(mod_ptr!=NULL)
   {
     i++;
-    if( mod_ptr->is_trivial() == FALSE)
+    if( !mod_ptr->is_trivial() )
     {
       const char *metric_tags[5]={"WMC1","WMCv","DIT","NOC","CBO"};
       fstr << "<tr>" << endl;
@@ -568,7 +568,7 @@ void CCCC_Html_Stream::Procedural_Summary() {
   while(mod_ptr!=NULL)
   {
     i++;
-    if( mod_ptr->is_trivial() == FALSE)
+    if( !mod_ptr->is_trivial() )
     {
       fstr << "<tr>" << endl;
       string href=mod_ptr->key()+".html#procdet";
@@ -649,7 +649,7 @@ void CCCC_Html_Stream::Structural_Summary()
   CCCC_Module* module_ptr=prjptr->module_table.first_item();
   while(module_ptr!=NULL)
   {
-    if(module_ptr->is_trivial()==FALSE)
+    if(!module_ptr->is_trivial())
     {
       fstr << "<tr>" << endl;
 
@@ -768,7 +768,7 @@ void CCCC_Html_Stream::Structural_Detail()
   CCCC_Module* module_ptr=prjptr->module_table.first_item();
   while(module_ptr!=NULL)
   {
-    if(module_ptr->is_trivial()==FALSE)
+    if(!module_ptr->is_trivial())
     {
       fstr << "<tr>" << endl;
       Put_Label_Cell(module_ptr->name(nlSIMPLE).c_str(), 0, "structdet","structsum");
@@ -1077,7 +1077,7 @@ void CCCC_Html_Stream::Separate_Modules()
   while(mod_ptr!=NULL)
   {
     int trivial_module=mod_ptr->is_trivial();
-    if(trivial_module==FALSE)
+    if(!trivial_module)
     {
       string info="Detailed report on module " + mod_ptr->key();
       string filename=outdir;
