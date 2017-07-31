@@ -103,6 +103,10 @@ class CCCC_Html_Stream {
   void Procedural_Detail(CCCC_Module *module_ptr);
   void Structural_Detail(CCCC_Module *module_ptr);
 
+  /**
+   * This function generates a separate HTML report for each non-trivial
+   * module in the database.
+   */
   void Separate_Module_Link(CCCC_Module *module_ptr);
 
   /**

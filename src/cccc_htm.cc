@@ -1068,16 +1068,16 @@ CCCC_Html_Stream& operator <<(CCCC_Html_Stream& os, const CCCC_Metric& mtc)
   return os;
 }
 
+/**
+ * This function generates a separate HTML report for each non-trivial
+ * module in the database.
+ */
 void CCCC_Html_Stream::Separate_Modules()
 {
-  // this function generates a separate HTML report for each non-trivial
-  // module in the database
-
   CCCC_Module* mod_ptr=prjptr->module_table.first_item();
   while(mod_ptr!=NULL)
   {
-    int trivial_module=mod_ptr->is_trivial();
-    if(!trivial_module)
+    if(!mod_ptr->is_trivial())
     {
       string info="Detailed report on module " + mod_ptr->key();
       string filename=outdir;

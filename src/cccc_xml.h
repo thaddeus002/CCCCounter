@@ -42,9 +42,9 @@
 
 class CCCC_Xml_Stream {
   friend CCCC_Xml_Stream& operator <<(CCCC_Xml_Stream& os,
-				       const string& stg);
+               const string& stg);
   friend CCCC_Xml_Stream& operator <<(CCCC_Xml_Stream& os,
-				       const CCCC_Metric& mtc);
+               const CCCC_Metric& mtc);
 
   ofstream fstr;
   static string libdir;
@@ -60,7 +60,6 @@ class CCCC_Xml_Stream {
   void OO_Design();
   void Other_Extents();
   void Separate_Modules();
-  void Source_Listing();
 
 
   void Module_Summary(CCCC_Module *module_ptr);
@@ -71,8 +70,8 @@ class CCCC_Xml_Stream {
   void Separate_Module_Link(CCCC_Module *module_ptr);
 
   void Put_Label_Node(string nodeTag, string label, int width=0,
-		      string ref_name="", string ref_href="",
-		      CCCC_Record *rec_ptr=0);
+          string ref_name="", string ref_href="",
+          CCCC_Record *rec_ptr=0);
   void Put_Metric_Node(string nodeTag, const CCCC_Metric& metric);
   void Put_Metric_Node(string nodeTag, int count, string tag);
   void Put_Metric_Node(string nodeTag, int num, int denom, string tag);
@@ -80,13 +79,13 @@ class CCCC_Xml_Stream {
   void Put_Extent_Node(const CCCC_Extent& extent, int width=0, bool withDescription=false);
   void Put_Extent_List(CCCC_Record& record,bool withDescription=false);
   void Put_Structural_Details_Node(CCCC_Module *mod,
-				   CCCC_Project *prj,
-				   int mask,
-				   UserelNameLevel nl);
+           CCCC_Project *prj,
+           int mask,
+           UserelNameLevel nl);
 
  public:
   static void GenerateReports(CCCC_Project* project, int report_mask,
-			      const string& outfile, const string& outdir);
+            const string& outfile, const string& outdir);
 
   // general-purpose constructor with standard preamble
   CCCC_Xml_Stream(const string& fname, const string& info);

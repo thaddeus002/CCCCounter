@@ -636,8 +636,7 @@ void CCCC_Xml_Stream::Separate_Modules()
   CCCC_Module* mod_ptr=prjptr->module_table.first_item();
   while(mod_ptr!=NULL)
   {
-    int trivial_module=mod_ptr->is_trivial();
-    if(!trivial_module)
+    if(!mod_ptr->is_trivial())
     {
       string info="Detailed report on module " + mod_ptr->key();
       string filename=outdir;
@@ -812,10 +811,5 @@ void CCCC_Xml_Stream::Module_Summary(CCCC_Module *module_ptr)
   Put_Metric_Node(IF4CONPERMEM_NODE_NAME,if4c,nof,"8.3");
 
   fstr << XML_TAG_CLOSE_BEGIN << MODSUM_NODE_NAME << XML_TAG_CLOSE_END << endl;
-}
-
-
-void CCCC_Xml_Stream::Source_Listing()
-{
 }
 
