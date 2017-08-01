@@ -29,8 +29,8 @@
 #include "cccc_db.h"
 
 CCCC_Member::CCCC_Member()
-  : parent(NULL)
 {
+  parent = NULL;
   visibility=vDONTKNOW;
 }
 
@@ -39,25 +39,25 @@ int CCCC_Member::get_count(const char* count_tag) {
   string count_tag_str=count_tag;
 
   if(count_tag_str=="WMC1")
-    {
-      retval=1;
-    }
-  else if(count_tag_str=="WMCv")
-    {
-      switch(get_visibility())
   {
-  case vPUBLIC:
-  case vPROTECTED:
     retval=1;
-    break;
-  default:
-    NULL;
   }
-    }
-  else
+  else if(count_tag_str=="WMCv")
+  {
+    switch(get_visibility())
     {
-      retval=extent_table.get_count(count_tag);
+    case vPUBLIC:
+    case vPROTECTED:
+      retval=1;
+      break;
+    default:
+      NULL;
     }
+  }
+  else
+  {
+    retval=extent_table.get_count(count_tag);
+  }
 
   return retval;
 }
